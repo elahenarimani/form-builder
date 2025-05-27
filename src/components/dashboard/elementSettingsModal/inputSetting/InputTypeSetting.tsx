@@ -1,0 +1,69 @@
+import React, { useState } from "react";
+import Select from "react-select";
+import { OptionInputType } from "../../../../types/formTypes";
+const inputTypeOptions: OptionInputType[] = [
+  { value: 1, label: "Text" },
+  { value: 2, label: "Number" },
+  { value: 4, label: "Color" },
+  { value: 5, label: "Radio" },
+  { value: 6, label: "Checkbox" },
+];
+const InputSetting = () => {
+  const [selectedInputType, setSelectedInputType] = useState<OptionInputType | null>(
+    null
+  );
+  return (
+    <div className="w-full h-[50px] flex flex-col justify-start items-start  ">
+      <label className="block mb-2 text-sm font-medium text-gray-700 text-left">
+        Type
+      </label>
+      <Select
+  defaultValue={selectedInputType}
+  onChange={setSelectedInputType}
+  options={inputTypeOptions}
+  isClearable
+  placeholder=""
+  className="w-full"
+  menuPortalTarget={typeof window !== "undefined" ? document.body : null}
+  styles={{
+    container: (provided) => ({
+      ...provided,
+      width: "100%",
+    }),
+    control: (provided, state) => ({
+      ...provided,
+      width: "100%",
+      border: "1px solid #d1d5db",
+      boxShadow: "none",
+      borderColor: state.isFocused ? "#d1d5db" : "#d1d5db",
+      "&:hover": {
+        borderColor: "#a1a1aa",
+      },
+    }),
+    menu: (provided) => ({
+      ...provided,
+      width: "100%",
+      zIndex: 99999,  
+    }),
+    menuPortal: (base) => ({
+      ...base,
+      zIndex: 99999,  
+    }),
+    option: (provided) => ({
+      ...provided,
+      textAlign: "left",
+    }),
+    singleValue: (provided) => ({
+      ...provided,
+      textAlign: "left",
+    }),
+    placeholder: (provided) => ({
+      ...provided,
+      textAlign: "left",
+    }),
+  }}
+/>
+    </div>
+  );
+};
+export default InputSetting;
