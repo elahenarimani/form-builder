@@ -60,3 +60,7 @@ export type OptionWidthType = {
   value: number;
   label: string;
 };
+export type OptionHeightType= {
+  value: number;
+  label: string;
+};

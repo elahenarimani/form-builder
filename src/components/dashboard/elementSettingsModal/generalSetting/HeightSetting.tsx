@@ -1,25 +1,26 @@
 import React, { useState } from "react";
 import Select from "react-select";
-import { OptionInputType } from "../../../../types/formTypes";
-const inputTypeOptions: OptionInputType[] = [
-  { value: 1, label: "Text" },
-  { value: 2, label: "Number" },
-  { value: 4, label: "Color" },
-  { value: 5, label: "Radio" },
-  { value: 6, label: "Checkbox" },
+import { OptionHeightType } from "../../../../types/formTypes";
+const inputHeightOptions: OptionHeightType[] = [
+  { value: 1, label: "50%" },
+  { value: 2, label: "60%" },
+  { value: 4, label: "70%" },
+  { value: 5, label: "80%" },
+  { value: 6, label: "90%" },
 ];
-const InputSetting = () => {
-  const [selectedInputType, setSelectedInputType] =
-    useState<OptionInputType | null>(null);
+const HeightSetting = () => {
+  const [selectedHeight, setSelectedHeight] = useState<OptionHeightType | null>(
+    null
+  );
   return (
     <div className="w-full h-[80px] flex flex-col justify-start items-start  ">
       <label className="block mb-2 mt-2 text-sm font-medium text-gray-700 text-left">
-        Type
+        Height
       </label>
       <Select
-        defaultValue={selectedInputType}
-        onChange={setSelectedInputType}
-        options={inputTypeOptions}
+        defaultValue={selectedHeight}
+        onChange={setSelectedHeight}
+        options={inputHeightOptions}
         isClearable
         placeholder=""
         className="w-full"
@@ -65,4 +66,5 @@ const InputSetting = () => {
     </div>
   );
 };
-export default InputSetting;
+
+export default HeightSetting;

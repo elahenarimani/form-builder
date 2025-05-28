@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FormElement } from "../../../types/formTypes";
 import InputSetting from "./inputSetting/InputTypeSetting";
 import WidthSetting from "./generalSetting/WidthSetting";
+import HeightSetting from "./generalSetting/HeightSetting";
 type elementSettingsPrpps = {
   element: FormElement;
   //  onClose: () => void;
@@ -10,10 +11,16 @@ const ElementSettingModal = ({ element }: elementSettingsPrpps) => {
   const [localStorageElement, setLocalStorageElement] = useState<FormElement[]>(
     []
   );
+  const [required, setRequired] = useState({
+    inputType: true,
+    width: true,
+    height: true,
+  });
   return (
     <div className="modal-wrapper overflow-visible fixed w-full h-screen bg-black/30 flex justify-center items-start z-50 top-0 left-0 right-0 p-[18px] ">
       <div className="modal overflow-visible w-full h-full bg-white p-4 rounded-[10px] ">
         <h2 className="font-bold mb-3">{element.type} setting</h2>
+
         <div className="flex flex-row justify-center items-center gap-5 mb-[5px] overflow-visible">
           {/* <label className="block mb-1">Require:</label> */}
           {/* <input
@@ -23,9 +30,78 @@ const ElementSettingModal = ({ element }: elementSettingsPrpps) => {
           ></input> */}
         </div>
         {element.type === "input" && (
-          <div className="w-full h-full flex flex-col justify-start items-center  mb-[5px] overflow-visible !gap-0">
+          <div className="input-setting w-full h-full flex flex-col justify-start items-center  mb-[5px] overflow-visible !gap-0">
             <InputSetting />
             <WidthSetting />
+            <HeightSetting />
+            {/* <div className="w-full h-[80px] flex flex-col justify-start items-start  ">
+              <label className="block mb-2 text-sm font-medium text-gray-700 text-left">
+                Label
+              </label>
+              <input type="text" className="w-full border-[1px] border-[#d1d5db] min-h-[38px] rounded-[5px] outline-none pl-[10px]">
+              </input >
+            </div> */}
+            <div className="w-full justify-between items-start">
+              <p className="mb-2 mt-2 text-sm font-medium text-gray-700 !text-left">Validation</p>
+            </div>
+            <div className="validation w-full h-[80px] border-[1px] border-[#d1d5db] rounded-[5px] flex flex-row justify-between items-center mb-2 p-[18px]">
+              {" "}
+              <div className="flex justify-between items-center gap-[10px]">
+                <label>Required Type?</label>
+                <input
+                  type="checkbox"
+                  aria-label="required or not"
+                  checked={required.inputType}
+                  onChange={(e) =>
+                    setRequired((prev) => ({
+                      ...prev,
+                      inputType: e.target.checked,
+                    }))
+                  }
+                />
+              </div>
+              <div className="flex justify-between items-center gap-[10px]">
+                <label>Required Type?</label>
+                <input
+                  type="checkbox"
+                  aria-label="required or not"
+                  checked={required.inputType}
+                  onChange={(e) =>
+                    setRequired((prev) => ({
+                      ...prev,
+                      inputType: e.target.checked,
+                    }))
+                  }
+                />
+              </div>
+              <div className="flex justify-between items-center gap-[10px]">
+                <label>Required Type?</label>
+                <input
+                  type="checkbox"
+                  aria-label="required or not"
+                  checked={required.inputType}
+                  onChange={(e) =>
+                    setRequired((prev) => ({
+                      ...prev,
+                      inputType: e.target.checked,
+                    }))
+                  }
+                />
+              </div>
+            </div>
+            {/* <label className="flex items-center gap-2">
+    <input
+      type="checkbox"
+      checked={required.inputType}
+      onChange={(e) =>
+        seRequired((prev) => ({
+          ...prev,
+          inputType: e.target.checked,
+        }))
+      }
+    />
+    تنظیم نوع (Type)
+  </label> */}
           </div>
         )}
         {element.type === "select" && (

@@ -21,7 +21,7 @@ const MainForm = ({
   return (
     <div
       ref={setNodeRef}
-      className="main-form relative  w-full min-h-screen border border-[#444444] rounded-[5px] py-[20px] px-[15px] bg-gray-50"
+      className="main-form   top-0 w-full min-h-screen border border-[#444444] rounded-[5px] py-[20px] px-[15px] bg-gray-50"
     >
       <h2 className="text-lg font-bold mb-4">My Form</h2>
       {elements.map((el) => (
@@ -30,7 +30,7 @@ const MainForm = ({
           className="w-full h-[40px] mb-4 flex justify-between items-center gap-[10px] group"
           onClick={() => setClickedElement(el)}
           style={{
-            position: "absolute",
+           
             top: el.y || 0,
             left: el.x || 0,
             width: el.width || "auto",

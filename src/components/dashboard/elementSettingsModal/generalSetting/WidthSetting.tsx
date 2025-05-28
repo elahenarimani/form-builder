@@ -13,8 +13,8 @@ const WidthSetting = () => {
     null
   );
   return (
-    <div className="w-full h-[50px] flex flex-col justify-start items-start  ">
-      <label className="block mb-2 text-sm font-medium text-gray-700 text-left">
+    <div className="w-full h-[80px] flex flex-col justify-start items-start  ">
+      <label className="block mb-2 mt-2 text-sm font-medium text-gray-700 text-left">
         Width
       </label>
       <Select
