@@ -8,12 +8,12 @@ const inputTypeOptions: OptionInputType[] = [
   { value: 5, label: "Radio" },
   { value: 6, label: "Checkbox" },
 ];
-const InputSetting = () => {
+const InputTypeSetting = () => {
   const [selectedInputType, setSelectedInputType] =
     useState<OptionInputType | null>(null);
   return (
     <div className="w-full h-[80px] flex flex-col justify-start items-start  ">
-      <label className="block mb-2 mt-2 text-sm font-medium text-gray-700 text-left">
+      <label className="block mb-1 mt-1 text-sm font-medium text-gray-700 text-left">
         Type
       </label>
       <Select
@@ -65,4 +65,4 @@ const InputSetting = () => {
     </div>
   );
 };
-export default InputSetting;
+export default InputTypeSetting;

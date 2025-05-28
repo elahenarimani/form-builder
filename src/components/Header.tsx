@@ -13,7 +13,7 @@ const Header = () => {
         <Button className='w-[26px] h-[26px]' disabled={true}><FaTableCellsLarge className='w-full h-full'/></Button>
       </div>
       <div className='lg:hidden w-[30px] h-[30px] hover:cursor-pointer'><CgSearch className='w-full h-full'/></div>
-      <div className='w-[30px] h-[30px] hover:cursor-pointer '><img  src='/image/logo.jpg' alt='Brand logo' className='w-full h-full'/></div>
+      <div className='w-[30px] h-[30px] hover:cursor-pointer '><img  src='/image/logo.jpg'  alt="Brand logo" className='w-full h-full' aria-label='logo image'/></div>
       <Button  className='w-[30px] h-[30px] hover:cursor-pointer '><CgProfile className='w-full h-full' /></Button>
     </div>
   );

@@ -1,8 +1,10 @@
 import { useDroppable } from "@dnd-kit/core";
-import { FormElement } from "../../types/formTypes";
+import { FormElement, SelectElement } from "../../types/formTypes";
 import { IoTrash } from "react-icons/io5";
-import { useState } from "react";
+import { useContext } from "react";
 import ElementSettingModal from "./elementSettingsModal/ElementSettingModal";
+import { FormElementsContext } from "../../App";
+import { InputElement } from "../../types/formTypes";
 type MainFormProps = {
   elements: FormElement[];
   onDelete: (id: string) => void;
@@ -16,8 +18,8 @@ const MainForm = ({
   clickedElement,
   setClickedElement,
 }: MainFormProps) => {
+  const FormElmntContext = useContext(FormElementsContext);
   const { setNodeRef } = useDroppable({ id: "drop-area" });
-  // const [clickedElement , setClickedElement] = useState<FormElement | null>(null)
   return (
     <div
       ref={setNodeRef}
@@ -30,7 +32,6 @@ const MainForm = ({
           className="w-full h-[40px] mb-4 flex justify-between items-center gap-[10px] group"
           onClick={() => setClickedElement(el)}
           style={{
-           
             top: el.y || 0,
             left: el.x || 0,
             width: el.width || "auto",
@@ -41,18 +42,28 @@ const MainForm = ({
             <input
               type="text"
               className="border p-2 w-full h-full rounded text-[#9CA7C4]"
-              placeholder="Enter text"
+              placeholder={(el as InputElement).placeholder || ""}
+              minLength={el.minLength}
+              maxLength={el.maxLength}
             />
           )}
           {el.type === "select" && (
             <select className="border p-2 w-full h-full rounded text-[#9CA7C4]">
+              {/* <option>Choose an option</option>
               <option>Choose an option</option>
-              <option>Choose an option</option>
-              <option>Choose an option</option>
+              <option>Choose an option</option> */}
+              {(el as SelectElement).options.map((opt) => (
+                <option key={opt}>{opt}</option>
+              ))}
             </select>
           )}
           {el.type === "range" && (
-            <input type="range" min={0} max={100} className="w-full h-full " />
+            <input
+              type="range"
+              min={el.min}
+              max={el.max}
+              className="w-full h-full "
+            />
           )}
           <button
             onClick={() => onDelete(el.id)}
