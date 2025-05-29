@@ -27,15 +27,28 @@ interface FormContextType {
   rangeElements: RangeElement[];
   setRangeElements: React.Dispatch<React.SetStateAction<RangeElement[]>>;
 }
-export const FormElementsContext = createContext<FormContextType | null>(null);
+type FormElementsContextType = {
+  formData: FormElement[];
+  setFormData: React.Dispatch<React.SetStateAction<FormElement[]>>;
+};
+export const FormElementsContext =
+  createContext<FormElement | null>(null);
+
+
+
+export const FormDataContext = createContext<FormElementsContextType| null>(null);
+
+
+
 function App() {
   const [elements, setElements] = useState<FormElement[]>([]);
   const [clickedElement, setClickedElement] = useState<FormElement | null>(
     null
   );
-  const [inputElements, setInputElements] = useState<InputElement[]>([]);
-  const [selectElements, setSelectElements] = useState<SelectElement[]>([]);
-  const [rangeElements, setRangeElements] = useState<RangeElement[]>([]);
+  // const [inputElements, setInputElements] = useState<InputElement[]>([]);
+  // const [selectElements, setSelectElements] = useState<SelectElement[]>([]);
+  // const [rangeElements, setRangeElements] = useState<RangeElement[]>([]);
+  const [formData, setFormData] = useState<FormElement[]>([]);
   const handleDrop = (event: DragEndEvent) => {
     const { active, over } = event;
     if (over && over.id === "drop-area") {
@@ -58,7 +71,7 @@ function App() {
             id: nanoid(),
             type: "select",
             required: false,
-            options:  ["گزینه 1", "گزینه 2", "گزینه 3"],
+            options: ["گزینه 1", "گزینه 2", "گزینه 3"],
             width: "100%",
           };
           break;
@@ -82,7 +95,8 @@ function App() {
       setElements((prev) => [...prev, newElement]);
     }
   };
-  const handleSave = () => {//json save
+  const handleSave = () => {
+    //json save
     const jsonData = JSON.stringify(elements, null, 2);
     localStorage.setItem("my-form", jsonData);
     console.log("saved JSON", jsonData);
@@ -91,37 +105,44 @@ function App() {
     setElements((prev) => prev.filter((el) => el.id !== id));
   };
   return (
-    <FormElementsContext.Provider
+    <FormDataContext.Provider
       value={{
-        inputElements,
-        setInputElements,
-        selectElements,
-        setSelectElements,
-        rangeElements,
-        setRangeElements,
+        formData,
+        setFormData,
       }}
     >
-      <div className="App ">
-        <DndContext onDragEnd={handleDrop}>
-          <Header />
-          <main className="w-full md:w-11/12 lg:w-4/5 md:ml-auto md:mr-auto h-full flex flex-col md:flex-row-reverse justify-start md:justify-between items-center px-[18px] py-[18px] gap-[10px] md:gap-[50px]">
-            <ElementPalette />
-            <MainForm
-              elements={elements}
-              onDelete={handleDelete}
-              clickedElement={clickedElement}
-              setClickedElement={setClickedElement}
-            />
-          </main>
-          <button
-            onClick={handleSave}
-            className="mt-4 ml-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-          >
-            ذخیره فرم
-          </button>
-        </DndContext>
-      </div>
-    </FormElementsContext.Provider>
+      {/* <FormElementsContext.Provider
+        value={{
+          inputElements,
+          setInputElements,
+          selectElements,
+          setSelectElements,
+          rangeElements,
+          setRangeElements,
+        }}
+      > */}
+        <div className="App ">
+          <DndContext onDragEnd={handleDrop}>
+            <Header />
+            <main className="w-full md:w-11/12 lg:w-4/5 md:ml-auto md:mr-auto h-full flex flex-col md:flex-row-reverse justify-start md:justify-between items-center px-[18px] py-[18px] gap-[10px] md:gap-[50px]">
+              <ElementPalette />
+              <MainForm
+                elements={elements}
+                onDelete={handleDelete}
+                clickedElement={clickedElement}
+                setClickedElement={setClickedElement}
+              />
+            </main>
+            <button
+              onClick={handleSave}
+              className="mt-4 ml-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+            >
+              ذخیره فرم
+            </button>
+          </DndContext>
+        </div>
+      {/* </FormElementsContext.Provider> */}
+    </FormDataContext.Provider>
   );
 }
 export default App;

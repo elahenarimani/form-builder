@@ -18,6 +18,7 @@ export type InputElement = BaseElement & {
   maxLength?: number;
   placeholder?: string;
 };
+
 export type SelectElement = BaseElement & {
   type: "select";
   required?: boolean;
@@ -46,7 +47,7 @@ export interface FormElementBase {
 }
 
 export type OptionInputType = {
-  value: number;
+  value: string;
   label: string;
 };
 export type OptionWidthType = {
@@ -56,4 +57,14 @@ export type OptionWidthType = {
 export type OptionHeightType = {
   value: number;
   label: string;
+};
+export type FormType = {
+  typeInput: string;
+  widthInput: number | string;
+  heightInput: number | string;
+  validationInput: boolean;
+  validationWidth:boolean;
+  validationHeight:boolean
+  minLengthInput: number;
+  maxLengthInput: number;
 };

@@ -76,7 +76,6 @@ const MainForm = ({
       {clickedElement && (
         <ElementSettingModal
           element={clickedElement}
-          // onClose ={() => setClickedElement(null)}
         />
       )}
     </div>

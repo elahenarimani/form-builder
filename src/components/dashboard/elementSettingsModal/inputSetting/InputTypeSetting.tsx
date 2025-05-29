@@ -1,16 +1,24 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Select from "react-select";
 import { OptionInputType } from "../../../../types/formTypes";
+import { FormType } from "../../../../types/formTypes";
+import { FormDataContext } from "../../../../App";
 const inputTypeOptions: OptionInputType[] = [
-  { value: 1, label: "Text" },
-  { value: 2, label: "Number" },
-  { value: 4, label: "Color" },
-  { value: 5, label: "Radio" },
-  { value: 6, label: "Checkbox" },
+  { value: "Text", label: "Text" },
+  { value: "Number", label: "Number" },
+  { value: "Color", label: "Color" },
+  { value: "Radio", label: "Radio" },
+  { value: "Checkbox", label: "Checkbox" },
 ];
-const InputTypeSetting = () => {
+type InputProps = {
+  setForminfo: React.Dispatch<React.SetStateAction<FormType>>;
+  typeInput: string;
+};
+const InputTypeSetting = ({ setForminfo, typeInput }: InputProps) => {
   const [selectedInputType, setSelectedInputType] =
     useState<OptionInputType | null>(null);
+  const FormDataContexted = useContext(FormDataContext);
+
   return (
     <div className="w-full h-[80px] flex flex-col justify-start items-start  ">
       <label className="block mb-1 mt-1 text-sm font-medium text-gray-700 text-left">
@@ -18,7 +26,14 @@ const InputTypeSetting = () => {
       </label>
       <Select
         defaultValue={selectedInputType}
-        onChange={setSelectedInputType}
+        onChange={(selectedInputType) => {
+          setSelectedInputType(selectedInputType);
+           setForminfo((prv) => ({
+            ...prv,
+            typeInput: selectedInputType ? selectedInputType?.label : "",
+          }));
+          console.log(typeInput);
+        }}
         options={inputTypeOptions}
         isClearable
         placeholder=""
