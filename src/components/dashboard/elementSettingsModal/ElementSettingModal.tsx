@@ -6,15 +6,13 @@ import HeightSetting from "./generalSetting/HeightSetting";
 import { FormElementsContext } from "../../../App";
 import InputTypeSetting from "./inputSetting/InputTypeSetting";
 import ValidationSetting from "./inputSetting/ValidationSetting";
+import MinMaxLength from "./inputSetting/MinMaxLength";
+import Button from "../../Button";
 type elementSettingsPrpps = {
   element: FormElement;
 };
 const ElementSettingModal = ({ element }: elementSettingsPrpps) => {
   const FormElmntContext = useContext(FormElementsContext);
-
-  // const updatedElement:any = FormElmntContext?.inputElements.find(
-  //   (el) => el.id === element.id
-  // );
   const [forminfo, setForminfo] = useState<FormType>({
     typeInput: "",
     widthInput: "",
@@ -51,61 +49,11 @@ const ElementSettingModal = ({ element }: elementSettingsPrpps) => {
               validationHeight={forminfo.validationHeight}
               setForminfo={setForminfo}
             />
-            <div className="Min-Max-Length-title w-full justify-between items-start">
-              <p className="mb-2 mt-2 text-sm font-medium text-gray-700 !text-left">
-                Min/Max Length
-              </p>
-            </div>
-            <div className="Min-Max-Length w-full h-[180px] border-[1px] border-[#d1d5db] rounded-[5px] flex flex-col  justify-start items-start gap-x-5 mb-2 p-[18px]">
-              <div className="w-full mb-2">
-                <label className="block mb-1 text-sm font-medium text-gray-700 text-left">
-                  min Length:
-                </label>
-                <input
-                  type="number"
-                  className="border rounded p-2 w-full outline-none"
-                  // value={updatedElement?.minLength}
-                  aria-label="min length"
-                  // onChange={(e) => {
-                  //   const newMinLength = Number(e.target.value);
-                  //   if (!updatedElement) return;
-                  //   updatedElement.minLength = newMinLength;
-                  //   console.log(updatedElement.minLength);
-                  //   FormElmntContext?.setInputElements((prev) =>
-                  //     prev.map((el) =>
-                  //       el.id === updatedElement.id
-                  //         ? { ...el, minLength: newMinLength }
-                  //         : el
-                  //     )
-                  //   );
-                  //   console.log(updatedElement.minLength);
-                  // }}
-                />
-              </div>
-              <div className="w-full mb-2">
-                <label className="block mb-1 text-sm font-medium text-gray-700 text-left">
-                  Max Length:
-                </label>
-                <input
-                  type="number"
-                  className="border rounded p-2 w-full outline-none"
-                  // value={updatedElement?.maxLength ?? 0}
-                  aria-label="max length"
-                  // onChange={(e) => {
-                  //   // const updatedElement = {
-                  //   //   ...element,
-                  //   //   maxLength: Number(e.target.value),
-                  //   // };
-                  //   console.log("New maxLength:", updatedElement?.maxLength);
-                  //   FormElmntContext?.setInputElements((prevElements) =>
-                  //     prevElements.map((el) =>
-                  //       el.id === updatedElement?.id ? updatedElement : el
-                  //     )
-                  //   );
-                  // }}
-                />
-              </div>
-            </div>
+            <MinMaxLength
+              minLengthInput={forminfo.minLengthInput}
+              maxLengthInput={forminfo.maxLengthInput}
+              setForminfo={setForminfo}
+            />
           </div>
         )}
         {element.type === "select" && (
@@ -140,13 +88,14 @@ const ElementSettingModal = ({ element }: elementSettingsPrpps) => {
             </div>
           </div>
         )}
-        <div className="flex justify-end gap-2 mt-3">
-          <button className="bg-gray-400 px-4 py-2 rounded text-white">
-            لغو
-          </button>
-          <button className="bg-blue-600 px-4 py-2 rounded text-white">
-            ذخیره
-          </button>
+        <div className="w-full h-full flex justify-center justify-centre gap-2 ">
+          <Button className="w-[70px] bg-white px-4 py-2 border-[1px] border-[#d1d5db] rounded-[5px] text-gray-700  flex justify-center justify-centre cursor-pointer">
+            Cancel
+          </Button >
+          <Button  className="w-[70px] bg-[#1ABC9C] px-4 py-2 rounded-[5px] text-white  flex justify-center justify-centre cursor-pointer" 
+          onClickHandler={()=> console.log(forminfo)}>
+            Save
+          </Button>
         </div>
       </div>
     </div>
