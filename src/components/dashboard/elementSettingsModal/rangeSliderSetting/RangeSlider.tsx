@@ -1,6 +1,6 @@
 import React from 'react'
 
-const RangeSlider = () => {
+const RangeSliderSetting = () => {
   return (
     <div>
       
@@ -8,4 +8,4 @@ const RangeSlider = () => {
   )
 }
 
-export default RangeSlider
+export default RangeSliderSetting

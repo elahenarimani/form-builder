@@ -12,22 +12,19 @@ const MinMaxLength = ({
 }: LengthProps) => {
   const [minLength, setMinLength] = useState<string>("");
   const [maxLength, setMaxLength] = useState<string>("");
-  const countLetters = (text: string) => {
-    const letterMin = Array.from(text.replace(/\u200C/g, "")).length;
-    const letterMax = Array.from(text.replace(/\u200C/g, "")).length;
-    if (letterMin) {
+  const countLetters = (text: string, feild: "min" | "max") => {
+    const letterCount = Array.from(text.replace(/\u200C/g, "")).length;
+    if (feild === "min") {
       setForminfo((prv) => ({
         ...prv,
-        minLengthInput: letterMin,
+        minLengthInput: letterCount,
       }));
-    }
-    if (letterMax) {
+    } else {
       setForminfo((prv) => ({
         ...prv,
-        maxLengthInput: letterMax,
+        maxLengthInput: letterCount,
       }));
     }
-    return { letterMin, letterMax };
   };
   return (
     <div className="Min-Max-Length-wrapper w-full h-[275px] flex flex-col justify-start">
@@ -49,7 +46,7 @@ const MinMaxLength = ({
             onChange={(e) => {
               const value = e.target.value;
               setMinLength(value);
-              countLetters(value);
+              countLetters(value, "min");
             }}
           />
         </div>
@@ -65,7 +62,7 @@ const MinMaxLength = ({
             onChange={(e) => {
               const value = e.target.value;
               setMaxLength(value);
-              countLetters(value);
+              countLetters(value, "max");
             }}
           />
         </div>

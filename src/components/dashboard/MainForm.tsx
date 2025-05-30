@@ -1,10 +1,15 @@
 import { useDroppable } from "@dnd-kit/core";
-import { FormElement, SelectElement } from "../../types/formTypes";
+import { FormElement, OpenModal, SelectElement } from "../../types/formTypes";
 import { IoTrash } from "react-icons/io5";
-import { useContext } from "react";
-import ElementSettingModal from "./elementSettingsModal/ElementSettingModal";
+import { useContext, useState } from "react";
+// import ElementSettingModal from "./elementSettingsModal/ElementSettingModal";
 import { FormElementsContext } from "../../App";
 import { InputElement } from "../../types/formTypes";
+import SelectSlider from "./elementSettingsModal/selectSetting/SelectSetting";
+import RangeSliderSetting from "./elementSettingsModal/rangeSliderSetting/RangeSlider";
+import SelectSettingModal from "./elementSettingsModal/selectSetting/SelectSetting";
+import ElementSettingModal from "./elementSettingsModal/ElementSettingModal";
+// import ElementSettingModal from "./elementSettingsModal/ElementSettingModal";
 type MainFormProps = {
   elements: FormElement[];
   onDelete: (id: string) => void;
@@ -20,6 +25,12 @@ const MainForm = ({
 }: MainFormProps) => {
   const FormElmntContext = useContext(FormElementsContext);
   const { setNodeRef } = useDroppable({ id: "drop-area" });
+  // const [openModal, setOpenModal] = useState<OpenModal>({
+  //   openInputSetting: false,
+  //   openSelectSetting: false,
+  //   openRangeSetting: false,
+  // });
+    const [openModal, setOpenModal] = useState<boolean>(false)
   return (
     <div
       ref={setNodeRef}
@@ -31,6 +42,7 @@ const MainForm = ({
           key={el.id}
           className="w-full h-[40px] mb-4 flex justify-between items-center gap-[10px] group"
           onClick={() => setClickedElement(el)}
+          // onClick={() => setOpenModal(true)}
           style={{
             top: el.y || 0,
             left: el.x || 0,
@@ -48,7 +60,15 @@ const MainForm = ({
             />
           )}
           {el.type === "select" && (
-            <select className="border p-2 w-full h-full rounded text-[#9CA7C4]">
+            <select
+              className="border p-2 w-full h-full rounded text-[#9CA7C4]"
+              // onClick={() =>
+              //   setOpenModal((prv) => ({
+              //     ...prv,
+              //     openSelectSetting: true,
+              //   }))
+              // }
+            >
               {/* <option>Choose an option</option>
               <option>Choose an option</option>
               <option>Choose an option</option> */}
@@ -73,11 +93,9 @@ const MainForm = ({
           </button>
         </div>
       ))}
-      {clickedElement && (
-        <ElementSettingModal
-          element={clickedElement}
-        />
-      )}
+        {clickedElement && <ElementSettingModal element={clickedElement} />}
+      {/* {clickedElement && <ElementSettingModal element={clickedElement} />} */}
+      {/* {clickedElement && <SelectSettingModal element={clickedElement} />} */}
     </div>
   );
 };

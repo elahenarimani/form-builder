@@ -1,7 +1,7 @@
 export type FormElementType = "input" | "select" | "range";
 export interface BaseElement {
   id: string;
-  type: FormElementType;
+  type?: FormElementType;
   x?: number;
   y?: number;
   width?: number | string;
@@ -18,13 +18,14 @@ export type InputElement = BaseElement & {
   maxLength?: number;
   placeholder?: string;
 };
-
 export type SelectElement = BaseElement & {
-  type: "select";
-  required?: boolean;
+  type?: "select";
+  // required?: boolean;
   options: string[];
+  requiredSelect?: boolean;
+  requiredWidth?: boolean;
+  requiredHeight?: boolean;
 };
-
 export type RangeElement = BaseElement & {
   type: "range";
   required?: boolean;
@@ -59,12 +60,32 @@ export type OptionHeightType = {
   label: string;
 };
 export type FormType = {
+  id: string;
   typeInput: string;
   widthInput: number | string;
   heightInput: number | string;
   validationInput: boolean;
-  validationWidth:boolean;
-  validationHeight:boolean
+  validationWidth: boolean;
+  validationHeight: boolean;
   minLengthInput: number;
   maxLengthInput: number;
+  // single: string;
+  // multi: string;
+};
+export type OpenModal = {
+  openInputSetting: boolean;
+  openSelectSetting: boolean;
+  openRangeSetting: boolean;
+};
+export type SelectEtting = {
+  value: string;
+  label: string;
+};
+export type folan = {
+  selectOptions: "";
+  heightInput: "";
+  widthInput: "";
+  validationInput: false;
+  validationWidth: false;
+  validationHeight: false;
 };

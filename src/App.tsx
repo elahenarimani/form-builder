@@ -70,9 +70,10 @@ function App() {
           newElement = {
             id: nanoid(),
             type: "select",
-            required: false,
+            // required: false,
             options: ["گزینه 1", "گزینه 2", "گزینه 3"],
             width: "100%",
+
           };
           break;
         case "range":
