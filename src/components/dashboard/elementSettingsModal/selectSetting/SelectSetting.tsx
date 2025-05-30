@@ -2,25 +2,20 @@ import Select from "react-select";
 import React, { useContext, useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
 import {
-  OptionHeightType,
+  SelectElement,
   SelectEtting,
 } from "../../../../types/formTypes";
 import { ElementContext } from "../../../../App";
-// import { FormDataContext } from "../../../../App";
-const selectOptions: SelectEtting[] = [
+type SelectProps = {
+  setSelectInfo: React.Dispatch<React.SetStateAction<SelectElement>>;
+}
+const SelectSetting = ({setSelectInfo}:SelectProps ) => {
+  const selectOptions: SelectEtting[] = [
   { value: "single Select", label: "single select" },
   { value: "multi Select", label: "multi select" },
 ];
-// type heightInputProps = {
-//   setForminfo: React.Dispatch<React.SetStateAction<FormType>>;
-// };
-const SelectSetting = () => {
   const FormContext = useContext(ElementContext);
-  const [settingSelect, setSettingSelect] = useState<SelectEtting | null>(null);
-  // const [selectedHeight, setSelectedHeight] = useState<OptionHeightType | null>(
-  //   null
-  // );
-  // const FormDataContexted = useContext(FormDataContext);
+  const [settingSelect, setSettingSelect] = useState< SelectEtting| null>(null);
   return (
     <div className="w-full h-[80px] flex flex-col justify-start items-start  ">
       <label className="block mb-1 mt-1 text-sm font-medium text-gray-700 text-left">
@@ -28,7 +23,13 @@ const SelectSetting = () => {
       </label>
       <Select
         defaultValue={settingSelect}
-        onChange={setSettingSelect}
+         onChange={(settingSelect) => {
+          setSettingSelect(settingSelect);
+          FormContext?.setElements((prv) => ({
+            ...prv,
+            options: settingSelect ? settingSelect?.label : "",
+          }));
+        }}
         options={selectOptions}
         isClearable
         placeholder=""

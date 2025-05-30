@@ -29,7 +29,7 @@ const InputTypeSetting = ({ setForminfo, typeInput }: InputProps) => {
         defaultValue={selectedInputType}
         onChange={(selectedInputType) => {
           setSelectedInputType(selectedInputType);
-          setForminfo((prv) => ({
+          FormContext?.setElements((prv) => ({
             ...prv,
             typeInput: selectedInputType ? selectedInputType?.label : "",
           }));

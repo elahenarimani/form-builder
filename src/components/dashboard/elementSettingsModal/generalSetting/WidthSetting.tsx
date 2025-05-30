@@ -24,24 +24,6 @@ const WidthSetting = ({ setForminfo, setSelectInfo, width }: InputProps) => {
   const [selectedWidth, setSelectedWidth] = useState<OptionWidthType | null>(
     null
   );
-  function elahe() {
-    const x = FormContext?.elements.find((item) => item.type === "input");
-    const y = FormContext?.elements.find((item) => item.type === "select");
-    const z = FormContext?.elements.find((item) => item.type === "range");
-    if (x) {
-      setSelectedWidth(selectedWidth);
-      FormContext?.setElements((prv) => ({
-        ...prv,
-        width: selectedWidth ? selectedWidth.label : "",
-      }));
-    } else {
-      setSelectedWidth(selectedWidth);
-      FormContext?.setElements((prv) => ({
-        ...prv,
-        width: selectedWidth ? selectedWidth.label : "",
-      }));
-    }
-  }
   // const FormDataContexted = useContext(FormDataContext);
   const FormContext = useContext(ElementContext);
   return (

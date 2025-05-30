@@ -15,6 +15,7 @@ import ValidationSetting from "./inputSetting/ValidationSetting";
 import SelectSettingModal from "./selectSetting/SelectSetting";
 import SelectSetting from "./selectSetting/SelectSetting";
 import { v4 as uuidv4 } from "uuid";
+import ValidationSelectSetting from "./selectSetting/ValidationSelectSetting";
 type elementSettingsPrpps = {
   element: FormElement;
 };
@@ -78,7 +79,7 @@ const ElementSettingModal = ({ element }: elementSettingsPrpps) => {
         )}
         {element.type === "select" && (
           <div className="input-setting w-full h-full flex flex-col justify-start items-center  mb-[4px] overflow-visible !gap-0">
-            <SelectSetting />
+            <SelectSetting setSelectInfo={setSelectInfo} />
             <WidthSetting
               width={selectInfo.width}
               setSelectInfo={setSelectInfo}
@@ -87,6 +88,7 @@ const ElementSettingModal = ({ element }: elementSettingsPrpps) => {
               height={selectInfo.height}
               setSelectInfo={setSelectInfo}
             />
+             {/* <ValidationSelectSetting /> */}
           </div>
         )}
         {element.type === "range" && (
@@ -116,17 +118,28 @@ const ElementSettingModal = ({ element }: elementSettingsPrpps) => {
           <Button
             className="w-[70px] bg-[#1ABC9C] px-4 py-2 rounded-[5px] text-white  flex justify-center justify-centre cursor-pointer"
             onClickHandler={() =>
-              console.log({
-                type: "input",
-                typeInput: forminfo.typeInput,
-                requiredType: forminfo.requiredType,
-                requiredWhidth: forminfo.requiredWhidth,
-                requiredHeight: forminfo.requiredHeight,
-                width: forminfo.width,
-                height: forminfo.height,
-                minLength: forminfo.minLength,
-                maxLength: forminfo.maxLength,
-              })
+              // console.log({
+              //   type: "input",
+              //   typeInput: forminfo.typeInput,
+              //   requiredType: forminfo.requiredType,
+              //   requiredWhidth: forminfo.requiredWhidth,
+              //   requiredHeight: forminfo.requiredHeight,
+              //   width: forminfo.width,
+              //   height: forminfo.height,
+              //   minLength: forminfo.minLength,
+              //   maxLength: forminfo.maxLength,
+              // })
+              // console.log({
+              //   id: selectInfo.id,
+              //   type: selectInfo.type,
+              //   width: selectInfo.width,
+              //   height: selectInfo.height,
+              //   options: selectInfo.options,
+              //   requiredSelect: selectInfo.requiredSelect,
+              //   requiredWidth: selectInfo.requiredWidth,
+              //   requiredHeight: selectInfo.requiredHeight,
+              // })
+              console.log(FormContext?.elements)
             }
           >
             Save

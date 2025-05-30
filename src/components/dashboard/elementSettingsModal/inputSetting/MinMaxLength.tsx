@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {  InputElement } from "../../../../types/formTypes";
+import { ElementContext } from "../../../../App";
 type LengthProps = {
   minLength: number;
   maxLength: number;
@@ -7,16 +8,17 @@ type LengthProps = {
 };
 const MinMaxLength = ({ minLength, maxLength, setForminfo }: LengthProps) => {
   const [minLength1, setMinLength1] = useState<string>("");
+  const FormContext = useContext(ElementContext);
   const [maxLength1, setMaxLength1] = useState<string>("");
   const countLetters = (text: string, feild: "min" | "max") => {
     const letterCount = Array.from(text.replace(/\u200C/g, "")).length;
     if (feild === "min") {
-      setForminfo((prv) => ({
+      FormContext?.setElements((prv) => ({
         ...prv,
         minLength: letterCount,
       }));
     } else {
-      setForminfo((prv) => ({
+      FormContext?.setElements((prv) => ({
         ...prv,
         maxLength: letterCount,
       }));

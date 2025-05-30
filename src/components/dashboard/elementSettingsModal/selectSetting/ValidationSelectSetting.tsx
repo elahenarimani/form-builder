@@ -7,13 +7,15 @@ type ValidationProps = {
   requiredWhidth: boolean;
   requiredHeight: boolean;
 };
-const ValidationSetting = ({
+const ValidationSelectSetting = (
+    {
   setForminfo,
   requiredType,
   requiredWhidth,
   requiredHeight,
-}: ValidationProps) => {
-  const FormContext = useContext(ElementContext);
+}: ValidationProps
+) => {
+     const FormContext = useContext(ElementContext);
   return (
     <div className="validation-wrapper w-full h-[150px] flex flex-col justify-between">
       <div className="validation-title w-full flex justify-between items-start">
@@ -24,7 +26,7 @@ const ValidationSetting = ({
       <div className="validation w-full h-full border-[1px] border-[#d1d5db] rounded-[5px] flex flex-row flex-wrap justify-between items-center gap-[30px] mb-2 p-[18px]">
         {" "}
         <div className="flex justify-between items-center gap-[5px] ">
-          <label className="text-sm">Required Type</label>
+          <label className="text-sm">Required Select</label>
           <input
             type="checkbox"
             aria-label="required or not"
@@ -73,4 +75,5 @@ const ValidationSetting = ({
   );
 };
 
-export default ValidationSetting;
+export default ValidationSelectSetting;
+

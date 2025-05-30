@@ -6,7 +6,7 @@ import { useContext, useState } from "react";
 import { ElementContext, FormElementsContext } from "../../App";
 import { InputElement } from "../../types/formTypes";
 import SelectSlider from "./elementSettingsModal/selectSetting/SelectSetting";
-import RangeSliderSetting from "./elementSettingsModal/rangeSliderSetting/RangeSlider";
+import RangeSliderSetting from "./elementSettingsModal/rangeSliderSetting/RangeSliderSetting";
 import SelectSettingModal from "./elementSettingsModal/selectSetting/SelectSetting";
 import ElementSettingModal from "./elementSettingsModal/InputSettingModal";
 // import ElementSettingModal from "./elementSettingsModal/ElementSettingModal";
@@ -38,7 +38,8 @@ const MainForm = ({
       className="main-form   top-0 w-full min-h-screen border border-[#444444] rounded-[5px] py-[20px] px-[15px] bg-gray-50"
     >
       <h2 className="text-lg font-bold mb-4">My Form</h2>
-      {FormContext?.elements.map((el) => (
+      {Array.isArray(FormContext?.elements) &&
+      FormContext?.elements.map((el) => (
         <div
           key={el.id}
           className="w-full h-[40px] mb-4 flex justify-between items-center gap-[10px] group"
@@ -95,8 +96,6 @@ const MainForm = ({
         </div>
       ))}
         {clickedElement && <ElementSettingModal element={clickedElement} />}
-      {/* {clickedElement && <ElementSettingModal element={clickedElement} />} */}
-      {/* {clickedElement && <SelectSettingModal element={clickedElement} />} */}
     </div>
   );
 };
