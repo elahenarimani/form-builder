@@ -1,25 +1,26 @@
-import React, { useContext, useState } from "react";
 import Select from "react-select";
+import React, { useContext, useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
 import {
-  FormType,
   OptionHeightType,
   SelectEtting,
 } from "../../../../types/formTypes";
-import { FormDataContext } from "../../../../App";
+import { ElementContext } from "../../../../App";
+// import { FormDataContext } from "../../../../App";
 const selectOptions: SelectEtting[] = [
-  { value: "single Select", label: "single Select" },
-  { value: "multi Select", label: "multi Select" },
+  { value: "single Select", label: "single select" },
+  { value: "multi Select", label: "multi select" },
 ];
 // type heightInputProps = {
 //   setForminfo: React.Dispatch<React.SetStateAction<FormType>>;
 // };
 const SelectSetting = () => {
+  const FormContext = useContext(ElementContext);
   const [settingSelect, setSettingSelect] = useState<SelectEtting | null>(null);
   // const [selectedHeight, setSelectedHeight] = useState<OptionHeightType | null>(
   //   null
   // );
-  const FormDataContexted = useContext(FormDataContext);
+  // const FormDataContexted = useContext(FormDataContext);
   return (
     <div className="w-full h-[80px] flex flex-col justify-start items-start  ">
       <label className="block mb-1 mt-1 text-sm font-medium text-gray-700 text-left">

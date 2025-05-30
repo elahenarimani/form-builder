@@ -1,28 +1,24 @@
 import React, { useState } from "react";
-import { FormType } from "../../../../types/formTypes";
+import {  InputElement } from "../../../../types/formTypes";
 type LengthProps = {
-  minLengthInput: number;
-  maxLengthInput: number;
-  setForminfo: React.Dispatch<React.SetStateAction<FormType>>;
+  minLength: number;
+  maxLength: number;
+    setForminfo: React.Dispatch<React.SetStateAction<InputElement>>;
 };
-const MinMaxLength = ({
-  minLengthInput,
-  maxLengthInput,
-  setForminfo,
-}: LengthProps) => {
-  const [minLength, setMinLength] = useState<string>("");
-  const [maxLength, setMaxLength] = useState<string>("");
+const MinMaxLength = ({ minLength, maxLength, setForminfo }: LengthProps) => {
+  const [minLength1, setMinLength1] = useState<string>("");
+  const [maxLength1, setMaxLength1] = useState<string>("");
   const countLetters = (text: string, feild: "min" | "max") => {
     const letterCount = Array.from(text.replace(/\u200C/g, "")).length;
     if (feild === "min") {
       setForminfo((prv) => ({
         ...prv,
-        minLengthInput: letterCount,
+        minLength: letterCount,
       }));
     } else {
       setForminfo((prv) => ({
         ...prv,
-        maxLengthInput: letterCount,
+        maxLength: letterCount,
       }));
     }
   };
@@ -41,11 +37,11 @@ const MinMaxLength = ({
           <input
             type="text"
             className="border rounded p-2 w-full outline-none"
-            value={minLength}
+            value={minLength1}
             aria-label="min length"
             onChange={(e) => {
               const value = e.target.value;
-              setMinLength(value);
+              setMinLength1(value);
               countLetters(value, "min");
             }}
           />
@@ -57,11 +53,11 @@ const MinMaxLength = ({
           <input
             type="text"
             className="border rounded p-2 w-full outline-none"
-            value={maxLength}
+            value={maxLength1}
             aria-label="max length"
             onChange={(e) => {
               const value = e.target.value;
-              setMaxLength(value);
+              setMaxLength1(value);
               countLetters(value, "max");
             }}
           />

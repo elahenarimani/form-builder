@@ -1,22 +1,23 @@
 export type FormElementType = "input" | "select" | "range";
 export interface BaseElement {
   id: string;
-  type?: FormElementType;
+  type: FormElementType;
   x?: number;
   y?: number;
   width?: number | string;
-  height?: number;
+  height?: number | string;
 }
 export type InputElement = BaseElement & {
   type: "input";
-  requiredType?: boolean;
-  requiredWhidth?: boolean;
-  requiredHeight?: boolean;
+  requiredType: boolean;
+  requiredWhidth: boolean;
+  requiredHeight: boolean;
   width?: number | string;
   height?: number | string;
-  minLength?: number;
-  maxLength?: number;
+  minLength: number;
+  maxLength: number;
   placeholder?: string;
+  typeInput:string
 };
 export type SelectElement = BaseElement & {
   type?: "select";
@@ -52,26 +53,26 @@ export type OptionInputType = {
   label: string;
 };
 export type OptionWidthType = {
-  value: number;
+  value: string;
   label: string;
 };
 export type OptionHeightType = {
-  value: number;
+  value: string;
   label: string;
 };
-export type FormType = {
-  id: string;
-  typeInput: string;
-  widthInput: number | string;
-  heightInput: number | string;
-  validationInput: boolean;
-  validationWidth: boolean;
-  validationHeight: boolean;
-  minLengthInput: number;
-  maxLengthInput: number;
-  // single: string;
-  // multi: string;
-};
+// export type FormType = {
+//   id: string;
+//   typeInput: string;
+//   width: number | string;
+//   heightInput: number | string;
+//   validationInput: boolean;
+//   validationWidth: boolean;
+//   validationHeight: boolean;
+//   minLengthInput: number;
+//   maxLengthInput: number;
+//   // single: string;
+//   // multi: string;
+// };
 export type OpenModal = {
   openInputSetting: boolean;
   openSelectSetting: boolean;

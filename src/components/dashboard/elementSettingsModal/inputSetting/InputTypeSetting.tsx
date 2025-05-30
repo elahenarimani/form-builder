@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
 import Select from "react-select";
-import { OptionInputType } from "../../../../types/formTypes";
-import { FormType } from "../../../../types/formTypes";
-import { FormDataContext } from "../../../../App";
+import { InputElement, OptionInputType } from "../../../../types/formTypes";
+import { ElementContext } from "../../../../App";
+// import { FormDataContext } from "../../../../App";
 const inputTypeOptions: OptionInputType[] = [
   { value: "Text", label: "Text" },
   { value: "Number", label: "Number" },
@@ -11,13 +11,14 @@ const inputTypeOptions: OptionInputType[] = [
   { value: "Checkbox", label: "Checkbox" },
 ];
 type InputProps = {
-  setForminfo: React.Dispatch<React.SetStateAction<FormType>>;
+  setForminfo: React.Dispatch<React.SetStateAction<InputElement>>;
   typeInput: string;
 };
 const InputTypeSetting = ({ setForminfo, typeInput }: InputProps) => {
   const [selectedInputType, setSelectedInputType] =
     useState<OptionInputType | null>(null);
-  const FormDataContexted = useContext(FormDataContext);
+  const FormContext = useContext(ElementContext);
+  // const FormDataContexted = useContext(FormDataContext);
 
   return (
     <div className="w-full h-[80px] flex flex-col justify-start items-start  ">
@@ -28,7 +29,7 @@ const InputTypeSetting = ({ setForminfo, typeInput }: InputProps) => {
         defaultValue={selectedInputType}
         onChange={(selectedInputType) => {
           setSelectedInputType(selectedInputType);
-           setForminfo((prv) => ({
+          setForminfo((prv) => ({
             ...prv,
             typeInput: selectedInputType ? selectedInputType?.label : "",
           }));

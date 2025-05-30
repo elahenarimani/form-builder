@@ -1,23 +1,30 @@
 import React, { useContext, useState } from "react";
 import Select from "react-select";
-import { FormType, OptionHeightType } from "../../../../types/formTypes";
-import { FormDataContext } from "../../../../App";
+import {
+  InputElement,
+  OptionHeightType,
+  SelectElement,
+} from "../../../../types/formTypes";
+import { ElementContext } from "../../../../App";
+// import { FormDataContext } from "../../../../App";
 const inputHeightOptions: OptionHeightType[] = [
-  { value: 1, label: "50%" },
-  { value: 2, label: "60%" },
-  { value: 4, label: "70%" },
-  { value: 5, label: "80%" },
-  { value: 6, label: "90%" },
+  { value: "50%", label: "50%" },
+  { value: "60%", label: "60%" },
+  { value: "70%", label: "70%" },
+  { value: "80%", label: "80%" },
+  { value: "90%", label: "90%" },
 ];
- type heightInputProps = {
-    setForminfo: React.Dispatch<React.SetStateAction<FormType>>;
-     heightInput : string|number;
-  };
-const HeightSetting = ({setForminfo , heightInput} : heightInputProps) => {
+type heightInputProps = {
+  setForminfo?: React.Dispatch<React.SetStateAction<InputElement>>;
+  height?: number | string;
+  setSelectInfo?: React.Dispatch<React.SetStateAction<SelectElement>>;
+};
+const HeightSetting = ({ setForminfo, height }: heightInputProps) => {
   const [selectedHeight, setSelectedHeight] = useState<OptionHeightType | null>(
     null
   );
-  const FormDataContexted = useContext(FormDataContext);
+  // const FormDataContexted = useContext(FormDataContext);
+  const FormContext = useContext(ElementContext);
   return (
     <div className="w-full h-[80px] flex flex-col justify-start items-start  ">
       <label className="block mb-1 mt-1 text-sm font-medium text-gray-700 text-left">
@@ -27,9 +34,9 @@ const HeightSetting = ({setForminfo , heightInput} : heightInputProps) => {
         defaultValue={selectedHeight}
         onChange={(selectedHeight) => {
           setSelectedHeight(selectedHeight);
-          setForminfo((prv) => ({
+          FormContext?.setElements((prv) => ({
             ...prv,
-            heightInput : selectedHeight ? selectedHeight.label : "",
+            height: selectedHeight ? selectedHeight.label : "",
           }));
         }}
         options={inputHeightOptions}

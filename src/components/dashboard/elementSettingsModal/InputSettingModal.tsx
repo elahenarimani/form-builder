@@ -1,9 +1,13 @@
 import React, { useContext, useState } from "react";
-import { FormElement, FormType, SelectElement } from "../../../types/formTypes";
+import {
+  FormElement,
+  InputElement,
+  SelectElement,
+} from "../../../types/formTypes";
 import InputSetting from "./inputSetting/InputTypeSetting";
 import WidthSetting from "./generalSetting/WidthSetting";
 import HeightSetting from "./generalSetting/HeightSetting";
-import { FormElementsContext } from "../../../App";
+import { ElementContext, FormElementsContext } from "../../../App";
 import MinMaxLength from "./inputSetting/MinMaxLength";
 import Button from "../../Button";
 import InputTypeSetting from "./inputSetting/InputTypeSetting";
@@ -15,19 +19,29 @@ type elementSettingsPrpps = {
   element: FormElement;
 };
 const ElementSettingModal = ({ element }: elementSettingsPrpps) => {
-  const FormElmntContext = useContext(FormElementsContext);
-  const [forminfo, setForminfo] = useState<FormType>({
-     id: uuidv4(),
+  const FormContext = useContext(ElementContext);
+  const [forminfo, setForminfo] = useState<InputElement>({
+    id: uuidv4(),
+    // typeInput: "",
+    // width: "",
+    // heightInput: "",
+    // validationInput: false,
+    // validationWidth: false,
+    // validationHeight: false,
+    // minLengthInput: 0,
+    // maxLengthInput: 0,
+
+    type: "input",
     typeInput: "",
-    widthInput: "",
-    heightInput: "",
-    validationInput: false,
-    validationWidth: false,
-    validationHeight: false,
-    minLengthInput: 0,
-    maxLengthInput: 0,
+    requiredType: false,
+    requiredWhidth: false,
+    requiredHeight: false,
+    width: "",
+    height: "",
+    minLength: 0,
+    maxLength: 0,
   });
-  const [selectInfo, srtSelectInfo] = useState<SelectElement>({
+  const [selectInfo, setSelectInfo] = useState<SelectElement>({
     id: uuidv4(),
     type: "select",
     width: 0,
@@ -47,23 +61,17 @@ const ElementSettingModal = ({ element }: elementSettingsPrpps) => {
               typeInput={forminfo.typeInput}
               setForminfo={setForminfo}
             />
-            <WidthSetting
-              widthInput={forminfo.widthInput}
-              setForminfo={setForminfo}
-            />
-            <HeightSetting
-              heightInput={forminfo.heightInput}
-              setForminfo={setForminfo}
-            />
+            <WidthSetting width={forminfo.width} setForminfo={setForminfo} />
+            <HeightSetting height={forminfo.height} setForminfo={setForminfo} />
             <ValidationSetting
-              validationInput={forminfo.validationInput}
-              validationWidth={forminfo.validationWidth}
-              validationHeight={forminfo.validationHeight}
+              requiredType={forminfo.requiredType}
+              requiredWhidth={forminfo.requiredWhidth}
+              requiredHeight={forminfo.requiredHeight}
               setForminfo={setForminfo}
             />
             <MinMaxLength
-              minLengthInput={forminfo.minLengthInput}
-              maxLengthInput={forminfo.maxLengthInput}
+              minLength={forminfo.minLength}
+              maxLength={forminfo.maxLength}
               setForminfo={setForminfo}
             />
           </div>
@@ -71,7 +79,14 @@ const ElementSettingModal = ({ element }: elementSettingsPrpps) => {
         {element.type === "select" && (
           <div className="input-setting w-full h-full flex flex-col justify-start items-center  mb-[4px] overflow-visible !gap-0">
             <SelectSetting />
-  
+            <WidthSetting
+              width={selectInfo.width}
+              setSelectInfo={setSelectInfo}
+            />
+            <HeightSetting
+              height={selectInfo.height}
+              setSelectInfo={setSelectInfo}
+            />
           </div>
         )}
         {element.type === "range" && (
@@ -100,7 +115,19 @@ const ElementSettingModal = ({ element }: elementSettingsPrpps) => {
           </Button>
           <Button
             className="w-[70px] bg-[#1ABC9C] px-4 py-2 rounded-[5px] text-white  flex justify-center justify-centre cursor-pointer"
-            onClickHandler={() => setForminfo(forminfo)}
+            onClickHandler={() =>
+              console.log({
+                type: "input",
+                typeInput: forminfo.typeInput,
+                requiredType: forminfo.requiredType,
+                requiredWhidth: forminfo.requiredWhidth,
+                requiredHeight: forminfo.requiredHeight,
+                width: forminfo.width,
+                height: forminfo.height,
+                minLength: forminfo.minLength,
+                maxLength: forminfo.maxLength,
+              })
+            }
           >
             Save
           </Button>

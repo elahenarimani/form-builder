@@ -31,14 +31,16 @@ type FormElementsContextType = {
   formData: FormElement[];
   setFormData: React.Dispatch<React.SetStateAction<FormElement[]>>;
 };
+type ElementsContextType = {
+  //true
+  elements: FormElement[];
+  setElements: React.Dispatch<React.SetStateAction<FormElement[]>>;
+};
 export const FormElementsContext =
-  createContext<FormElement | null>(null);
+  createContext<FormElementsContextType | null>(null);
 
-
-
-export const FormDataContext = createContext<FormElementsContextType| null>(null);
-
-
+// export const FormDataContext = createContext<FormElementsContextType| null>(null);
+export const ElementContext = createContext<ElementsContextType | null>(null); //true
 
 function App() {
   const [elements, setElements] = useState<FormElement[]>([]);
@@ -64,6 +66,9 @@ function App() {
             requiredHeight: false,
             width: "100%",
             placeholder: "متن خود را وارد کنید",
+            typeInput: "",
+            minLength: 0,
+            maxLength: 100,
           };
           break;
         case "select":
@@ -73,7 +78,6 @@ function App() {
             // required: false,
             options: ["گزینه 1", "گزینه 2", "گزینه 3"],
             width: "100%",
-
           };
           break;
         case "range":
@@ -106,10 +110,10 @@ function App() {
     setElements((prev) => prev.filter((el) => el.id !== id));
   };
   return (
-    <FormDataContext.Provider
+    <ElementContext.Provider
       value={{
-        formData,
-        setFormData,
+        elements,
+        setElements,
       }}
     >
       {/* <FormElementsContext.Provider
@@ -122,28 +126,28 @@ function App() {
           setRangeElements,
         }}
       > */}
-        <div className="App ">
-          <DndContext onDragEnd={handleDrop}>
-            <Header />
-            <main className="w-full md:w-11/12 lg:w-4/5 md:ml-auto md:mr-auto h-full flex flex-col md:flex-row-reverse justify-start md:justify-between items-center px-[18px] py-[18px] gap-[10px] md:gap-[50px]">
-              <ElementPalette />
-              <MainForm
-                elements={elements}
-                onDelete={handleDelete}
-                clickedElement={clickedElement}
-                setClickedElement={setClickedElement}
-              />
-            </main>
-            <button
-              onClick={handleSave}
-              className="mt-4 ml-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-            >
-              ذخیره فرم
-            </button>
-          </DndContext>
-        </div>
+      <div className="App ">
+        <DndContext onDragEnd={handleDrop}>
+          <Header />
+          <main className="w-full md:w-11/12 lg:w-4/5 md:ml-auto md:mr-auto h-full flex flex-col md:flex-row-reverse justify-start md:justify-between items-center px-[18px] py-[18px] gap-[10px] md:gap-[50px]">
+            <ElementPalette />
+            <MainForm
+              elements={elements}
+              onDelete={handleDelete}
+              clickedElement={clickedElement}
+              setClickedElement={setClickedElement}
+            />
+          </main>
+          <button
+            onClick={handleSave}
+            className="mt-4 ml-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+          >
+            ذخیره فرم
+          </button>
+        </DndContext>
+      </div>
       {/* </FormElementsContext.Provider> */}
-    </FormDataContext.Provider>
+    </ElementContext.Provider>
   );
 }
 export default App;

@@ -3,12 +3,12 @@ import { FormElement, OpenModal, SelectElement } from "../../types/formTypes";
 import { IoTrash } from "react-icons/io5";
 import { useContext, useState } from "react";
 // import ElementSettingModal from "./elementSettingsModal/ElementSettingModal";
-import { FormElementsContext } from "../../App";
+import { ElementContext, FormElementsContext } from "../../App";
 import { InputElement } from "../../types/formTypes";
 import SelectSlider from "./elementSettingsModal/selectSetting/SelectSetting";
 import RangeSliderSetting from "./elementSettingsModal/rangeSliderSetting/RangeSlider";
 import SelectSettingModal from "./elementSettingsModal/selectSetting/SelectSetting";
-import ElementSettingModal from "./elementSettingsModal/ElementSettingModal";
+import ElementSettingModal from "./elementSettingsModal/InputSettingModal";
 // import ElementSettingModal from "./elementSettingsModal/ElementSettingModal";
 type MainFormProps = {
   elements: FormElement[];
@@ -18,13 +18,14 @@ type MainFormProps = {
 };
 
 const MainForm = ({
-  elements,
+  // elements,
   onDelete,
   clickedElement,
   setClickedElement,
 }: MainFormProps) => {
-  const FormElmntContext = useContext(FormElementsContext);
+  //  const FormContext = useContext(ElementContext);
   const { setNodeRef } = useDroppable({ id: "drop-area" });
+    const FormContext = useContext(ElementContext);
   // const [openModal, setOpenModal] = useState<OpenModal>({
   //   openInputSetting: false,
   //   openSelectSetting: false,
@@ -37,7 +38,7 @@ const MainForm = ({
       className="main-form   top-0 w-full min-h-screen border border-[#444444] rounded-[5px] py-[20px] px-[15px] bg-gray-50"
     >
       <h2 className="text-lg font-bold mb-4">My Form</h2>
-      {elements.map((el) => (
+      {FormContext?.elements.map((el) => (
         <div
           key={el.id}
           className="w-full h-[40px] mb-4 flex justify-between items-center gap-[10px] group"

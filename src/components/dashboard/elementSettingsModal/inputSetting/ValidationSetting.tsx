@@ -1,16 +1,16 @@
 import React from "react";
-import { FormType } from "../../../../types/formTypes";
+import {  InputElement } from "../../../../types/formTypes";
 type ValidationProps = {
-  setForminfo: React.Dispatch<React.SetStateAction<FormType>>;
-  validationInput: boolean;
-  validationWidth: boolean;
-  validationHeight: boolean;
+   setForminfo: React.Dispatch<React.SetStateAction<InputElement>>;
+  requiredType: boolean;
+  requiredWhidth: boolean;
+  requiredHeight: boolean;
 };
 const ValidationSetting = ({
   setForminfo,
-  validationInput,
-  validationWidth,
-  validationHeight,
+  requiredType,
+  requiredWhidth,
+  requiredHeight,
 }: ValidationProps) => {
   return (
     <div className="validation-wrapper w-full h-[150px] flex flex-col justify-between">
@@ -27,11 +27,11 @@ const ValidationSetting = ({
             type="checkbox"
             aria-label="required or not"
             defaultChecked={true}
-            checked={validationInput}
+            checked={requiredType}
             onChange={(e) => {
               setForminfo((prv) => ({
                 ...prv,
-                validationInput: e.target.checked,
+                requiredType: e.target.checked,
               }));
             }}
           />
@@ -42,11 +42,11 @@ const ValidationSetting = ({
             type="checkbox"
             aria-label="required or not"
             defaultChecked={true}
-            checked={validationWidth}
+            checked={requiredWhidth}
             onChange={(e) => {
               setForminfo((prv) => ({
                 ...prv,
-                validationWidth: e.target.checked,
+                requiredWhidth: e.target.checked,
               }));
             }}
           />
@@ -57,11 +57,11 @@ const ValidationSetting = ({
             type="checkbox"
             aria-label="required or not"
             defaultChecked={true}
-            checked={validationHeight}
+            checked={requiredHeight}
             onChange={(e) => {
               setForminfo((prv) => ({
                 ...prv,
-                validationHeight: e.target.checked,
+                requiredHeight: e.target.checked,
               }));
             }}
           />
