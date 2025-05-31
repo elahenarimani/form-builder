@@ -7,7 +7,6 @@ import {
   SelectElement,
 } from "../../../../types/formTypes";
 import { ElementContext } from "../../../../App";
-// import { FormDataContext } from "../../../../App";
 const inputHeightOptions: OptionHeightType[] = [
   { value: "50%", label: "50%" },
   { value: "60%", label: "60%" },
@@ -17,15 +16,25 @@ const inputHeightOptions: OptionHeightType[] = [
 ];
 type heightInputProps = {
   setForminfo?: React.Dispatch<React.SetStateAction<InputElement>>;
-  height?: number | string;
   setSelectInfo?: React.Dispatch<React.SetStateAction<SelectElement>>;
-    setSliderInfo?:  React.Dispatch<React.SetStateAction<RangeElement>>;
+  setSliderInfo?: React.Dispatch<React.SetStateAction<RangeElement>>;
+  height?: number | string;
+  forminfo?: InputElement;
+  selectInfo?: SelectElement;
+  sliderInfo?: RangeElement;
 };
-const HeightSetting = ({ setForminfo, height ,setSliderInfo, setSelectInfo}: heightInputProps) => {
+const HeightSetting = ({
+  setForminfo,
+  setSliderInfo,
+  setSelectInfo,
+  height,
+  forminfo,
+  selectInfo,
+  sliderInfo,
+}: heightInputProps) => {
   const [selectedHeight, setSelectedHeight] = useState<OptionHeightType | null>(
     null
   );
-  // const FormDataContexted = useContext(FormDataContext);
   const FormContext = useContext(ElementContext);
   return (
     <div className="w-full h-[80px] flex flex-col justify-start items-start  ">
@@ -36,10 +45,21 @@ const HeightSetting = ({ setForminfo, height ,setSliderInfo, setSelectInfo}: hei
         defaultValue={selectedHeight}
         onChange={(selectedHeight) => {
           setSelectedHeight(selectedHeight);
-          FormContext?.setElements((prv) => ({
-            ...prv,
-            height: selectedHeight ? selectedHeight.label : "",
-          }));
+          const height = selectedHeight ? selectedHeight.label : "";
+          const type = forminfo?.type || selectInfo?.type || sliderInfo?.type;
+          switch (type) {
+            case "input":
+              setForminfo?.((prev) => ({ ...prev, height }));
+              break;
+            case "select":
+              setSelectInfo?.((prev) => ({ ...prev, height }));
+              break;
+            case "range":
+              setSliderInfo?.((prev) => ({ ...prev, height }));
+              break;
+            default:
+              break;
+          }
         }}
         options={inputHeightOptions}
         isClearable

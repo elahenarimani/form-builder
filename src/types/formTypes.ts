@@ -29,9 +29,9 @@ export type SelectElement = BaseElement & {
 export type RangeElement = BaseElement & {
   type: "range";
   requiredRange: boolean;
-  min: number;
-  max: number;
-  step: number;
+  min: number | string;
+  max: number | string;
+  step: number | string;
 };
 export type FormElement = InputElement | SelectElement | RangeElement;
 export interface Validation {

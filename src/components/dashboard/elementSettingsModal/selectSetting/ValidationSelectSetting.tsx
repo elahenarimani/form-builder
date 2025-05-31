@@ -72,5 +72,4 @@ const ValidationSelectSetting = ({
     </div>
   );
 };
-
 export default ValidationSelectSetting;

@@ -62,9 +62,9 @@ const ElementSettingModal = ({ element }: elementSettingsPrpps) => {
     requiredRange: false,
     requiredWhidth: false,
     requiredHeight: false,
-    min: 0,
-    max: 0,
-    step: 0,
+    min: "",
+    max: "",
+    step: "",
   });
   return (
     <div className="modal-wrapper overflow-visible fixed w-full h-screen bg-black/30 flex justify-center items-start z-50 top-0 left-0 right-0 p-[18px] ">
@@ -76,8 +76,8 @@ const ElementSettingModal = ({ element }: elementSettingsPrpps) => {
               typeInput={forminfo.typeInput}
               setForminfo={setForminfo}
             />
-            <WidthSetting width={forminfo.width} setForminfo={setForminfo} />
-            <HeightSetting height={forminfo.height} setForminfo={setForminfo} />
+            <WidthSetting width={forminfo.width} setForminfo={setForminfo} forminfo={forminfo}/>
+            <HeightSetting height={forminfo.height} setForminfo={setForminfo} forminfo={forminfo}/>
             <ValidationSetting
               requiredType={forminfo.requiredType}
               requiredWidth={forminfo.requiredWhidth}
@@ -97,10 +97,12 @@ const ElementSettingModal = ({ element }: elementSettingsPrpps) => {
             <WidthSetting
               width={selectInfo.width}
               setSelectInfo={setSelectInfo}
+              selectInfo={selectInfo}
             />
             <HeightSetting
               height={selectInfo.height}
               setSelectInfo={setSelectInfo}
+              selectInfo={selectInfo}
             />
             <ValidationSelectSetting
               requiredSelect={selectInfo.requiredSelect}
@@ -131,10 +133,12 @@ const ElementSettingModal = ({ element }: elementSettingsPrpps) => {
             <WidthSetting
               setSliderInfo={setSliderInfo}
               width={sliderInfo.width}
+              sliderInfo={sliderInfo}
             />
             <HeightSetting
               height={sliderInfo.height}
               setSliderInfo={setSliderInfo}
+              sliderInfo={sliderInfo}
             />
             <ValidationSliderSetting
               requiredRange={sliderInfo.requiredRange}
@@ -178,7 +182,8 @@ const ElementSettingModal = ({ element }: elementSettingsPrpps) => {
               //   requiredWidth: selectInfo.requiredWidth,
               //   requiredHeight: selectInfo.requiredHeight,
               // })
-              console.log(FormContext?.elements)
+              console.log(sliderInfo)
+              // console.log(FormContext?.elements)
             }
           >
             Save

@@ -8,7 +8,7 @@ type SliderProps = {
 };
 const ValidationSliderSetting = ({ setSliderInfo ,requiredRange,requiredWhidth,requiredHeight}: SliderProps) => {
   return (
-    <div>
+    
       <div className="validation-wrapper w-full h-[150px] flex flex-col justify-between">
         <div className="validation-title w-full flex justify-between items-start">
           <p className="mb-2 mt-2 text-sm font-medium text-gray-700 !text-left">
@@ -64,7 +64,6 @@ const ValidationSliderSetting = ({ setSliderInfo ,requiredRange,requiredWhidth,r
           </div>
         </div>
       </div>
-    </div>
   );
 };
 

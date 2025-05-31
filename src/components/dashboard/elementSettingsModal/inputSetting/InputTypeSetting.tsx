@@ -29,12 +29,20 @@ const InputTypeSetting = ({ setForminfo, typeInput }: InputProps) => {
         defaultValue={selectedInputType}
         onChange={(selectedInputType) => {
           setSelectedInputType(selectedInputType);
-          FormContext?.setElements((prv) => ({
+          setForminfo((prv) => ({
             ...prv,
             typeInput: selectedInputType ? selectedInputType?.label : "",
           }));
           console.log(typeInput);
         }}
+
+
+        //  onChange={(e) =>
+        //       setSliderInfo((prev) => ({
+        //         ...prev,
+        //         step: Number(e.target.value),
+        //       }))
+        //     }
         options={inputTypeOptions}
         isClearable
         placeholder=""

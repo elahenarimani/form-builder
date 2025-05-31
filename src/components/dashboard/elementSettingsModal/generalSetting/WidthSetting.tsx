@@ -7,7 +7,6 @@ import {
   SelectElement,
 } from "../../../../types/formTypes";
 import { ElementContext } from "../../../../App";
-// import { ElementContext, FormDataContext } from "../../../../App";
 const inputWidthOptions: OptionWidthType[] = [
   { value: "50%", label: "50%" },
   { value: "60%", label: "60%" },
@@ -17,19 +16,28 @@ const inputWidthOptions: OptionWidthType[] = [
 ];
 type InputProps = {
   setForminfo?: React.Dispatch<React.SetStateAction<InputElement>>;
-  width: string | number;
   setSelectInfo?: React.Dispatch<React.SetStateAction<SelectElement>>;
-  setSliderInfo?:  React.Dispatch<React.SetStateAction<RangeElement>>;
-  // width?: number|number;
+  setSliderInfo?: React.Dispatch<React.SetStateAction<RangeElement>>;
+  width: string | number;
+  forminfo?: InputElement;
+  selectInfo?: SelectElement;
+  sliderInfo?: RangeElement;
 };
-const WidthSetting = ({ setForminfo, setSelectInfo, width,  setSliderInfo }: InputProps) => {
+const WidthSetting = ({
+  setForminfo,
+  setSelectInfo,
+  setSliderInfo,
+  width,
+  forminfo,
+  selectInfo,
+  sliderInfo,
+}: InputProps) => {
   const [selectedWidth, setSelectedWidth] = useState<OptionWidthType | null>(
     null
   );
-  // const FormDataContexted = useContext(FormDataContext);
   const FormContext = useContext(ElementContext);
   return (
-    <div className="w-full h-[80px] flex flex-col justify-start items-start  ">
+    <div className="w-full h-[80px] flex flex-col justify-start items-start">
       <label className="block mb-1 mt-1 text-sm font-medium text-gray-700 text-left">
         Width
       </label>
@@ -37,10 +45,21 @@ const WidthSetting = ({ setForminfo, setSelectInfo, width,  setSliderInfo }: Inp
         defaultValue={selectedWidth}
         onChange={(selectedWidth) => {
           setSelectedWidth(selectedWidth);
-          FormContext?.setElements((prv) => ({
-            ...prv,
-            width: selectedWidth ? selectedWidth.label : "",
-          }));
+          const width = selectedWidth ? selectedWidth.label : "";
+          const type = forminfo?.type || selectInfo?.type || sliderInfo?.type;
+          switch (type) {
+            case "input":
+              setForminfo?.((prev) => ({ ...prev, width }));
+              break;
+            case "select":
+              setSelectInfo?.((prev) => ({ ...prev, width }));
+              break;
+            case "range":
+              setSliderInfo?.((prev) => ({ ...prev, width }));
+              break;
+            default:
+              break;
+          }
         }}
         options={inputWidthOptions}
         isClearable
