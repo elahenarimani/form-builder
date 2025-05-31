@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import {
   FormElement,
   InputElement,
+  RangeElement,
   SelectElement,
 } from "../../../types/formTypes";
 import InputSetting from "./inputSetting/InputTypeSetting";
@@ -16,6 +17,8 @@ import SelectSettingModal from "./selectSetting/SelectSetting";
 import SelectSetting from "./selectSetting/SelectSetting";
 import { v4 as uuidv4 } from "uuid";
 import ValidationSelectSetting from "./selectSetting/ValidationSelectSetting";
+import ValidationSliderSetting from "./rangeSliderSetting/ValidationSliderSetting";
+import SliderFeature from "./rangeSliderSetting/SliderFeature";
 type elementSettingsPrpps = {
   element: FormElement;
 };
@@ -31,7 +34,6 @@ const ElementSettingModal = ({ element }: elementSettingsPrpps) => {
     // validationHeight: false,
     // minLengthInput: 0,
     // maxLengthInput: 0,
-
     type: "input",
     typeInput: "",
     requiredType: false,
@@ -49,8 +51,20 @@ const ElementSettingModal = ({ element }: elementSettingsPrpps) => {
     height: 0,
     options: [],
     requiredSelect: false,
-    requiredWidth: false,
+    requiredWhidth: false,
     requiredHeight: false,
+  });
+  const [sliderInfo, setSliderInfo] = useState<RangeElement>({
+    id: uuidv4(),
+    width: 0,
+    height: 0,
+    type: "range",
+    requiredRange: false,
+    requiredWhidth: false,
+    requiredHeight: false,
+    min: 0,
+    max: 0,
+    step: 0,
   });
   return (
     <div className="modal-wrapper overflow-visible fixed w-full h-screen bg-black/30 flex justify-center items-start z-50 top-0 left-0 right-0 p-[18px] ">
@@ -66,7 +80,7 @@ const ElementSettingModal = ({ element }: elementSettingsPrpps) => {
             <HeightSetting height={forminfo.height} setForminfo={setForminfo} />
             <ValidationSetting
               requiredType={forminfo.requiredType}
-              requiredWhidth={forminfo.requiredWhidth}
+              requiredWidth={forminfo.requiredWhidth}
               requiredHeight={forminfo.requiredHeight}
               setForminfo={setForminfo}
             />
@@ -88,12 +102,17 @@ const ElementSettingModal = ({ element }: elementSettingsPrpps) => {
               height={selectInfo.height}
               setSelectInfo={setSelectInfo}
             />
-             {/* <ValidationSelectSetting /> */}
+            <ValidationSelectSetting
+              requiredSelect={selectInfo.requiredSelect}
+              requiredWidth={selectInfo.requiredWhidth}
+              requiredHeight={selectInfo.requiredHeight}
+              setSelectInfo={setSelectInfo}
+            />
           </div>
         )}
         {element.type === "range" && (
-          <div>
-            <div className="mb-4">
+          <div className="slider-setting w-full h-full flex flex-col justify-start items-center  mb-[4px] overflow-visible !gap-0">
+            {/* <div className="mb-4">
               <label className="block mb-1">Min:</label>
               <input
                 type="number"
@@ -108,7 +127,27 @@ const ElementSettingModal = ({ element }: elementSettingsPrpps) => {
                 defaultValue={element.max}
                 className="border rounded p-2 w-full"
               />
-            </div>
+            </div> */}
+            <WidthSetting
+              setSliderInfo={setSliderInfo}
+              width={sliderInfo.width}
+            />
+            <HeightSetting
+              height={sliderInfo.height}
+              setSliderInfo={setSliderInfo}
+            />
+            <ValidationSliderSetting
+              requiredRange={sliderInfo.requiredRange}
+              requiredWhidth={sliderInfo.requiredWhidth}
+              requiredHeight={sliderInfo.requiredHeight}
+              setSliderInfo={setSliderInfo}
+            />
+            <SliderFeature
+              min={sliderInfo.min}
+              max={sliderInfo.max}
+              step={sliderInfo.step}
+              setSliderInfo={setSliderInfo}
+            />
           </div>
         )}
         <div className="w-full h-full flex justify-center justify-centre gap-2 ">

@@ -4,35 +4,34 @@ export interface BaseElement {
   type: FormElementType;
   x?: number;
   y?: number;
-  width?: number | string;
-  height?: number | string;
+  width: number | string;
+  height: number | string;
+  requiredWhidth: boolean;
+  requiredHeight: boolean;
 }
 export type InputElement = BaseElement & {
   type: "input";
   requiredType: boolean;
-  requiredWhidth: boolean;
-  requiredHeight: boolean;
+
   width?: number | string;
   height?: number | string;
   minLength: number;
   maxLength: number;
   placeholder?: string;
-  typeInput:string
+  typeInput: string;
 };
 export type SelectElement = BaseElement & {
   type?: "select";
   // required?: boolean;
   options: string[];
-  requiredSelect?: boolean;
-  requiredWidth?: boolean;
-  requiredHeight?: boolean;
+  requiredSelect: boolean;
 };
 export type RangeElement = BaseElement & {
   type: "range";
-  required?: boolean;
+  requiredRange: boolean;
   min: number;
   max: number;
-  // step: number;
+  step: number;
 };
 export type FormElement = InputElement | SelectElement | RangeElement;
 export interface Validation {

@@ -3,6 +3,7 @@ import Select from "react-select";
 import {
   InputElement,
   OptionWidthType,
+  RangeElement,
   SelectElement,
 } from "../../../../types/formTypes";
 import { ElementContext } from "../../../../App";
@@ -16,11 +17,12 @@ const inputWidthOptions: OptionWidthType[] = [
 ];
 type InputProps = {
   setForminfo?: React.Dispatch<React.SetStateAction<InputElement>>;
-  width?: string | number;
+  width: string | number;
   setSelectInfo?: React.Dispatch<React.SetStateAction<SelectElement>>;
+  setSliderInfo?:  React.Dispatch<React.SetStateAction<RangeElement>>;
   // width?: number|number;
 };
-const WidthSetting = ({ setForminfo, setSelectInfo, width }: InputProps) => {
+const WidthSetting = ({ setForminfo, setSelectInfo, width,  setSliderInfo }: InputProps) => {
   const [selectedWidth, setSelectedWidth] = useState<OptionWidthType | null>(
     null
   );

@@ -59,12 +59,13 @@ function App() {
       switch (type) {
         case "input":
           newElement = {
-            id: nanoid(),
+            id: uuidv4(),
             type: "input",
             requiredType: true,
             requiredWhidth: false,
             requiredHeight: false,
             width: "100%",
+            height: "100%",
             placeholder: "متن خود را وارد کنید",
             typeInput: "",
             minLength: 0,
@@ -73,20 +74,30 @@ function App() {
           break;
         case "select":
           newElement = {
-            id: nanoid(),
+            id: uuidv4(),
             type: "select",
             // required: false,
             options: ["گزینه 1", "گزینه 2", "گزینه 3"],
             width: "100%",
+            height: "100%",
+            requiredSelect: false,
+            requiredWhidth: false,
+            requiredHeight: false,
           };
           break;
         case "range":
           newElement = {
-            id: nanoid(),
+            id: uuidv4(),
             type: "range",
-            required: false,
+            // required: false,
             min: 0,
             max: 100,
+            requiredRange: false,
+            requiredWhidth: false,
+            requiredHeight: false,
+            step: 0,
+            width: "100%",
+            height: "100%",
           };
           break;
       }

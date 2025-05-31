@@ -3,6 +3,7 @@ import Select from "react-select";
 import {
   InputElement,
   OptionHeightType,
+  RangeElement,
   SelectElement,
 } from "../../../../types/formTypes";
 import { ElementContext } from "../../../../App";
@@ -18,8 +19,9 @@ type heightInputProps = {
   setForminfo?: React.Dispatch<React.SetStateAction<InputElement>>;
   height?: number | string;
   setSelectInfo?: React.Dispatch<React.SetStateAction<SelectElement>>;
+    setSliderInfo?:  React.Dispatch<React.SetStateAction<RangeElement>>;
 };
-const HeightSetting = ({ setForminfo, height }: heightInputProps) => {
+const HeightSetting = ({ setForminfo, height ,setSliderInfo, setSelectInfo}: heightInputProps) => {
   const [selectedHeight, setSelectedHeight] = useState<OptionHeightType | null>(
     null
   );

@@ -1,19 +1,18 @@
-import React, { useContext } from "react";
+import React from "react";
 import {  InputElement } from "../../../../types/formTypes";
-import { ElementContext } from "../../../../App";
 type ValidationProps = {
    setForminfo: React.Dispatch<React.SetStateAction<InputElement>>;
   requiredType: boolean;
-  requiredWhidth: boolean;
+  requiredWidth: boolean;
   requiredHeight: boolean;
 };
 const ValidationSetting = ({
   setForminfo,
   requiredType,
-  requiredWhidth,
+  requiredWidth,
   requiredHeight,
 }: ValidationProps) => {
-  const FormContext = useContext(ElementContext);
+  
   return (
     <div className="validation-wrapper w-full h-[150px] flex flex-col justify-between">
       <div className="validation-title w-full flex justify-between items-start">
@@ -31,7 +30,7 @@ const ValidationSetting = ({
             defaultChecked={true}
             checked={requiredType}
             onChange={(e) => {
-              FormContext?.setElements((prv) => ({
+              setForminfo((prv) => ({
                 ...prv,
                 requiredType: e.target.checked,
               }));
@@ -44,11 +43,11 @@ const ValidationSetting = ({
             type="checkbox"
             aria-label="required or not"
             defaultChecked={true}
-            checked={requiredWhidth}
+            checked={requiredWidth}
             onChange={(e) => {
-              FormContext?.setElements((prv) => ({
+              setForminfo((prv) => ({
                 ...prv,
-                requiredWhidth: e.target.checked,
+                requiredWidth: e.target.checked,
               }));
             }}
           />
@@ -61,7 +60,7 @@ const ValidationSetting = ({
             defaultChecked={true}
             checked={requiredHeight}
             onChange={(e) => {
-              FormContext?.setElements((prv) => ({
+              setForminfo((prv) => ({
                 ...prv,
                 requiredHeight: e.target.checked,
               }));

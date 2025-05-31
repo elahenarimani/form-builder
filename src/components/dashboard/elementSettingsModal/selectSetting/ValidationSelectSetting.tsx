@@ -1,21 +1,19 @@
 import React, { useContext } from "react";
-import {  InputElement } from "../../../../types/formTypes";
+import { InputElement, SelectElement } from "../../../../types/formTypes";
 import { ElementContext } from "../../../../App";
 type ValidationProps = {
-   setForminfo: React.Dispatch<React.SetStateAction<InputElement>>;
-  requiredType: boolean;
-  requiredWhidth: boolean;
+  setSelectInfo: React.Dispatch<React.SetStateAction<SelectElement>>;
+  requiredSelect: boolean;
+  requiredWidth: boolean;
   requiredHeight: boolean;
 };
-const ValidationSelectSetting = (
-    {
-  setForminfo,
-  requiredType,
-  requiredWhidth,
+const ValidationSelectSetting = ({
+  requiredSelect,
+  requiredWidth,
   requiredHeight,
-}: ValidationProps
-) => {
-     const FormContext = useContext(ElementContext);
+  setSelectInfo,
+}: ValidationProps) => {
+  const FormContext = useContext(ElementContext);
   return (
     <div className="validation-wrapper w-full h-[150px] flex flex-col justify-between">
       <div className="validation-title w-full flex justify-between items-start">
@@ -31,11 +29,11 @@ const ValidationSelectSetting = (
             type="checkbox"
             aria-label="required or not"
             defaultChecked={true}
-            checked={requiredType}
+            checked={requiredSelect}
             onChange={(e) => {
-              FormContext?.setElements((prv) => ({
+              setSelectInfo((prv) => ({
                 ...prv,
-                requiredType: e.target.checked,
+                requiredSelect: e.target.checked,
               }));
             }}
           />
@@ -46,11 +44,11 @@ const ValidationSelectSetting = (
             type="checkbox"
             aria-label="required or not"
             defaultChecked={true}
-            checked={requiredWhidth}
+            checked={requiredWidth}
             onChange={(e) => {
-              FormContext?.setElements((prv) => ({
+              setSelectInfo((prv) => ({
                 ...prv,
-                requiredWhidth: e.target.checked,
+                requiredWidth: e.target.checked,
               }));
             }}
           />
@@ -63,7 +61,7 @@ const ValidationSelectSetting = (
             defaultChecked={true}
             checked={requiredHeight}
             onChange={(e) => {
-              FormContext?.setElements((prv) => ({
+              setSelectInfo((prv) => ({
                 ...prv,
                 requiredHeight: e.target.checked,
               }));
@@ -76,4 +74,3 @@ const ValidationSelectSetting = (
 };
 
 export default ValidationSelectSetting;
-
