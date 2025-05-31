@@ -174,13 +174,13 @@ const ElementSettingModal = ({ element, activeType,setClickedElement }: elementS
             />
           </div>
         )}
-        <div className="w-full h-full flex justify-center justify-centre gap-2 ">
-          <Button className="w-[70px] bg-white px-4 py-2 border-[1px] border-[#d1d5db] rounded-[5px] text-gray-700  flex justify-center justify-centre cursor-pointer"
+        <div className="w-full h-full flex justify-center justify-centre gap-[20px] ">
+          <Button className="w-[70px] bg-white px-4 py-2 border-[1px] border-[#d1d5db] rounded-[50px] text-gray-700  flex justify-center justify-centre cursor-pointer"
           onClickHandler={()=> setClickedElement(null)}>
             Cancel
           </Button>
           <Button
-            className="w-[70px] bg-[#1ABC9C] px-4 py-2 rounded-[5px] text-white  flex justify-center justify-centre cursor-pointer"
+            className="w-[70px] bg-[#1ABC9C] px-4 py-2 rounded-[50px] text-white  flex justify-center justify-centre cursor-pointer"
             onClickHandler={
               () => addForm()
               // console.log({

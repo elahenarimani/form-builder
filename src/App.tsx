@@ -3,13 +3,7 @@ import Header from "./components/Header";
 import ElementPalette from "./components/dashboard/ElementPalette";
 import MainForm from "./components/dashboard/MainForm";
 import { useState, createContext } from "react";
-// import { DndContext } from "@dnd-kit/core";
-import {
-  DndContext,
-  useDraggable,
-  useDroppable,
-  DragEndEvent,
-} from "@dnd-kit/core";
+import { DndContext, DragEndEvent } from "@dnd-kit/core";
 import { v4 as uuidv4 } from "uuid";
 import {
   FormElement,
@@ -18,15 +12,7 @@ import {
   SelectElement,
   RangeElement,
 } from "./types/formTypes";
-import { nanoid } from "nanoid";
-interface FormContextType {
-  inputElements: InputElement[];
-  setInputElements: React.Dispatch<React.SetStateAction<InputElement[]>>;
-  selectElements: SelectElement[];
-  setSelectElements: React.Dispatch<React.SetStateAction<SelectElement[]>>;
-  rangeElements: RangeElement[];
-  setRangeElements: React.Dispatch<React.SetStateAction<RangeElement[]>>;
-}
+import Button from "./components/Button";
 type FormElementsContextType = {
   formData: FormElement[];
   setFormData: React.Dispatch<React.SetStateAction<FormElement[]>>;
@@ -38,17 +24,27 @@ type ElementsContextType = {
 };
 export const FormElementsContext =
   createContext<FormElementsContextType | null>(null);
-
 // export const FormDataContext = createContext<FormElementsContextType| null>(null);
 export const ElementContext = createContext<ElementsContextType | null>(null); //true
-
 function App() {
   const [elements, setElements] = useState<FormElement[]>([]);
- 
   // const [inputElements, setInputElements] = useState<InputElement[]>([]);
   // const [selectElements, setSelectElements] = useState<SelectElement[]>([]);
   // const [rangeElements, setRangeElements] = useState<RangeElement[]>([]);
-  const [formData, setFormData] = useState<FormElement[]>([]);
+  const [formName, setFormName] = useState("");
+  // const [formData, setFormData] = useState<FormElement[]>([]);
+  const finalForm = {
+  id: uuidv4(),
+  name: formName,
+  formElement: elements
+};
+const handleSaveForm = () => {
+  // if (!formName) return alert("لطفاً نام فرم را وارد کنید");
+  const existingForms = JSON.parse(localStorage.getItem("forms") || "[]");
+  const updatedForms = [...existingForms, finalForm];
+  localStorage.setItem("forms", JSON.stringify(updatedForms));
+  console.log(updatedForms)
+};
   const handleDrop = (event: DragEndEvent) => {
     const { active, over } = event;
     if (over && over.id === "drop-area") {
@@ -125,38 +121,60 @@ function App() {
         setElements,
       }}
     >
-      {/* <FormElementsContext.Provider
-        value={{
-          inputElements,
-          setInputElements,
-          selectElements,
-          setSelectElements,
-          rangeElements,
-          setRangeElements,
-        }}
-      > */}
-      <div className="App ">
+      <div className="App pb-[18px]">
         <DndContext onDragEnd={handleDrop}>
           <Header />
           <main className="w-full md:w-11/12 lg:w-4/5 md:ml-auto md:mr-auto h-full flex flex-col md:flex-row-reverse justify-start md:justify-between items-center px-[18px] py-[18px] gap-[10px] md:gap-[50px]">
             <ElementPalette />
-            <MainForm
-              elements={elements}
-              onDelete={handleDelete}
-              // clickedElement={clickedElement}
-              // setClickedElement={setClickedElement}
-            />
+            <MainForm  onDelete={handleDelete} formName={formName} setFormName={setFormName}/>
           </main>
-          <button
-            onClick={handleSave}
-            className="mt-4 ml-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-          >
-            ذخیره فرم
-          </button>
+          <div className="w-full h-full flex justify-center justify-centre gap-[20px] ">
+            <Button
+              className="w-[130px] bg-white px-4 py-2 border-[1px] border-[#d1d5db] rounded-[50px] text-gray-700  flex justify-center justify-centre cursor-pointer"
+              onClickHandler={()=> handleSaveForm() }
+            >
+              Save as JSON
+            </Button>
+            <Button
+              className="w-[130px] bg-[#1ABC9C] px-4 py-2 rounded-[50px] text-white  flex justify-center justify-centre cursor-pointer"
+ 
+              // console.log({
+              //   type: "input",
+              //   typeInput: forminfo.typeInput,
+              //   requiredType: forminfo.requiredType,
+              //   requiredWhidth: forminfo.requiredWhidth,
+              //   requiredHeight: forminfo.requiredHeight,
+              //   width: forminfo.width,
+              //   height: forminfo.height,
+              //   minLength: forminfo.minLength,
+              //   maxLength: forminfo.maxLength,
+              // })
+              // console.log({
+              //   id: selectInfo.id,
+              //   type: selectInfo.type,
+              //   width: selectInfo.width,
+              //   height: selectInfo.height,
+              //   options: selectInfo.options,
+              //   requiredSelect: selectInfo.requiredSelect,
+              //   requiredWidth: selectInfo.requiredWidth,
+              //   requiredHeight: selectInfo.requiredHeight,
+              // })
+              // console.log(sliderInfo)
+              // console.log(selectInfo)
+              //  console.log(forminfo)
+
+              // console.log(FormContext?.elements)
+            >
+              Save
+            </Button>
+          </div>
         </DndContext>
       </div>
-      {/* </FormElementsContext.Provider> */}
     </ElementContext.Provider>
   );
 }
 export default App;
+function uuid() {
+  throw new Error("Function not implemented.");
+}
+

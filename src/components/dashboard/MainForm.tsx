@@ -9,15 +9,18 @@ import {
   SelectElement,
   RangeElement,
 } from "../../types/formTypes";
-import "./mainForm.css"
+import "./mainForm.css";
 import { ElementContext } from "../../App";
 import ElementSettingModal from "./elementSettingsModal/InputSettingModal";
-
+import { IoMdSettings } from "react-icons/io";
+import Button from "../Button";
 type MainFormProps = {
-  elements: FormElement[];
+  // elements: FormElement[];
   onDelete: (id: string) => void;
+  formName: string;
+  setFormName: React.Dispatch<React.SetStateAction<string>>;
 };
-const MainForm = ({ onDelete }: MainFormProps) => {
+const MainForm = ({ onDelete, formName, setFormName }: MainFormProps) => {
   const [clickedElement, setClickedElement] = useState<FormElement | null>(
     null
   );
@@ -25,17 +28,28 @@ const MainForm = ({ onDelete }: MainFormProps) => {
   const FormContext = useContext(ElementContext);
   const [activeType, setActiveType] = useState<FormElementType>("input");
   console.log(FormContext?.elements);
+  console.log(formName);
   return (
     <div
       ref={setNodeRef}
-      className="main-form top-0 w-full min-h-screen border border-[#444444] rounded-[5px] py-[20px] px-[15px] bg-gray-50"
+      className="main-form top-0 w-full min-h-screen border border-[#444444] rounded-[5px] py-[20px] px-[15px] bg-gray-50 "
     >
       <h2 className="text-lg font-bold mb-4">My Form</h2>
+      <div className="w-full h-[80px] flex flex-col justify-start items-start gap-[2px] mb-4">
+        <label className="w-full h-full  text-sm ">Form Name:</label>
+        <input
+          className="w-full h-full rounded-[5px] px-[5px] outline-none border"
+          type="text"
+          aria-label="required or not"
+          value={formName}
+          onChange={(e) => setFormName(e.target.value)}
+        />
+      </div>
       {Array.isArray(FormContext?.elements) &&
         FormContext?.elements.map((el) => (
           <div
             key={el.id}
-            className="w-full h-[40px] mb-4 flex justify-between items-center gap-[10px] group"
+            className="w-full h-[40px] mb-4 flex flex-row justify-between items-center "
             style={{
               top: el.y || 0,
               left: el.x || 0,
@@ -64,7 +78,7 @@ const MainForm = ({ onDelete }: MainFormProps) => {
                 }}
                 onClick={() => {
                   setActiveType("input");
-                  setClickedElement(el);
+                  // setClickedElement(el);
                 }}
               />
             )}
@@ -84,7 +98,7 @@ const MainForm = ({ onDelete }: MainFormProps) => {
                 }}
                 onClick={() => {
                   setActiveType("select");
-                  setClickedElement(el);
+                  // setClickedElement(el);
                 }}
               >
                 {(el as SelectElement).options.length === 0 ? (
@@ -112,7 +126,7 @@ const MainForm = ({ onDelete }: MainFormProps) => {
                 }}
               >
                 <ReactSlider
-                  className="horizontal-slider"
+                  className="w-full horizontal-slider"
                   thumbClassName="example-thumb"
                   trackClassName="example-track"
                   min={Number((el as RangeElement).min) || 0}
@@ -132,12 +146,20 @@ const MainForm = ({ onDelete }: MainFormProps) => {
                 />
               </div>
             )}
-            <button
-              onClick={() => onDelete(el.id)}
-              className=" top-1 right-1 opacity-0 group-hover:opacity-100 transition-opacity"
-            >
-              <IoTrash size={20} color="red" />
-            </button>
+            <div className="!w-[60px] h-full flex justify-end items-center p-[8px]  ">
+              <Button
+                onClickHandler={() => onDelete(el.id)}
+                className=" top-1 right-1  group-hover:opacity-100 transition-opacity"
+              >
+                <IoTrash size={20} color="red" />
+              </Button>
+              <Button
+                onClickHandler={() => setClickedElement(el)}
+                className=" top-1 right-1  group-hover:opacity-100 transition-opacity"
+              >
+                <IoMdSettings size={20} color="gray" />
+              </Button>
+            </div>
           </div>
         ))}
       {clickedElement && (
