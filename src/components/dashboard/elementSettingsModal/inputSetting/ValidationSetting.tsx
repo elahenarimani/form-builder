@@ -9,7 +9,7 @@ type ValidationProps = {
 const ValidationSetting = ({
   setForminfo,
   requiredType,
-  requiredWidth,
+ requiredWidth,
   requiredHeight,
 }: ValidationProps) => {
   

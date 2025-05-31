@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import {
   FormElement,
+  FormElementType,
   InputElement,
   RangeElement,
   SelectElement,
@@ -21,23 +22,18 @@ import ValidationSliderSetting from "./rangeSliderSetting/ValidationSliderSettin
 import SliderFeature from "./rangeSliderSetting/SliderFeature";
 type elementSettingsPrpps = {
   element: FormElement;
+  activeType: FormElementType;
+  setClickedElement: (element: FormElement | null) => void;
 };
-const ElementSettingModal = ({ element }: elementSettingsPrpps) => {
+
+const ElementSettingModal = ({ element, activeType,setClickedElement }: elementSettingsPrpps) => {
   const FormContext = useContext(ElementContext);
   const [forminfo, setForminfo] = useState<InputElement>({
     id: uuidv4(),
-    // typeInput: "",
-    // width: "",
-    // heightInput: "",
-    // validationInput: false,
-    // validationWidth: false,
-    // validationHeight: false,
-    // minLengthInput: 0,
-    // maxLengthInput: 0,
     type: "input",
     typeInput: "",
     requiredType: false,
-    requiredWhidth: false,
+    requiredWidth: false,
     requiredHeight: false,
     width: "",
     height: "",
@@ -51,7 +47,7 @@ const ElementSettingModal = ({ element }: elementSettingsPrpps) => {
     height: 0,
     options: [],
     requiredSelect: false,
-    requiredWhidth: false,
+    requiredWidth: false,
     requiredHeight: false,
   });
   const [sliderInfo, setSliderInfo] = useState<RangeElement>({
@@ -60,12 +56,28 @@ const ElementSettingModal = ({ element }: elementSettingsPrpps) => {
     height: 0,
     type: "range",
     requiredRange: false,
-    requiredWhidth: false,
+    requiredWidth: false,
     requiredHeight: false,
     min: "",
     max: "",
     step: "",
   });
+
+  function addForm() {
+    switch (activeType) {
+      case "input":
+        FormContext?.setElements((prv) => [...prv, forminfo]);
+        break;
+      case "select":
+        FormContext?.setElements?.((prev) => [...prev, selectInfo]);
+        break;
+      case "range":
+        FormContext?.setElements?.((prv) => [...prv, sliderInfo]);
+        break;
+    }
+    setClickedElement(null)
+  }
+  // console.log(FormContext?.elements);
   return (
     <div className="modal-wrapper overflow-visible fixed w-full h-screen bg-black/30 flex justify-center items-start z-50 top-0 left-0 right-0 p-[18px] ">
       <div className="modal overflow-y-auto w-full h-full bg-white p-4 rounded-[10px] flex flex-col justify-start items-center gap-0">
@@ -76,11 +88,19 @@ const ElementSettingModal = ({ element }: elementSettingsPrpps) => {
               typeInput={forminfo.typeInput}
               setForminfo={setForminfo}
             />
-            <WidthSetting width={forminfo.width} setForminfo={setForminfo} forminfo={forminfo}/>
-            <HeightSetting height={forminfo.height} setForminfo={setForminfo} forminfo={forminfo}/>
+            <WidthSetting
+              width={forminfo.width}
+              setForminfo={setForminfo}
+              forminfo={forminfo}
+            />
+            <HeightSetting
+              height={forminfo.height}
+              setForminfo={setForminfo}
+              forminfo={forminfo}
+            />
             <ValidationSetting
               requiredType={forminfo.requiredType}
-              requiredWidth={forminfo.requiredWhidth}
+              requiredWidth={forminfo.requiredWidth}
               requiredHeight={forminfo.requiredHeight}
               setForminfo={setForminfo}
             />
@@ -106,7 +126,7 @@ const ElementSettingModal = ({ element }: elementSettingsPrpps) => {
             />
             <ValidationSelectSetting
               requiredSelect={selectInfo.requiredSelect}
-              requiredWidth={selectInfo.requiredWhidth}
+              requiredWidth={selectInfo.requiredWidth}
               requiredHeight={selectInfo.requiredHeight}
               setSelectInfo={setSelectInfo}
             />
@@ -142,7 +162,7 @@ const ElementSettingModal = ({ element }: elementSettingsPrpps) => {
             />
             <ValidationSliderSetting
               requiredRange={sliderInfo.requiredRange}
-              requiredWhidth={sliderInfo.requiredWhidth}
+              requiredWidth={sliderInfo.requiredWidth}
               requiredHeight={sliderInfo.requiredHeight}
               setSliderInfo={setSliderInfo}
             />
@@ -155,12 +175,14 @@ const ElementSettingModal = ({ element }: elementSettingsPrpps) => {
           </div>
         )}
         <div className="w-full h-full flex justify-center justify-centre gap-2 ">
-          <Button className="w-[70px] bg-white px-4 py-2 border-[1px] border-[#d1d5db] rounded-[5px] text-gray-700  flex justify-center justify-centre cursor-pointer">
+          <Button className="w-[70px] bg-white px-4 py-2 border-[1px] border-[#d1d5db] rounded-[5px] text-gray-700  flex justify-center justify-centre cursor-pointer"
+          onClickHandler={()=> setClickedElement(null)}>
             Cancel
           </Button>
           <Button
             className="w-[70px] bg-[#1ABC9C] px-4 py-2 rounded-[5px] text-white  flex justify-center justify-centre cursor-pointer"
-            onClickHandler={() =>
+            onClickHandler={
+              () => addForm()
               // console.log({
               //   type: "input",
               //   typeInput: forminfo.typeInput,
@@ -182,7 +204,10 @@ const ElementSettingModal = ({ element }: elementSettingsPrpps) => {
               //   requiredWidth: selectInfo.requiredWidth,
               //   requiredHeight: selectInfo.requiredHeight,
               // })
-              console.log(sliderInfo)
+              // console.log(sliderInfo)
+              // console.log(selectInfo)
+              //  console.log(forminfo)
+
               // console.log(FormContext?.elements)
             }
           >

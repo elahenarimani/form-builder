@@ -3,10 +3,10 @@ import { RangeElement } from "../../../../types/formTypes";
 type SliderProps = {
   setSliderInfo: React.Dispatch<React.SetStateAction<RangeElement>>;
   requiredRange: boolean;
-  requiredWhidth: boolean;
+  requiredWidth: boolean;
   requiredHeight: boolean;
 };
-const ValidationSliderSetting = ({ setSliderInfo ,requiredRange,requiredWhidth,requiredHeight}: SliderProps) => {
+const ValidationSliderSetting = ({ setSliderInfo ,requiredRange,requiredWidth,requiredHeight}: SliderProps) => {
   return (
     
       <div className="validation-wrapper w-full h-[150px] flex flex-col justify-between">
@@ -38,11 +38,11 @@ const ValidationSliderSetting = ({ setSliderInfo ,requiredRange,requiredWhidth,r
               type="checkbox"
               aria-label="required or not"
               defaultChecked={true}
-              checked={requiredWhidth}
+              checked={requiredWidth}
               onChange={(e) => {
                 setSliderInfo((prv) => ({
                   ...prv,
-                  requiredWhidth: e.target.checked,
+                  requiredWidth: e.target.checked,
                 }));
               }}
             />

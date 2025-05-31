@@ -7,7 +7,7 @@ const ElementPalette = () => {
   const selectDraggable = useDraggable({ id: "select" });
   const rangeDraggable = useDraggable({ id: "range" });
   return (
-    <div className="w-full md:min-w-[340px] md:min-h-screen md:max-w-[340px] px-[18px] border border-[#444444] rounded-[5px] py-[11px]">
+    <div className="w-full md:min-w-[340px] md:min-h-screen md:max-w-[340px] px-[18px] border border-[#444444] rounded-[5px] py-[11px] bg-gray-50">
       <div className="w-full grid grid-cols-2 justify-items-center items-start gap-[10px] py-[10px] md:gap-[15px]">
         <div
           ref={inputDraggable.setNodeRef}

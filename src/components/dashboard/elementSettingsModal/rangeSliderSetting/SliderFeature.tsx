@@ -13,9 +13,6 @@ const SliderFeature = ({
   step,
   setSliderInfo,
 }: SliderFeatureProps) => {
-  //   const [minLength1, setMinLength1] = useState<string>("");
-  //   const FormContext = useContext(ElementContext);
-  //   const [maxLength1, setMaxLength1] = useState<string>("");
   return (
     <div className="Min-Max-Length-wrapper w-full h-[300px] flex flex-col justify-start">
       <div className="Min-Max-Length-title w-full justify-between items-start">

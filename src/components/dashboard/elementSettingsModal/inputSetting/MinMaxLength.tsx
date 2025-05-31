@@ -13,12 +13,12 @@ const MinMaxLength = ({ minLength, maxLength, setForminfo }: LengthProps) => {
   const countLetters = (text: string, feild: "min" | "max") => {
     const letterCount = Array.from(text.replace(/\u200C/g, "")).length;
     if (feild === "min") {
-      FormContext?.setElements((prv) => ({
+     setForminfo ((prv) => ({
         ...prv,
         minLength: letterCount,
       }));
     } else {
-      FormContext?.setElements((prv) => ({
+      setForminfo ((prv) => ({
         ...prv,
         maxLength: letterCount,
       }));

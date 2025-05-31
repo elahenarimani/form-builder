@@ -46,9 +46,11 @@ const ValidationSelectSetting = ({
             defaultChecked={true}
             checked={requiredWidth}
             onChange={(e) => {
+                console.log(e.target.checked)
               setSelectInfo((prv) => ({
                 ...prv,
-                requiredWidth: e.target.checked,
+              
+                requiredWidth : e.target.checked,
               }));
             }}
           />

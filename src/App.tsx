@@ -44,9 +44,7 @@ export const ElementContext = createContext<ElementsContextType | null>(null); /
 
 function App() {
   const [elements, setElements] = useState<FormElement[]>([]);
-  const [clickedElement, setClickedElement] = useState<FormElement | null>(
-    null
-  );
+ 
   // const [inputElements, setInputElements] = useState<InputElement[]>([]);
   // const [selectElements, setSelectElements] = useState<SelectElement[]>([]);
   // const [rangeElements, setRangeElements] = useState<RangeElement[]>([]);
@@ -62,11 +60,11 @@ function App() {
             id: uuidv4(),
             type: "input",
             requiredType: true,
-            requiredWhidth: false,
+            requiredWidth: false,
             requiredHeight: false,
             width: "100%",
             height: "100%",
-            placeholder: "متن خود را وارد کنید",
+            placeholder: "Enter text",
             typeInput: "",
             minLength: 0,
             maxLength: 100,
@@ -77,11 +75,11 @@ function App() {
             id: uuidv4(),
             type: "select",
             // required: false,
-            options: ["گزینه 1", "گزینه 2", "گزینه 3"],
+            options: ["option 1", "option 2", "option 3"],
             width: "100%",
             height: "100%",
             requiredSelect: false,
-            requiredWhidth: false,
+            requiredWidth: false,
             requiredHeight: false,
           };
           break;
@@ -93,7 +91,7 @@ function App() {
             min: 0,
             max: 100,
             requiredRange: false,
-            requiredWhidth: false,
+            requiredWidth: false,
             requiredHeight: false,
             step: 0,
             width: "100%",
@@ -145,8 +143,8 @@ function App() {
             <MainForm
               elements={elements}
               onDelete={handleDelete}
-              clickedElement={clickedElement}
-              setClickedElement={setClickedElement}
+              // clickedElement={clickedElement}
+              // setClickedElement={setClickedElement}
             />
           </main>
           <button

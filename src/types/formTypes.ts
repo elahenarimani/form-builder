@@ -6,13 +6,12 @@ export interface BaseElement {
   y?: number;
   width: number | string;
   height: number | string;
-  requiredWhidth: boolean;
+  requiredWidth: boolean;
   requiredHeight: boolean;
 }
 export type InputElement = BaseElement & {
   type: "input";
   requiredType: boolean;
-
   width?: number | string;
   height?: number | string;
   minLength: number;
