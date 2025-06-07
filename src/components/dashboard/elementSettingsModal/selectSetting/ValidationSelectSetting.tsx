@@ -1,11 +1,13 @@
 import React, { useContext } from "react";
-import { InputElement, SelectElement } from "../../../../types/formTypes";
+import { FormElement, InputElement, SelectElement } from "../../../../types/formTypes";
 import { ElementContext } from "../../../../App";
 type ValidationProps = {
   setSelectInfo: React.Dispatch<React.SetStateAction<SelectElement>>;
   requiredSelect: boolean;
   requiredWidth: boolean;
   requiredHeight: boolean;
+   modalElement: FormElement | null;
+    setModalElement: React.Dispatch<React.SetStateAction<FormElement | null>>;
 };
 const ValidationSelectSetting = ({
   requiredSelect,

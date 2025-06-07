@@ -1,10 +1,12 @@
 import React, { useContext, useState } from "react";
-import {  InputElement } from "../../../../types/formTypes";
+import {  FormElement, InputElement } from "../../../../types/formTypes";
 import { ElementContext } from "../../../../App";
 type LengthProps = {
   minLength: number;
   maxLength: number;
     setForminfo: React.Dispatch<React.SetStateAction<InputElement>>;
+     modalElement: FormElement | null;
+      setModalElement: React.Dispatch<React.SetStateAction<FormElement | null>>;
 };
 const MinMaxLength = ({ minLength, maxLength, setForminfo }: LengthProps) => {
   const [minLength1, setMinLength1] = useState<string>("");

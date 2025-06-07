@@ -1,11 +1,13 @@
 import React, { useContext, useState } from "react";
-import { InputElement, RangeElement } from "../../../../types/formTypes";
+import { FormElement, InputElement, RangeElement } from "../../../../types/formTypes";
 import { ElementContext } from "../../../../App";
 type SliderFeatureProps = {
   setSliderInfo: React.Dispatch<React.SetStateAction<RangeElement>>;
   min:  number | string;
   max:  number | string;
   step:  number | string;
+   modalElement: FormElement | null;
+    setModalElement: React.Dispatch<React.SetStateAction<FormElement | null>>;
 };
 const SliderFeature = ({
   min,

@@ -1,10 +1,12 @@
 import Select from "react-select";
 import React, { useContext, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { SelectElement, SelectEtting } from "../../../../types/formTypes";
+import { FormElement, SelectElement, SelectEtting } from "../../../../types/formTypes";
 import { ElementContext } from "../../../../App";
 type SelectProps = {
   setSelectInfo: React.Dispatch<React.SetStateAction<SelectElement>>;
+   modalElement: FormElement | null;
+    setModalElement: React.Dispatch<React.SetStateAction<FormElement | null>>;
 };
 const SelectSetting = ({ setSelectInfo }: SelectProps) => {
   const selectOptions: SelectEtting[] = [

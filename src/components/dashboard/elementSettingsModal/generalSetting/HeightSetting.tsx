@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import Select from "react-select";
 import {
+  FormElement,
   InputElement,
   OptionHeightType,
   RangeElement,
@@ -22,6 +23,8 @@ type heightInputProps = {
   forminfo?: InputElement;
   selectInfo?: SelectElement;
   sliderInfo?: RangeElement;
+  modalElement: FormElement | null;
+  setModalElement: React.Dispatch<React.SetStateAction<FormElement | null>>;
 };
 const HeightSetting = ({
   setForminfo,

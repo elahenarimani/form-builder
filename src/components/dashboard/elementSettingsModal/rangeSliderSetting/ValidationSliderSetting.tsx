@@ -1,10 +1,12 @@
 import React from "react";
-import { RangeElement } from "../../../../types/formTypes";
+import { FormElement, RangeElement } from "../../../../types/formTypes";
 type SliderProps = {
   setSliderInfo: React.Dispatch<React.SetStateAction<RangeElement>>;
   requiredRange: boolean;
   requiredWidth: boolean;
   requiredHeight: boolean;
+   modalElement: FormElement | null;
+    setModalElement: React.Dispatch<React.SetStateAction<FormElement | null>>;
 };
 const ValidationSliderSetting = ({ setSliderInfo ,requiredRange,requiredWidth,requiredHeight}: SliderProps) => {
   return (

@@ -1,6 +1,6 @@
 import { useDroppable } from "@dnd-kit/core";
 import { IoTrash } from "react-icons/io5";
-import { useContext, useState } from "react";
+import React, { useContext, useState } from "react";
 import ReactSlider from "react-slider";
 import {
   FormElement,
@@ -19,24 +19,56 @@ type MainFormProps = {
   onDelete: (id: string) => void;
   formName: string;
   setFormName: React.Dispatch<React.SetStateAction<string>>;
+  saveSettingData: (id: string) => void;
+  clickedElement: FormElement | null;
+  setClickedElement: React.Dispatch<React.SetStateAction<FormElement | null>>;
+  opensettingModal: boolean;
+  setOpensettingModal: React.Dispatch<React.SetStateAction<boolean>>;
 };
-const MainForm = ({ onDelete, formName, setFormName }: MainFormProps) => {
-  const [clickedElement, setClickedElement] = useState<FormElement | null>(
-    null
-  );
+const MainForm = ({
+  onDelete,
+  formName,
+  setFormName,
+  saveSettingData,
+  clickedElement,
+  setClickedElement,
+  opensettingModal,
+  setOpensettingModal,
+}: MainFormProps) => {
+  // const [clickedElement, setClickedElement] = useState<FormElement | null>(
+  //   null
+  // );
+  //   type ElementsContextType = {
+  //   //true
+  //   elements: FormElement[];
+  //   setElements: React.Dispatch<React.SetStateAction<FormElement[]>>;
+  // };
+  const [modalElement, setModalElement] = useState<FormElement | null>(null);
   const { setNodeRef } = useDroppable({ id: "drop-area" });
   const FormContext = useContext(ElementContext);
   const [activeType, setActiveType] = useState<FormElementType>("input");
   console.log(FormContext?.elements);
   console.log(formName);
+  const saveSetting = (idSetting: string) => {
+    const elementFinder = FormContext?.elements.find(
+      (el) => el.id === idSetting
+    );
+    if (elementFinder) {
+      setModalElement(elementFinder);
+    }
+    setOpensettingModal(true);
+    console.log(opensettingModal);
+    console.log(idSetting);
+    console.log(elementFinder)
+  };
   return (
     <div
       ref={setNodeRef}
       className="main-form top-0 w-full min-h-screen border border-[#444444] rounded-[5px] py-[20px] px-[15px] bg-gray-50 "
     >
       <h2 className="text-lg font-bold mb-4">My Form</h2>
-      <div className="w-full h-[80px] flex flex-col justify-start items-start gap-[2px] mb-4">
-        <label className="w-full h-full  text-sm ">Form Name:</label>
+      <div className="w-[300px] h-[80px] flex flex-col justify-start items-start gap-[2px] mb-4">
+        <label className="w-full h-full text-start text-sm ">Form Name:</label>
         <input
           className="w-full h-full rounded-[5px] px-[5px] outline-none border"
           type="text"
@@ -49,7 +81,7 @@ const MainForm = ({ onDelete, formName, setFormName }: MainFormProps) => {
         FormContext?.elements.map((el) => (
           <div
             key={el.id}
-            className="w-full h-[40px] mb-4 flex flex-row justify-between items-center "
+            className="w-[300px] h-[40px] mb-4 flex flex-row justify-between items-center "
             style={{
               top: el.y || 0,
               left: el.x || 0,
@@ -78,7 +110,6 @@ const MainForm = ({ onDelete, formName, setFormName }: MainFormProps) => {
                 }}
                 onClick={() => {
                   setActiveType("input");
-                  // setClickedElement(el);
                 }}
               />
             )}
@@ -118,11 +149,13 @@ const MainForm = ({ onDelete, formName, setFormName }: MainFormProps) => {
                   width:
                     (el as RangeElement).requiredWidth && el.width
                       ? `${el.width}px`
-                      : "100%",
+                      : "300px",
+
                   height:
                     (el as RangeElement).requiredHeight && el.height
                       ? `${el.height}px`
                       : "auto",
+                  overflow: "hidden",
                 }}
               >
                 <ReactSlider
@@ -154,7 +187,8 @@ const MainForm = ({ onDelete, formName, setFormName }: MainFormProps) => {
                 <IoTrash size={20} color="red" />
               </Button>
               <Button
-                onClickHandler={() => setClickedElement(el)}
+                // onClickHandler={() => setClickedElement(el)}
+                onClickHandler={() => saveSetting(el.id)}
                 className=" top-1 right-1  group-hover:opacity-100 transition-opacity"
               >
                 <IoMdSettings size={20} color="gray" />
@@ -162,11 +196,16 @@ const MainForm = ({ onDelete, formName, setFormName }: MainFormProps) => {
             </div>
           </div>
         ))}
-      {clickedElement && (
+      {opensettingModal && modalElement && (
         <ElementSettingModal
           element={clickedElement}
           activeType={activeType}
           setClickedElement={setClickedElement}
+          opensettingModal={opensettingModal}
+          setOpensettingModal={setOpensettingModal}
+          saveSetting={saveSetting}
+          modalElement={modalElement}
+          setModalElement={setModalElement}
         />
       )}
     </div>

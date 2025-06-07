@@ -33,18 +33,25 @@ function App() {
   // const [rangeElements, setRangeElements] = useState<RangeElement[]>([]);
   const [formName, setFormName] = useState("");
   // const [formData, setFormData] = useState<FormElement[]>([]);
+  //    const [openSettingModal, setOpenSettingModal] = useState<FormElement | null>(
+  //   null
+  // );
+  const [clickedElement, setClickedElement] = useState<FormElement | null>(
+    null
+  );
+  const [opensettingModal, setOpensettingModal] = useState<boolean>(false);
   const finalForm = {
-  id: uuidv4(),
-  name: formName,
-  formElement: elements
-};
-const handleSaveForm = () => {
-  // if (!formName) return alert("لطفاً نام فرم را وارد کنید");
-  const existingForms = JSON.parse(localStorage.getItem("forms") || "[]");
-  const updatedForms = [...existingForms, finalForm];
-  localStorage.setItem("forms", JSON.stringify(updatedForms));
-  console.log(updatedForms)
-};
+    id: uuidv4(),
+    name: formName,
+    formElement: elements,
+  };
+  const handleSaveForm = () => {
+    // if (!formName) return alert("لطفاً نام فرم را وارد کنید");
+    const existingForms = JSON.parse(localStorage.getItem("forms") || "[]");
+    const updatedForms = [...existingForms, finalForm];
+    localStorage.setItem("forms", JSON.stringify(updatedForms));
+    console.log(updatedForms);
+  };
   const handleDrop = (event: DragEndEvent) => {
     const { active, over } = event;
     if (over && over.id === "drop-area") {
@@ -114,6 +121,11 @@ const handleSaveForm = () => {
   const handleDelete = (id: string) => {
     setElements((prev) => prev.filter((el) => el.id !== id));
   };
+  const saveSettingData = (id: string) => {
+    setOpensettingModal(true)
+    console.log(opensettingModal)
+    console.log(id)
+  };
   return (
     <ElementContext.Provider
       value={{
@@ -126,18 +138,27 @@ const handleSaveForm = () => {
           <Header />
           <main className="w-full md:w-11/12 lg:w-4/5 md:ml-auto md:mr-auto h-full flex flex-col md:flex-row-reverse justify-start md:justify-between items-center px-[18px] py-[18px] gap-[10px] md:gap-[50px]">
             <ElementPalette />
-            <MainForm  onDelete={handleDelete} formName={formName} setFormName={setFormName}/>
+            <MainForm
+              onDelete={handleDelete}
+              formName={formName}
+              setFormName={setFormName}
+              saveSettingData={saveSettingData}
+              clickedElement={clickedElement}
+              setClickedElement={setClickedElement}
+              opensettingModal={ opensettingModal}
+              setOpensettingModal={setOpensettingModal}
+            />
           </main>
           <div className="w-full h-full flex justify-center justify-centre gap-[20px] ">
             <Button
               className="w-[130px] bg-white px-4 py-2 border-[1px] border-[#d1d5db] rounded-[50px] text-gray-700  flex justify-center justify-centre cursor-pointer"
-              onClickHandler={()=> handleSaveForm() }
+              onClickHandler={() => handleSaveForm()}
             >
               Save as JSON
             </Button>
             <Button
               className="w-[130px] bg-[#1ABC9C] px-4 py-2 rounded-[50px] text-white  flex justify-center justify-centre cursor-pointer"
- 
+
               // console.log({
               //   type: "input",
               //   typeInput: forminfo.typeInput,
@@ -177,4 +198,3 @@ export default App;
 function uuid() {
   throw new Error("Function not implemented.");
 }
-

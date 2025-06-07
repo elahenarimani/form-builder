@@ -1,10 +1,12 @@
 import React from "react";
-import {  InputElement } from "../../../../types/formTypes";
+import {  FormElement, InputElement } from "../../../../types/formTypes";
 type ValidationProps = {
    setForminfo: React.Dispatch<React.SetStateAction<InputElement>>;
   requiredType: boolean;
   requiredWidth: boolean;
   requiredHeight: boolean;
+   modalElement: FormElement | null;
+    setModalElement: React.Dispatch<React.SetStateAction<FormElement | null>>;
 };
 const ValidationSetting = ({
   setForminfo,
