@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Select from "react-select";
 import {
   FormElement,
@@ -34,11 +34,16 @@ const HeightSetting = ({
   forminfo,
   selectInfo,
   sliderInfo,
+  modalElement,
+  setModalElement,
 }: heightInputProps) => {
   const [selectedHeight, setSelectedHeight] = useState<OptionHeightType | null>(
     null
   );
   const FormContext = useContext(ElementContext);
+  useEffect(() => {
+    console.log("modalElement changed:", modalElement);
+  }, [modalElement]);
   return (
     <div className="w-full h-[80px] flex flex-col justify-start items-start  ">
       <label className="block mb-1 mt-1 text-sm font-medium text-gray-700 text-left">
@@ -49,21 +54,60 @@ const HeightSetting = ({
         onChange={(selectedHeight) => {
           setSelectedHeight(selectedHeight);
           const height = selectedHeight ? selectedHeight.label : "";
-          const type = forminfo?.type || selectInfo?.type || sliderInfo?.type;
+          const type = modalElement?.type;
           switch (type) {
             case "input":
-              setForminfo?.((prev) => ({ ...prev, height }));
+              setModalElement?.((prev) => {
+                if (!prev) return prev;
+                return { ...prev, height };
+              });
               break;
             case "select":
-              setSelectInfo?.((prev) => ({ ...prev, height }));
+              setModalElement?.((prev) => {
+                if (!prev) return prev;
+                return { ...prev, height };
+              });
               break;
             case "range":
-              setSliderInfo?.((prev) => ({ ...prev, height }));
+              setModalElement?.((prev) => {
+                if (!prev) return prev;
+                return { ...prev, height };
+              });
               break;
             default:
               break;
           }
+          // setModalElement((prv) => {
+          //   if (!prv) return null;
+          //   if (prv?.type === "input") {
+          //     return {
+          //       ...prv,
+          //       typeInput: selectedHeight ? selectedHeight.label : "",
+          //     };
+          //   } else {
+          //     return prv;
+          //   }
+          //   //  console.log({inputtypeeee: modalElement})
+          // });
         }}
+        // onChange={(selectedHeight) => {
+        //   setSelectedHeight(selectedHeight);
+        //   const height = selectedHeight ? selectedHeight.label : "";
+        //   const type = forminfo?.type || selectInfo?.type || sliderInfo?.type;
+        //   switch (type) {
+        //     case "input":
+        //       setForminfo?.((prev) => ({ ...prev, height }));
+        //       break;
+        //     case "select":
+        //       setSelectInfo?.((prev) => ({ ...prev, height }));
+        //       break;
+        //     case "range":
+        //       setSliderInfo?.((prev) => ({ ...prev, height }));
+        //       break;
+        //     default:
+        //       break;
+        //   }
+        // }}
         options={inputHeightOptions}
         isClearable
         placeholder=""

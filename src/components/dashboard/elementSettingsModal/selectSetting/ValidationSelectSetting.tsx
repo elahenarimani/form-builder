@@ -14,6 +14,8 @@ const ValidationSelectSetting = ({
   requiredWidth,
   requiredHeight,
   setSelectInfo,
+  modalElement,
+  setModalElement,
 }: ValidationProps) => {
   const FormContext = useContext(ElementContext);
   return (

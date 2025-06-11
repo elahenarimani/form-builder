@@ -147,6 +147,8 @@ const WidthSetting = ({
   forminfo,
   selectInfo,
   sliderInfo,
+  modalElement,
+  setModalElement,
 }: InputProps) => {
   const [selectedWidth, setSelectedWidth] = useState<OptionWidthType | null>(
     null
@@ -162,21 +164,48 @@ const WidthSetting = ({
         onChange={(selectedWidth) => {
           setSelectedWidth(selectedWidth);
           const width = selectedWidth ? selectedWidth.label : "";
-          const type = forminfo?.type || selectInfo?.type || sliderInfo?.type;
+          const type = modalElement?.type;
           switch (type) {
             case "input":
-              setForminfo?.((prev) => ({ ...prev, width }));
+              setModalElement?.((prev) => {
+                if (!prev) return prev;
+                return { ...prev, width };
+              });
               break;
             case "select":
-              setSelectInfo?.((prev) => ({ ...prev, width }));
+              setModalElement?.((prev) => {
+                if (!prev) return prev;
+                return { ...prev, width };
+              });
               break;
             case "range":
-              setSliderInfo?.((prev) => ({ ...prev, width }));
+              setModalElement?.((prev) => {
+                if (!prev) return prev;
+                return { ...prev, width };
+              });
               break;
             default:
               break;
           }
         }}
+        // onChange={(selectedWidth) => {
+        //   setSelectedWidth(selectedWidth);
+        //   const width = selectedWidth ? selectedWidth.label : "";
+        //   const type = forminfo?.type || selectInfo?.type || sliderInfo?.type;
+        //   switch (type) {
+        //     case "input":
+        //       setForminfo?.((prev) => ({ ...prev, width }));
+        //       break;
+        //     case "select":
+        //       setSelectInfo?.((prev) => ({ ...prev, width }));
+        //       break;
+        //     case "range":
+        //       setSliderInfo?.((prev) => ({ ...prev, width }));
+        //       break;
+        //     default:
+        //       break;
+        //   }
+        // }}
         options={inputWidthOptions}
         isClearable
         placeholder=""

@@ -1,26 +1,35 @@
-import React, { useContext, useState } from "react";
-import {  FormElement, InputElement } from "../../../../types/formTypes";
+import React, { useContext, useEffect, useState } from "react";
+import { FormElement, InputElement } from "../../../../types/formTypes";
 import { ElementContext } from "../../../../App";
 type LengthProps = {
   minLength: number;
   maxLength: number;
-    setForminfo: React.Dispatch<React.SetStateAction<InputElement>>;
-     modalElement: FormElement | null;
-      setModalElement: React.Dispatch<React.SetStateAction<FormElement | null>>;
+  setForminfo: React.Dispatch<React.SetStateAction<InputElement>>;
+  modalElement: FormElement | null;
+  setModalElement: React.Dispatch<React.SetStateAction<FormElement | null>>;
 };
-const MinMaxLength = ({ minLength, maxLength, setForminfo }: LengthProps) => {
+const MinMaxLength = ({
+  minLength,
+  maxLength,
+  setForminfo,
+  modalElement,
+  setModalElement,
+}: LengthProps) => {
   const [minLength1, setMinLength1] = useState<string>("");
   const FormContext = useContext(ElementContext);
+  useEffect(() => {
+    console.log("modalElement changed:", modalElement);
+  }, [modalElement]);
   const [maxLength1, setMaxLength1] = useState<string>("");
   const countLetters = (text: string, feild: "min" | "max") => {
     const letterCount = Array.from(text.replace(/\u200C/g, "")).length;
     if (feild === "min") {
-     setForminfo ((prv) => ({
+      setForminfo((prv) => ({
         ...prv,
         minLength: letterCount,
       }));
     } else {
-      setForminfo ((prv) => ({
+      setForminfo((prv) => ({
         ...prv,
         maxLength: letterCount,
       }));

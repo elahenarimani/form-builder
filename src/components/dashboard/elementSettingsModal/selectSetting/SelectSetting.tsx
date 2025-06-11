@@ -1,20 +1,31 @@
 import Select from "react-select";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { FormElement, SelectElement, SelectEtting } from "../../../../types/formTypes";
+import {
+  FormElement,
+  SelectElement,
+  SelectEtting,
+} from "../../../../types/formTypes";
 import { ElementContext } from "../../../../App";
 type SelectProps = {
   setSelectInfo: React.Dispatch<React.SetStateAction<SelectElement>>;
-   modalElement: FormElement | null;
-    setModalElement: React.Dispatch<React.SetStateAction<FormElement | null>>;
+  modalElement: FormElement | null;
+  setModalElement: React.Dispatch<React.SetStateAction<FormElement | null>>;
 };
-const SelectSetting = ({ setSelectInfo }: SelectProps) => {
+const SelectSetting = ({
+  setSelectInfo,
+  modalElement,
+  setModalElement,
+}: SelectProps) => {
   const selectOptions: SelectEtting[] = [
     { value: "single Select", label: "single select" },
     { value: "multi Select", label: "multi select" },
   ];
   const FormContext = useContext(ElementContext);
   const [settingSelect, setSettingSelect] = useState<SelectEtting | null>(null);
+  useEffect(() => {
+    console.log("modalElement changed:", modalElement);
+  }, [modalElement]);
   return (
     <div className="w-full h-[80px] flex flex-col justify-start items-start  ">
       <label className="block mb-1 mt-1 text-sm font-medium text-gray-700 text-left">
@@ -24,11 +35,26 @@ const SelectSetting = ({ setSelectInfo }: SelectProps) => {
         defaultValue={settingSelect}
         onChange={(settingSelect) => {
           setSettingSelect(settingSelect);
-          setSelectInfo((prv) => ({
-            ...prv,
-            options: settingSelect ? [settingSelect.label] : [],
-          }));
+          setModalElement((prv) => {
+            if (!prv) return null;
+            if (prv?.type === "select") {
+              return {
+                ...prv,
+                options : settingSelect ? [settingSelect.label] : [],
+              };
+            } else {
+              return prv;
+            }
+            //  console.log({inputtypeeee: modalElement})
+          });
         }}
+        // onChange={(settingSelect) => {
+        //   setSettingSelect(settingSelect);
+        //   setSelectInfo((prv) => ({
+        //     ...prv,
+        //     options: settingSelect ? [settingSelect.label] : [],
+        //   }));
+        // }}
         options={selectOptions}
         isClearable
         placeholder=""
