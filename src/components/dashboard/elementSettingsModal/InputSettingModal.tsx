@@ -142,9 +142,9 @@ const ElementSettingModal = ({
               setModalElement={setModalElement}
             />
             <ValidationSetting
-              requiredType={forminfo.requiredType}
-              requiredWidth={forminfo.requiredWidth}
-              requiredHeight={forminfo.requiredHeight}
+              // requiredType={forminfo.requiredType}
+              // requiredWidth={forminfo.requiredWidth}
+              // requiredHeight={forminfo.requiredHeight}
               setForminfo={setForminfo}
               modalElement={modalElement}
               setModalElement={setModalElement}

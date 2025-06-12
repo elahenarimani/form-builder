@@ -1,20 +1,24 @@
-import React from "react";
-import {  FormElement, InputElement } from "../../../../types/formTypes";
+import React, { useState } from "react";
+import { FormElement, InputElement } from "../../../../types/formTypes";
 type ValidationProps = {
-   setForminfo: React.Dispatch<React.SetStateAction<InputElement>>;
-  requiredType: boolean;
-  requiredWidth: boolean;
-  requiredHeight: boolean;
-   modalElement: FormElement | null;
-    setModalElement: React.Dispatch<React.SetStateAction<FormElement | null>>;
+  setForminfo: React.Dispatch<React.SetStateAction<InputElement>>;
+  // requiredType: boolean;
+  // requiredWidth: boolean;
+  // requiredHeight: boolean;
+  modalElement: FormElement | null;
+  setModalElement: React.Dispatch<React.SetStateAction<FormElement | null>>;
 };
 const ValidationSetting = ({
   setForminfo,
-  requiredType,
- requiredWidth,
-  requiredHeight,
+  // requiredType,
+  // requiredWidth,
+  // requiredHeight,
+  modalElement,
+  setModalElement,
 }: ValidationProps) => {
-  
+  const [requiredType, setRequiredType] = useState(false);
+  const [requiredWidth, setRequiredWidth] = useState(false);
+  const [ requiredHeight, setRequiredHeight] = useState(false);
   return (
     <div className="validation-wrapper w-full h-[150px] flex flex-col justify-between">
       <div className="validation-title w-full flex justify-between items-start">
@@ -32,10 +36,22 @@ const ValidationSetting = ({
             defaultChecked={true}
             checked={requiredType}
             onChange={(e) => {
-              setForminfo((prv) => ({
-                ...prv,
-                requiredType: e.target.checked,
-              }));
+              setRequiredType(e.target.checked)
+              setModalElement((prv) => {
+                if (!prv) return null;
+                if (prv) {
+                  return {
+                    ...prv,
+                    requiredType: e.target.checked,
+                  };
+                } else {
+                  return prv;
+                }
+              });
+              // setForminfo((prv) => ({
+              //   ...prv,
+              //   requiredType: e.target.checked,
+              // }));
             }}
           />
         </div>
@@ -46,11 +62,25 @@ const ValidationSetting = ({
             aria-label="required or not"
             defaultChecked={true}
             checked={requiredWidth}
-            onChange={(e) => {
-              setForminfo((prv) => ({
-                ...prv,
-                requiredWidth: e.target.checked,
-              }));
+            // onChange={(e) => {
+            //   setForminfo((prv) => ({
+            //     ...prv,
+            //     requiredWidth: e.target.checked,
+            //   }));
+            // }}
+             onChange={(e) => {
+              setRequiredWidth(e.target.checked)
+              setModalElement((prv) => {
+                if (!prv) return null;
+                if (prv) {
+                  return {
+                    ...prv,
+                    requiredWidth: e.target.checked,
+                  };
+                } else {
+                  return prv;
+                }
+              });
             }}
           />
         </div>
@@ -61,11 +91,25 @@ const ValidationSetting = ({
             aria-label="required or not"
             defaultChecked={true}
             checked={requiredHeight}
+            // onChange={(e) => {
+            //   setForminfo((prv) => ({
+            //     ...prv,
+            //     requiredHeight: e.target.checked,
+            //   }));
+            // }}
             onChange={(e) => {
-              setForminfo((prv) => ({
-                ...prv,
-                requiredHeight: e.target.checked,
-              }));
+              setRequiredHeight(e.target.checked)
+              setModalElement((prv) => {
+                if (!prv) return null;
+                if (prv) {
+                  return {
+                    ...prv,
+                    requiredHeight: e.target.checked,
+                  };
+                } else {
+                  return prv;
+                }
+              });
             }}
           />
         </div>

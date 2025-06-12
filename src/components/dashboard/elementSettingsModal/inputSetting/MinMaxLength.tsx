@@ -15,24 +15,39 @@ const MinMaxLength = ({
   modalElement,
   setModalElement,
 }: LengthProps) => {
-  const [minLength1, setMinLength1] = useState<string>("");
+  const [minLength1, setMinLength1] = useState<number>(0);
+    const [maxLength1, setMaxLength1] = useState<number>(0);
   const FormContext = useContext(ElementContext);
   useEffect(() => {
     console.log("modalElement changed:", modalElement);
   }, [modalElement]);
-  const [maxLength1, setMaxLength1] = useState<string>("");
-  const countLetters = (text: string, feild: "min" | "max") => {
-    const letterCount = Array.from(text.replace(/\u200C/g, "")).length;
+  const countLetters = (text: number, feild: "min" | "max") => {
+    // const letterCount = Array.from(text.replace(/\u200C/g, "")).length;
+    const letterCount = text;
     if (feild === "min") {
-      setForminfo((prv) => ({
-        ...prv,
-        minLength: letterCount,
-      }));
+      setModalElement((prv) => {
+        if (!prv) return null;
+        if (prv) {
+          return {
+            ...prv,
+            minLength: letterCount,
+          };
+        } else {
+          return prv;
+        }
+      });
     } else {
-      setForminfo((prv) => ({
-        ...prv,
-        maxLength: letterCount,
-      }));
+      setModalElement((prv) => {
+        if (!prv) return null;
+        if (prv) {
+          return {
+            ...prv,
+            maxLength: letterCount,
+          };
+        } else {
+          return prv;
+        }
+      });
     }
   };
   return (
@@ -48,12 +63,12 @@ const MinMaxLength = ({
             min Length:
           </label>
           <input
-            type="text"
+            type="number"
             className="border rounded p-2 w-full outline-none"
             value={minLength1}
             aria-label="min length"
             onChange={(e) => {
-              const value = e.target.value;
+              const value = Number(e.target.value);
               setMinLength1(value);
               countLetters(value, "min");
             }}
@@ -64,12 +79,12 @@ const MinMaxLength = ({
             Max Length:
           </label>
           <input
-            type="text"
+            type="number"
             className="border rounded p-2 w-full outline-none"
             value={maxLength1}
             aria-label="max length"
             onChange={(e) => {
-              const value = e.target.value;
+              const value = Number(e.target.value);
               setMaxLength1(value);
               countLetters(value, "max");
             }}
