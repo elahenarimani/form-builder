@@ -1,6 +1,6 @@
 import { useDroppable } from "@dnd-kit/core";
 import { IoTrash } from "react-icons/io5";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ReactSlider from "react-slider";
 import {
   FormElement,
@@ -47,7 +47,10 @@ const MainForm = ({
   const { setNodeRef } = useDroppable({ id: "drop-area" });
   const FormContext = useContext(ElementContext);
   const [activeType, setActiveType] = useState<FormElementType>("input");
-  console.log(FormContext?.elements);
+  // console.log(FormContext?.elements);
+  useEffect(() => {
+      console.log("form context:", FormContext?.elements);
+    }, [FormContext?.elements]);
   console.log(formName);
   const saveSetting = (idSetting: string) => {
     const elementFinder = FormContext?.elements.find(

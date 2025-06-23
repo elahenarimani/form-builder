@@ -80,7 +80,7 @@ const ElementSettingModal = ({
     console.log("modalElement changed:", modalElement);
   }, [modalElement]);
   useEffect(() => {
-    console.log("modalElement changed:", FormContext?.elements);
+    console.log("form context:", FormContext?.elements);
   }, [FormContext?.elements]);
   // function addForm() {
   //   switch (activeType) {
@@ -181,9 +181,9 @@ const ElementSettingModal = ({
               setModalElement={setModalElement}
             />
             <ValidationSelectSetting
-              requiredSelect={selectInfo.requiredSelect}
-              requiredWidth={selectInfo.requiredWidth}
-              requiredHeight={selectInfo.requiredHeight}
+              // requiredSelect={selectInfo.requiredSelect}
+              // requiredWidth={selectInfo.requiredWidth}
+              // requiredHeight={selectInfo.requiredHeight}
               setSelectInfo={setSelectInfo}
               modalElement={modalElement}
               setModalElement={setModalElement}
@@ -224,9 +224,9 @@ const ElementSettingModal = ({
               setModalElement={setModalElement}
             />
             <ValidationSliderSetting
-              requiredRange={sliderInfo.requiredRange}
-              requiredWidth={sliderInfo.requiredWidth}
-              requiredHeight={sliderInfo.requiredHeight}
+              // requiredRange={sliderInfo.requiredRange}
+              // requiredWidth={sliderInfo.requiredWidth}
+              // requiredHeight={sliderInfo.requiredHeight}
               setSliderInfo={setSliderInfo}
               modalElement={modalElement}
               setModalElement={setModalElement}

@@ -18,7 +18,7 @@ const ValidationSetting = ({
 }: ValidationProps) => {
   const [requiredType, setRequiredType] = useState(false);
   const [requiredWidth, setRequiredWidth] = useState(false);
-  const [ requiredHeight, setRequiredHeight] = useState(false);
+  const [requiredHeight, setRequiredHeight] = useState(false);
   return (
     <div className="validation-wrapper w-full h-[150px] flex flex-col justify-between">
       <div className="validation-title w-full flex justify-between items-start">
