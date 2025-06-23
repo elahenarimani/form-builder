@@ -7,20 +7,29 @@ import {
 import { ElementContext } from "../../../../App";
 type SliderFeatureProps = {
   setSliderInfo: React.Dispatch<React.SetStateAction<RangeElement>>;
-  min: number | string;
+  // min: number | string;
   max: number | string;
   step: number | string;
   modalElement: FormElement | null;
   setModalElement: React.Dispatch<React.SetStateAction<FormElement | null>>;
 };
 const SliderFeature = ({
-  min,
+  // min,
   max,
   step,
   setSliderInfo,
   modalElement,
   setModalElement,
 }: SliderFeatureProps) => {
+  const [minSlider, setMinSlider] = useState<
+    string | number | readonly string[] | undefined
+  >(undefined);
+  const [maxSlider, setMaxSlider] = useState<
+    string | number | readonly string[] | undefined
+  >(undefined);
+  const [stepSlider, setStepSlider] = useState<
+    string | number | readonly string[] | undefined
+  >(undefined);
   return (
     <div className="Min-Max-Length-wrapper w-full h-[300px] flex flex-col justify-start">
       <div className="Min-Max-Length-title w-full justify-between items-start">
@@ -36,14 +45,26 @@ const SliderFeature = ({
           <input
             type="number"
             className="border rounded p-2 w-full outline-none"
-            value={min}
+            value={minSlider}
             aria-label="min"
-            onChange={(e) =>
-              setSliderInfo((prev) => ({
-                ...prev,
-                min: Number(e.target.value),
-              }))
-            }
+            // onChange={(e) =>
+            //   setSliderInfo((prev) => ({
+            //     ...prev,
+            //     min: Number(e.target.value),
+            //   }))
+            // }
+            onChange={(e) => {
+              setModalElement((prv) => {
+                if (prv) {
+                  return {
+                    ...prv,
+                    min: Number(e.target.value),
+                  };
+                } else {
+                  return prv;
+                }
+              });
+            }}
           />
         </div>
         <div className="w-full mb-2">
@@ -53,14 +74,26 @@ const SliderFeature = ({
           <input
             type="number"
             className="border rounded p-2 w-full outline-none"
-            value={max}
+            value={maxSlider}
             aria-label="max"
-            onChange={(e) =>
-              setSliderInfo((prev) => ({
-                ...prev,
-                max: Number(e.target.value),
-              }))
-            }
+            // onChange={(e) =>
+            //   setSliderInfo((prev) => ({
+            //     ...prev,
+            //     max: Number(e.target.value),
+            //   }))
+            // }
+            onChange={(e) => {
+              setModalElement((prv) => {
+                if (prv) {
+                  return {
+                    ...prv,
+                    max: Number(e.target.value),
+                  };
+                } else {
+                  return prv;
+                }
+              });
+            }}
           />
         </div>
         <div className="w-full mb-2">
@@ -70,14 +103,26 @@ const SliderFeature = ({
           <input
             type="number"
             className="border rounded p-2 w-full outline-none"
-            value={step}
+            value={stepSlider}
             aria-label="max "
-            onChange={(e) =>
-              setSliderInfo((prev) => ({
-                ...prev,
-                step: Number(e.target.value),
-              }))
-            }
+            // onChange={(e) =>
+            //   setSliderInfo((prev) => ({
+            //     ...prev,
+            //     step: Number(e.target.value),
+            //   }))
+            // }
+            onChange={(e) => {
+              setModalElement((prv) => {
+                if (prv) {
+                  return {
+                    ...prv,
+                    step: Number(e.target.value),
+                  };
+                } else {
+                  return prv;
+                }
+              });
+            }}
           />
         </div>
       </div>

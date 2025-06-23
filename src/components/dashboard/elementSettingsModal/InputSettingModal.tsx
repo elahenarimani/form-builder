@@ -232,7 +232,7 @@ const ElementSettingModal = ({
               setModalElement={setModalElement}
             />
             <SliderFeature
-              min={sliderInfo.min}
+              // min={sliderInfo.min}
               max={sliderInfo.max}
               step={sliderInfo.step}
               setSliderInfo={setSliderInfo}
