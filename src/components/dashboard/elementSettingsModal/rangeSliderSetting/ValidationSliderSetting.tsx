@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FormElement, RangeElement } from "../../../../types/formTypes";
 type SliderProps = {
-  setSliderInfo: React.Dispatch<React.SetStateAction<RangeElement>>;
+  // setSliderInfo: React.Dispatch<React.SetStateAction<RangeElement>>;
   // requiredRange: boolean;
   // requiredWidth: boolean;
   // requiredHeight: boolean;
@@ -9,7 +9,7 @@ type SliderProps = {
   setModalElement: React.Dispatch<React.SetStateAction<FormElement | null>>;
 };
 const ValidationSliderSetting = ({
-  setSliderInfo,
+  // setSliderInfo,
   // requiredRange,
   // requiredWidth,
   // requiredHeight,

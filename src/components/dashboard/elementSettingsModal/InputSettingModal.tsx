@@ -42,40 +42,40 @@ const ElementSettingModal = ({
   setModalElement,
 }: elementSettingsPrpps) => {
   const FormContext = useContext(ElementContext);
-  const [forminfo, setForminfo] = useState<InputElement>({
-    id: uuidv4(),
-    type: "input",
-    typeInput: "",
-    requiredType: false,
-    requiredWidth: false,
-    requiredHeight: false,
-    width: "",
-    height: "",
-    minLength: 0,
-    maxLength: 0,
-  });
-  const [selectInfo, setSelectInfo] = useState<SelectElement>({
-    id: uuidv4(),
-    type: "select",
-    width: 0,
-    height: 0,
-    options: [],
-    requiredSelect: false,
-    requiredWidth: false,
-    requiredHeight: false,
-  });
-  const [sliderInfo, setSliderInfo] = useState<RangeElement>({
-    id: uuidv4(),
-    width: 0,
-    height: 0,
-    type: "range",
-    requiredRange: false,
-    requiredWidth: false,
-    requiredHeight: false,
-    min: "",
-    max: "",
-    step: "",
-  });
+  // const [forminfo, setForminfo] = useState<InputElement>({
+  //   id: uuidv4(),
+  //   type: "input",
+  //   typeInput: "",
+  //   requiredType: false,
+  //   requiredWidth: false,
+  //   requiredHeight: false,
+  //   width: "",
+  //   height: "",
+  //   minLength: 0,
+  //   maxLength: 0,
+  // });
+  // const [selectInfo, setSelectInfo] = useState<SelectElement>({
+  //   id: uuidv4(),
+  //   type: "select",
+  //   width: 0,
+  //   height: 0,
+  //   options: [],
+  //   requiredSelect: false,
+  //   requiredWidth: false,
+  //   requiredHeight: false,
+  // });
+  // const [sliderInfo, setSliderInfo] = useState<RangeElement>({
+  //   id: uuidv4(),
+  //   width: 0,
+  //   height: 0,
+  //   type: "range",
+  //   requiredRange: false,
+  //   requiredWidth: false,
+  //   requiredHeight: false,
+  //   min: "",
+  //   max: "",
+  //   step: "",
+  // });
   useEffect(() => {
     console.log("modalElement changed:", modalElement);
   }, [modalElement]);
@@ -122,22 +122,22 @@ const ElementSettingModal = ({
         {modalElement?.type === "input" && (
           <div className="input-setting w-full h-full flex flex-col justify-start items-center  mb-[4px] overflow-visible !gap-0">
             <InputTypeSetting
-              typeInput={forminfo.typeInput}
-              setForminfo={setForminfo}
+              // typeInput={forminfo.typeInput}
+              // setForminfo={setForminfo}
               modalElement={modalElement}
               setModalElement={setModalElement}
             />
             <WidthSetting
-              width={forminfo.width}
-              setForminfo={setForminfo}
-              forminfo={forminfo}
+              // width={forminfo.width}
+              // setForminfo={setForminfo}
+              // forminfo={forminfo}
               modalElement={modalElement}
               setModalElement={setModalElement}
             />
             <HeightSetting
-              height={forminfo.height}
-              setForminfo={setForminfo}
-              forminfo={forminfo}
+              // height={forminfo.height}
+              // setForminfo={setForminfo}
+              // forminfo={forminfo}
               modalElement={modalElement}
               setModalElement={setModalElement}
             />
@@ -145,14 +145,14 @@ const ElementSettingModal = ({
               // requiredType={forminfo.requiredType}
               // requiredWidth={forminfo.requiredWidth}
               // requiredHeight={forminfo.requiredHeight}
-              setForminfo={setForminfo}
+              // setForminfo={setForminfo}
               modalElement={modalElement}
               setModalElement={setModalElement}
             />
             <MinMaxLength
-              minLength={forminfo.minLength}
-              maxLength={forminfo.maxLength}
-              setForminfo={setForminfo}
+              // minLength={forminfo.minLength}
+              // maxLength={forminfo.maxLength}
+              // setForminfo={setForminfo}
               modalElement={modalElement}
               setModalElement={setModalElement}
             />
@@ -162,21 +162,21 @@ const ElementSettingModal = ({
         {modalElement?.type === "select" && (
           <div className="input-setting w-full h-full flex flex-col justify-start items-center  mb-[4px] overflow-visible !gap-0">
             <SelectSetting
-              setSelectInfo={setSelectInfo}
+              // setSelectInfo={setSelectInfo}
               modalElement={modalElement}
               setModalElement={setModalElement}
             />
             <WidthSetting
-              width={selectInfo.width}
-              setSelectInfo={setSelectInfo}
-              selectInfo={selectInfo}
+              // width={selectInfo.width}
+              // setSelectInfo={setSelectInfo}
+              // selectInfo={selectInfo}
               modalElement={modalElement}
               setModalElement={setModalElement}
             />
             <HeightSetting
-              height={selectInfo.height}
-              setSelectInfo={setSelectInfo}
-              selectInfo={selectInfo}
+              // height={selectInfo.height}
+              // setSelectInfo={setSelectInfo}
+              // selectInfo={selectInfo}
               modalElement={modalElement}
               setModalElement={setModalElement}
             />
@@ -184,7 +184,7 @@ const ElementSettingModal = ({
               // requiredSelect={selectInfo.requiredSelect}
               // requiredWidth={selectInfo.requiredWidth}
               // requiredHeight={selectInfo.requiredHeight}
-              setSelectInfo={setSelectInfo}
+              // setSelectInfo={setSelectInfo}
               modalElement={modalElement}
               setModalElement={setModalElement}
             />
@@ -210,16 +210,16 @@ const ElementSettingModal = ({
               />
             </div> */}
             <WidthSetting
-              setSliderInfo={setSliderInfo}
-              width={sliderInfo.width}
-              sliderInfo={sliderInfo}
+              // setSliderInfo={setSliderInfo}
+              // width={sliderInfo.width}
+              // sliderInfo={sliderInfo}
               modalElement={modalElement}
               setModalElement={setModalElement}
             />
             <HeightSetting
-              height={sliderInfo.height}
-              setSliderInfo={setSliderInfo}
-              sliderInfo={sliderInfo}
+              // height={sliderInfo.height}
+              // setSliderInfo={setSliderInfo}
+              // sliderInfo={sliderInfo}
               modalElement={modalElement}
               setModalElement={setModalElement}
             />
@@ -227,15 +227,15 @@ const ElementSettingModal = ({
               // requiredRange={sliderInfo.requiredRange}
               // requiredWidth={sliderInfo.requiredWidth}
               // requiredHeight={sliderInfo.requiredHeight}
-              setSliderInfo={setSliderInfo}
+              // setSliderInfo={setSliderInfo}
               modalElement={modalElement}
               setModalElement={setModalElement}
             />
             <SliderFeature
               // min={sliderInfo.min}
-              max={sliderInfo.max}
-              step={sliderInfo.step}
-              setSliderInfo={setSliderInfo}
+              // max={sliderInfo.max}
+              // step={sliderInfo.step}
+              // setSliderInfo={setSliderInfo}
               modalElement={modalElement}
               setModalElement={setModalElement}
             />

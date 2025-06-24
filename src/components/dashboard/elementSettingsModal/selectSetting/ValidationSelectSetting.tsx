@@ -6,7 +6,7 @@ import {
 } from "../../../../types/formTypes";
 import { ElementContext } from "../../../../App";
 type ValidationProps = {
-  setSelectInfo: React.Dispatch<React.SetStateAction<SelectElement>>;
+  // setSelectInfo: React.Dispatch<React.SetStateAction<SelectElement>>;
   // requiredSelect: boolean;
   // requiredWidth: boolean;
   // requiredHeight: boolean;
@@ -17,7 +17,7 @@ const ValidationSelectSetting = ({
   // requiredSelect,
   // requiredWidth,
   // requiredHeight,
-  setSelectInfo,
+  // setSelectInfo,
   modalElement,
   setModalElement,
 }: ValidationProps) => {

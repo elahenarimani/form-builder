@@ -8,12 +8,12 @@ import {
 } from "../../../../types/formTypes";
 import { ElementContext } from "../../../../App";
 type SelectProps = {
-  setSelectInfo: React.Dispatch<React.SetStateAction<SelectElement>>;
+  // setSelectInfo: React.Dispatch<React.SetStateAction<SelectElement>>;
   modalElement: FormElement | null;
   setModalElement: React.Dispatch<React.SetStateAction<FormElement | null>>;
 };
 const SelectSetting = ({
-  setSelectInfo,
+  // setSelectInfo,
   modalElement,
   setModalElement,
 }: SelectProps) => {

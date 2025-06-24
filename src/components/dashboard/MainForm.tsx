@@ -49,8 +49,8 @@ const MainForm = ({
   const [activeType, setActiveType] = useState<FormElementType>("input");
   // console.log(FormContext?.elements);
   useEffect(() => {
-      console.log("form context:", FormContext?.elements);
-    }, [FormContext?.elements]);
+    console.log("form context:", FormContext?.elements);
+  }, [FormContext?.elements]);
   console.log(formName);
   const saveSetting = (idSetting: string) => {
     const elementFinder = FormContext?.elements.find(
@@ -62,7 +62,7 @@ const MainForm = ({
     setOpensettingModal(true);
     console.log(opensettingModal);
     console.log(idSetting);
-    console.log(elementFinder)
+    console.log(elementFinder);
   };
   return (
     <div
@@ -84,7 +84,7 @@ const MainForm = ({
         FormContext?.elements.map((el) => (
           <div
             key={el.id}
-            className="w-[300px] h-[40px] mb-4 flex flex-row justify-between items-center "
+            className="w-[300px] h-[40px] mb-4 flex flex-row justify-between items-center gap-3"
             style={{
               top: el.y || 0,
               left: el.x || 0,
@@ -93,9 +93,25 @@ const MainForm = ({
             }}
           >
             {el.type === "input" && (
+              // <div className="w-full h-full relative flex flex-row justify-between items-center gap-1">
+              /* {(el as InputElement).requiredType && (
+                  <div className="absolute top-2 right-1 text-red-500 text-sm">
+                    *
+                  </div>
+                )} */
               <input
                 type={(el as InputElement).typeInput}
-                className="border p-2 w-full h-full rounded text-[#9CA7C4]"
+                // className={` p-2 w-full h-full rounded text-[#9CA7C4] outline-none border-red-950 border-solid border-1 ${
+                //   (el as InputElement).requiredType
+                //     ? "border-red-600 border-solid border-1"
+                //     : "border"
+                // }`}
+                className={`p-2 w-full h-full rounded text-[#9CA7C4] outline-none border 
+                      ${
+                        (el as InputElement).requiredType
+                          ? "border-red-500"
+                          : "border-gray-300"
+                      }`}
                 placeholder={(el as InputElement).placeholder}
                 minLength={(el as InputElement).minLength}
                 maxLength={(el as InputElement).maxLength}
@@ -115,10 +131,17 @@ const MainForm = ({
                   setActiveType("input");
                 }}
               />
+              /* </div> */
             )}
             {el.type === "select" && (
               <select
-                className="border p-2 w-full h-full rounded text-[#9CA7C4]"
+                // className="border p-2 w-full h-full rounded text-[#9CA7C4]"
+                className={`p-2 w-full h-full rounded text-[#9CA7C4] outline-none border 
+                      ${
+                        (el as SelectElement).requiredSelect
+                          ? "border-red-500"
+                          : "border-gray-300"
+                      }`}
                 required={(el as SelectElement).requiredSelect}
                 style={{
                   width:
@@ -148,6 +171,12 @@ const MainForm = ({
             )}
             {el.type === "range" && (
               <div
+                className={` w-[300px] h-[40px] rounded border pl-5 pr-5 bg-white
+                      ${
+                        (el as RangeElement).requiredRange
+                          ? "border-red-500"
+                          : "border-gray-300"
+                      }`}
                 style={{
                   width:
                     (el as RangeElement).requiredWidth && el.width
@@ -162,7 +191,7 @@ const MainForm = ({
                 }}
               >
                 <ReactSlider
-                  className="w-full horizontal-slider"
+                  className="w-full h-[40px] horizontal-slider "
                   thumbClassName="example-thumb"
                   trackClassName="example-track"
                   min={Number((el as RangeElement).min) || 0}

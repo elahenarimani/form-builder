@@ -62,7 +62,7 @@ function App() {
           newElement = {
             id: uuidv4(),
             type: "input",
-            requiredType: true,
+            requiredType: false,
             requiredWidth: false,
             requiredHeight: false,
             width: "100%",

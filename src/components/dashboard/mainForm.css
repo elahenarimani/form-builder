@@ -1,7 +1,8 @@
 .horizontal-slider {
   width: 100%;
-  height: 25px;
+  height: 40px;
   position: relative;
+  background-color: white;
 }
 .example-thumb {
   height: 25px; 
@@ -13,6 +14,10 @@
   transform: translateY(-50%);
   position: absolute;
   outline: none;
+  color: white;
+  font-size: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 .example-track {
   top: 50%;
@@ -21,7 +26,8 @@
   background: #ddd;
   position: absolute;
   border-radius: 4px;
-  width: 100%;
+  
+  /* width: 100%; */
 }
 .example-track.example-track-1 {
   background: #1ABC9C;

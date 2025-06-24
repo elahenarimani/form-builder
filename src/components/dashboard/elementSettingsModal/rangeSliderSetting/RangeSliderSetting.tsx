@@ -1,5 +1,4 @@
 import React from "react";
-import ReactSlider from "react-slider";
 
 const RangeSliderSetting = () => {
   return (

@@ -101,14 +101,14 @@ const inputTypeOptions: OptionInputType[] = [
   { value: "Checkbox", label: "Checkbox" },
 ];
 type InputProps = {
-  setForminfo: React.Dispatch<React.SetStateAction<InputElement>>;
-  typeInput: string;
+  // setForminfo: React.Dispatch<React.SetStateAction<InputElement>>;
+  // typeInput: string;
   modalElement: FormElement | null;
   setModalElement: React.Dispatch<React.SetStateAction<FormElement | null>>;
 };
 const InputTypeSetting = ({
-  setForminfo,
-  typeInput,
+  // setForminfo,
+  // typeInput,
   modalElement,
   setModalElement,
 }: InputProps) => {

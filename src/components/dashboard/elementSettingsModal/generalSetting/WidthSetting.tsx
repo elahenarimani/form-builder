@@ -129,22 +129,22 @@ const inputWidthOptions: OptionWidthType[] = [
   { value: "90%", label: "90%" },
 ];
 type InputProps = {
-  setForminfo?: React.Dispatch<React.SetStateAction<InputElement>>;
+  // setForminfo?: React.Dispatch<React.SetStateAction<InputElement>>;
   setSelectInfo?: React.Dispatch<React.SetStateAction<SelectElement>>;
   setSliderInfo?: React.Dispatch<React.SetStateAction<RangeElement>>;
-  width: string | number;
-  forminfo?: InputElement;
+  // width: string | number;
+  // forminfo?: InputElement;
   selectInfo?: SelectElement;
   sliderInfo?: RangeElement;
   modalElement: FormElement | null;
       setModalElement: React.Dispatch<React.SetStateAction<FormElement | null>>;
 };
 const WidthSetting = ({
-  setForminfo,
+  // setForminfo,
   setSelectInfo,
   setSliderInfo,
-  width,
-  forminfo,
+  // width,
+  // forminfo,
   selectInfo,
   sliderInfo,
   modalElement,

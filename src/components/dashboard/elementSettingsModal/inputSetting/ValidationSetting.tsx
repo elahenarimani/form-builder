@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FormElement, InputElement } from "../../../../types/formTypes";
 type ValidationProps = {
-  setForminfo: React.Dispatch<React.SetStateAction<InputElement>>;
+  // setForminfo: React.Dispatch<React.SetStateAction<InputElement>>;
   // requiredType: boolean;
   // requiredWidth: boolean;
   // requiredHeight: boolean;
@@ -9,7 +9,7 @@ type ValidationProps = {
   setModalElement: React.Dispatch<React.SetStateAction<FormElement | null>>;
 };
 const ValidationSetting = ({
-  setForminfo,
+  // setForminfo,
   // requiredType,
   // requiredWidth,
   // requiredHeight,
@@ -33,7 +33,7 @@ const ValidationSetting = ({
           <input
             type="checkbox"
             aria-label="required or not"
-            defaultChecked={true}
+            defaultChecked={false}
             checked={requiredType}
             onChange={(e) => {
               setRequiredType(e.target.checked)
