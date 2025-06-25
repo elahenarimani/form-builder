@@ -5,6 +5,7 @@ import MainForm from "./components/dashboard/MainForm";
 import { useState, createContext } from "react";
 import { DndContext, DragEndEvent } from "@dnd-kit/core";
 import { v4 as uuidv4 } from "uuid";
+import Button from "./components/Button";
 import {
   FormElement,
   FormElementType,
@@ -12,25 +13,16 @@ import {
   SelectElement,
   RangeElement,
 } from "./types/formTypes";
-import Button from "./components/Button";
-type FormElementsContextType = {
-  formData: FormElement[];
-  setFormData: React.Dispatch<React.SetStateAction<FormElement[]>>;
-};
+
+
 type ElementsContextType = {
   //true
   elements: FormElement[];
   setElements: React.Dispatch<React.SetStateAction<FormElement[]>>;
 };
-export const FormElementsContext =
-  createContext<FormElementsContextType | null>(null);
-// export const FormDataContext = createContext<FormElementsContextType| null>(null);
 export const ElementContext = createContext<ElementsContextType | null>(null); //true
 function App() {
   const [elements, setElements] = useState<FormElement[]>([]);
-  // const [inputElements, setInputElements] = useState<InputElement[]>([]);
-  // const [selectElements, setSelectElements] = useState<SelectElement[]>([]);
-  // const [rangeElements, setRangeElements] = useState<RangeElement[]>([]);
   const [formName, setFormName] = useState("");
   // const [formData, setFormData] = useState<FormElement[]>([]);
   //    const [openSettingModal, setOpenSettingModal] = useState<FormElement | null>(
@@ -40,18 +32,19 @@ function App() {
     null
   );
   const [opensettingModal, setOpensettingModal] = useState<boolean>(false);
-  const finalForm = {
-    id: uuidv4(),
-    name: formName,
-    formElement: elements,
-  };
-  const handleSaveForm = () => {
-    // if (!formName) return alert("لطفاً نام فرم را وارد کنید");
-    const existingForms = JSON.parse(localStorage.getItem("forms") || "[]");
-    const updatedForms = [...existingForms, finalForm];
-    localStorage.setItem("forms", JSON.stringify(updatedForms));
-    console.log(updatedForms);
-  };
+  const [finalForm , setFinalForm] = useState<FormElement[]>([])
+  // const finalForm = {
+  //   id: uuidv4(),
+  //   name: formName,
+  //   formElement: elements,
+  // };
+  // const handleSaveForm = () => {
+  //   // if (!formName) return alert("لطفاً نام فرم را وارد کنید");
+  //   const existingForms = JSON.parse(localStorage.getItem("forms") || "[]");
+  //   const updatedForms = [...existingForms, finalForm];
+  //   localStorage.setItem("forms", JSON.stringify(updatedForms));
+  //   console.log(updatedForms);
+  // };
   const handleDrop = (event: DragEndEvent) => {
     const { active, over } = event;
     if (over && over.id === "drop-area") {
@@ -152,7 +145,7 @@ function App() {
           <div className="w-full h-full flex justify-center justify-centre gap-[20px] ">
             <Button
               className="w-[130px] bg-white px-4 py-2 border-[1px] border-[#d1d5db] rounded-[50px] text-gray-700  flex justify-center justify-centre cursor-pointer"
-              onClickHandler={() => handleSaveForm()}
+              // onClickHandler={() => handleSaveForm()}
             >
               Save as JSON
             </Button>

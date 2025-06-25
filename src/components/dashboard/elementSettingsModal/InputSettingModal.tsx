@@ -9,7 +9,7 @@ import {
 import InputSetting from "./inputSetting/InputTypeSetting";
 import WidthSetting from "./generalSetting/WidthSetting";
 import HeightSetting from "./generalSetting/HeightSetting";
-import { ElementContext, FormElementsContext } from "../../../App";
+import { ElementContext } from "../../../App";
 import MinMaxLength from "./inputSetting/MinMaxLength";
 import Button from "../../Button";
 import InputTypeSetting from "./inputSetting/InputTypeSetting";

@@ -47,6 +47,7 @@ const MainForm = ({
   const { setNodeRef } = useDroppable({ id: "drop-area" });
   const FormContext = useContext(ElementContext);
   const [activeType, setActiveType] = useState<FormElementType>("input");
+  const [inputValue, setInputValue] = useState("");
   // console.log(FormContext?.elements);
   useEffect(() => {
     console.log("form context:", FormContext?.elements);
@@ -64,6 +65,15 @@ const MainForm = ({
     console.log(idSetting);
     console.log(elementFinder);
   };
+  const inputHandler = (inputTyped : string , inputId: string) => {
+       const inputFinder = FormContext?.elements.find((item) => {
+        if (item.id === inputId) {
+           setInputValue(inputTyped);
+        }
+      });
+    console.log(inputId)
+  };
+
   return (
     <div
       ref={setNodeRef}
@@ -84,7 +94,7 @@ const MainForm = ({
         FormContext?.elements.map((el) => (
           <div
             key={el.id}
-            className="w-[300px] h-[40px] mb-4 flex flex-row justify-between items-center gap-3"
+            className="w-[300px] h-full mb-4 flex flex-row justify-between items-center gap-3"
             style={{
               top: el.y || 0,
               left: el.x || 0,
@@ -93,45 +103,59 @@ const MainForm = ({
             }}
           >
             {el.type === "input" && (
-              // <div className="w-full h-full relative flex flex-row justify-between items-center gap-1">
-              /* {(el as InputElement).requiredType && (
-                  <div className="absolute top-2 right-1 text-red-500 text-sm">
-                    *
-                  </div>
-                )} */
-              <input
-                type={(el as InputElement).typeInput}
-                // className={` p-2 w-full h-full rounded text-[#9CA7C4] outline-none border-red-950 border-solid border-1 ${
-                //   (el as InputElement).requiredType
-                //     ? "border-red-600 border-solid border-1"
-                //     : "border"
-                // }`}
-                className={`p-2 w-full h-full rounded text-[#9CA7C4] outline-none border 
+              <div className="w-full h-full ">
+                <input
+                  type={(el as InputElement).typeInput}
+                  // className={` p-2 w-full h-full rounded text-[#9CA7C4] outline-none border-red-950 border-solid border-1 ${
+                  //   (el as InputElement).requiredType
+                  //     ? "border-red-600 border-solid border-1"
+                  //     : "border"
+                  // }`}
+                  className={`p-2 w-full h-[40px] rounded text-[#9CA7C4] outline-none border 
                       ${
                         (el as InputElement).requiredType
                           ? "border-red-500"
                           : "border-gray-300"
                       }`}
-                placeholder={(el as InputElement).placeholder}
-                minLength={(el as InputElement).minLength}
-                maxLength={(el as InputElement).maxLength}
-                required={(el as InputElement).requiredType}
-                aria-label="describe input"
-                style={{
-                  width:
-                    (el as InputElement).requiredWidth && el.width
-                      ? `${el.width}px`
-                      : "100%",
-                  height:
-                    (el as InputElement).requiredHeight && el.height
-                      ? `${el.height}px`
-                      : "auto",
-                }}
-                onClick={() => {
-                  setActiveType("input");
-                }}
-              />
-              /* </div> */
+                  placeholder={(el as InputElement).placeholder}
+                  minLength={(el as InputElement).minLength}
+                  maxLength={(el as InputElement).maxLength}
+                  required={(el as InputElement).requiredType}
+                  aria-label="describe input"
+                  style={{
+                    width:
+                      (el as InputElement).requiredWidth && el.width
+                        ? `${el.width}px`
+                        : "100%",
+                    height:
+                      (el as InputElement).requiredHeight && el.height
+                        ? `${el.height}px`
+                        : "auto",
+                  }}
+                  onClick={() => {
+                    setActiveType("input");
+                  }}
+                  value={inputValue}
+                  onChange={(e) => inputHandler(e.target.value , (el as InputElement).id)}
+                />
+                {inputValue.length > 0 &&
+                inputValue.length < (el as InputElement).minLength ? (
+                  <p className="h-[20px] text-red-500 text-sm mt-1 text-left">
+                    minimum characters is {(el as InputElement).minLength}{" "}
+                    characters.
+                  </p>
+                ) : (
+                  <p className="hidden"></p>
+                )}
+                {inputValue.length === (el as InputElement).maxLength ? (
+                  <p className="h-[20px] text-red-500 text-sm mt-1 text-left">
+                    maximum characters is {(el as InputElement).maxLength}{" "}
+                    characters.
+                  </p>
+                ) : (
+                  <p className="hidden"></p>
+                )}
+              </div>
             )}
             {el.type === "select" && (
               <select
