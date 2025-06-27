@@ -1,13 +1,18 @@
-import React from "react";
+import  { useState } from "react";
 import { CgSearch, CgProfile } from "react-icons/cg";
 import { FaRegQuestionCircle } from "react-icons/fa";
 import { FaTableCellsLarge } from "react-icons/fa6";
-import Button from "../../../components/Button";
+import Button from "../Button";
+import SearchBox from "./SearchBox";
 const Header = () => {
+  const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
   return (
     <div className="w-full h-[50px] flex justify-between items-center bg-[#444444] px-[18px] text-white">
       <div className="max-w-[120px] h-full hidden lg:flex justify-start items-center gap-[10px] flex-1 ">
-        <div className=" w-[30px] h-[30px] hover:cursor-pointer">
+        <div
+          className=" w-[30px] h-[30px] hover:cursor-pointer"
+          onClick={() => setIsSearchOpen(true)}
+        >
           <CgSearch className="w-full h-full" />
         </div>
         <Button className="w-[26px] h-[26px]" disabled={true}>
@@ -31,6 +36,7 @@ const Header = () => {
       <Button className="w-[30px] h-[30px] hover:cursor-pointer ">
         <CgProfile className="w-full h-full" />
       </Button>
+      {isSearchOpen && (<SearchBox />)}
     </div>
   );
 };

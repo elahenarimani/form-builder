@@ -12,7 +12,7 @@ import {
 } from "../../types/formTypes";
 import { Outlet, useNavigate } from "react-router-dom";
 import ElementPalette from "./components/dashboard/ElementPalette";
-import Header from "./components/Header";
+import Header from "../../components/header/Header";
 import Button from "../../components/Button";
 import MainForm from "./components/dashboard/MainForm";
 
@@ -33,7 +33,6 @@ function HomePage() {
   );
   const navigate = useNavigate();
   const [opensettingModal, setOpensettingModal] = useState<boolean>(false);
-
   const handleDrop = (event: DragEndEvent) => {
     const { active, over } = event;
     if (over && over.id === "drop-area") {
@@ -110,18 +109,17 @@ function HomePage() {
     // setFinalForm((prv)=> [...prv , newForm ])
     const saved = localStorage.getItem("saved-forms");
     const parsed: FinalForm[] = saved ? JSON.parse(saved) : [];
-
     const updated = [...parsed, newForm];
     localStorage.setItem("saved-forms", JSON.stringify(updated));
     setFormName("");
     navigate("/formList");
   };
-  const handleSave = () => {
-    //json save
-    const jsonData = JSON.stringify(elements, null, 2);
-    localStorage.setItem("my-form", jsonData);
-    console.log("saved JSON", jsonData);
-  };
+  // const handleSaveAsJson = () => {
+  //   //json save
+  //   const jsonData = JSON.stringify(elements, null, 2);
+  //   localStorage.setItem("my-form", jsonData);
+  //   console.log("saved JSON", jsonData);
+  // };
   const handleDelete = (id: string) => {
     setElements((prev) => prev.filter((el) => el.id !== id));
   };
@@ -158,7 +156,7 @@ function HomePage() {
           <div className="w-full h-full flex justify-center justify-centre gap-[20px] ">
             <Button
               className="w-[130px] bg-white px-4 py-2 border-[1px] border-[#d1d5db] rounded-[50px] text-gray-700  flex justify-center justify-centre cursor-pointer"
-              // onClickHandler={() => handleSaveForm()}
+              // onClickHandler={() => handleSaveAsJson()}
             >
               Save as JSON
             </Button>
