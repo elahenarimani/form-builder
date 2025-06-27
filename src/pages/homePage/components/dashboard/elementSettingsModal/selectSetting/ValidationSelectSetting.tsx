@@ -6,18 +6,10 @@ import {
 } from "../../../../../../types/formTypes";
 import { ElementContext } from "../../../../../homePage/HomePage";
 type ValidationProps = {
-  // setSelectInfo: React.Dispatch<React.SetStateAction<SelectElement>>;
-  // requiredSelect: boolean;
-  // requiredWidth: boolean;
-  // requiredHeight: boolean;
   modalElement: FormElement | null;
   setModalElement: React.Dispatch<React.SetStateAction<FormElement | null>>;
 };
 const ValidationSelectSetting = ({
-  // requiredSelect,
-  // requiredWidth,
-  // requiredHeight,
-  // setSelectInfo,
   modalElement,
   setModalElement,
 }: ValidationProps) => {
@@ -41,25 +33,19 @@ const ValidationSelectSetting = ({
             aria-label="required or not"
             defaultChecked={true}
             checked={requiredSelect}
-            // onChange={(e) => {
-            //   setSelectInfo((prv) => ({
-            //     ...prv,
-            //     requiredSelect: e.target.checked,
-            //   }));
-            // }}
-            onChange={(e)=> {
-              setRequiredSelect(e.target.checked)
+            onChange={(e) => {
+              setRequiredSelect(e.target.checked);
               setModalElement((prv) => {
                 if (!prv) return null;
-                if (prv){
-                    return {
+                if (prv) {
+                  return {
                     ...prv,
-                    requiredSelect : e.target.checked,
+                    requiredSelect: e.target.checked,
                   };
                 } else {
                   return prv;
                 }
-              })
+              });
             }}
           />
         </div>
@@ -70,16 +56,8 @@ const ValidationSelectSetting = ({
             aria-label="required or not"
             defaultChecked={true}
             checked={requiredWidth}
-            // onChange={(e) => {
-            //   console.log(e.target.checked);
-            //   setSelectInfo((prv) => ({
-            //     ...prv,
-
-            //     requiredWidth: e.target.checked,
-            //   }));
-            // }}
             onChange={(e) => {
-              setRequiredWidth(e.target.checked)
+              setRequiredWidth(e.target.checked);
               setModalElement((prv) => {
                 if (!prv) return null;
                 if (prv) {
@@ -101,14 +79,8 @@ const ValidationSelectSetting = ({
             aria-label="required or not"
             defaultChecked={true}
             checked={requiredHeight}
-            // onChange={(e) => {
-            //   setSelectInfo((prv) => ({
-            //     ...prv,
-            //     requiredHeight: e.target.checked,
-            //   }));
-            // }}
             onChange={(e) => {
-              setRequiredHeight(e.target.checked)
+              setRequiredHeight(e.target.checked);
               setModalElement((prv) => {
                 if (!prv) return null;
                 if (prv) {

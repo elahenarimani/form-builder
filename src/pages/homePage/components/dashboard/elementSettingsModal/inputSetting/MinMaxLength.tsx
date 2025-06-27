@@ -2,16 +2,10 @@ import React, { useContext, useEffect, useState } from "react";
 import { FormElement, InputElement } from "../../../../../../types/formTypes";
 import { ElementContext } from "../../../../HomePage";
 type LengthProps = {
-  // minLength: number;
-  // maxLength: number;
-  // setForminfo: React.Dispatch<React.SetStateAction<InputElement>>;
   modalElement: FormElement | null;
   setModalElement: React.Dispatch<React.SetStateAction<FormElement | null>>;
 };
 const MinMaxLength = ({
-  // minLength,
-  // maxLength,
-  // setForminfo,
   modalElement,
   setModalElement,
 }: LengthProps) => {
@@ -22,7 +16,6 @@ const MinMaxLength = ({
     console.log("modalElement changed:", modalElement);
   }, [modalElement]);
   const countLetters = (text: number, feild: "min" | "max") => {
-    // const letterCount = Array.from(text.replace(/\u200C/g, "")).length;
     const letterCount = text;
     if (feild === "min") {
       setModalElement((prv) => {

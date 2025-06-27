@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
-import FormList from "../pages/formTable/FormsTable";
+import FormList from "../pages/formTablePage/FormsTablePage";
 import HomePage from "../pages/homePage/HomePage";
+import FormDetailsPage from "../pages/formTablePage/formDetailsPage/FormDetailsPage";
 
 
 const router = createBrowserRouter([
@@ -11,6 +12,12 @@ const router = createBrowserRouter([
   {
     path: "/formList",
     element: <FormList />,
+      children: [
+      {
+        path: "/formList/:id",
+        element: <FormDetailsPage />,
+      },
+    ],
   },
   
 ]);

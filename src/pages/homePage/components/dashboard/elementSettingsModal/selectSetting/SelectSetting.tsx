@@ -1,6 +1,5 @@
 import Select from "react-select";
 import React, { useContext, useEffect, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
 import {
   FormElement,
   SelectElement,
@@ -8,15 +7,10 @@ import {
 } from "../../../../../../types/formTypes";
 import { ElementContext } from "../../../../HomePage";
 type SelectProps = {
-  // setSelectInfo: React.Dispatch<React.SetStateAction<SelectElement>>;
   modalElement: FormElement | null;
   setModalElement: React.Dispatch<React.SetStateAction<FormElement | null>>;
 };
-const SelectSetting = ({
-  // setSelectInfo,
-  modalElement,
-  setModalElement,
-}: SelectProps) => {
+const SelectSetting = ({ modalElement, setModalElement }: SelectProps) => {
   const selectOptions: SelectEtting[] = [
     { value: "single Select", label: "single select" },
     { value: "multi Select", label: "multi select" },
@@ -40,21 +34,13 @@ const SelectSetting = ({
             if (prv?.type === "select") {
               return {
                 ...prv,
-                options : settingSelect ? [settingSelect.label] : [],
+                options: settingSelect ? [settingSelect.label] : [],
               };
             } else {
               return prv;
             }
-            //  console.log({inputtypeeee: modalElement})
           });
         }}
-        // onChange={(settingSelect) => {
-        //   setSettingSelect(settingSelect);
-        //   setSelectInfo((prv) => ({
-        //     ...prv,
-        //     options: settingSelect ? [settingSelect.label] : [],
-        //   }));
-        // }}
         options={selectOptions}
         isClearable
         placeholder=""

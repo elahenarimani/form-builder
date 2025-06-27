@@ -39,7 +39,6 @@ const MainForm = ({
   const FormContext = useContext(ElementContext);
   const [activeType, setActiveType] = useState<FormElementType>("input");
   const [inputValue, setInputValue] = useState<{[key: string]: string}>({});
-  // console.log(FormContext?.elements);
   useEffect(() => {
     console.log("form context:", FormContext?.elements);
   }, [FormContext?.elements]);

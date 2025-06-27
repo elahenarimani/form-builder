@@ -80,11 +80,8 @@ export type SelectEtting = {
   value: string;
   label: string;
 };
-export type folan = {
-  selectOptions: "";
-  heightInput: "";
-  widthInput: "";
-  validationInput: false;
-  validationWidth: false;
-  validationHeight: false;
-};
+export type FinalForm ={
+  id:string;
+  name:string;
+  elements:FormElement[]
+}

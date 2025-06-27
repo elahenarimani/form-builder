@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import {
   FormElement,
   InputElement,
@@ -6,18 +6,10 @@ import {
 } from "../../../../../../types/formTypes";
 import { ElementContext } from "../../../../HomePage";
 type SliderFeatureProps = {
-  // setSliderInfo: React.Dispatch<React.SetStateAction<RangeElement>>;
-  // min: number | string;
-  // max: number | string;
-  // step: number | string;
   modalElement: FormElement | null;
   setModalElement: React.Dispatch<React.SetStateAction<FormElement | null>>;
 };
 const SliderFeature = ({
-  // min,
-  // max,
-  // step,
-  // setSliderInfo,
   modalElement,
   setModalElement,
 }: SliderFeatureProps) => {
@@ -47,12 +39,6 @@ const SliderFeature = ({
             className="border rounded p-2 w-full outline-none"
             value={minSlider}
             aria-label="min"
-            // onChange={(e) =>
-            //   setSliderInfo((prev) => ({
-            //     ...prev,
-            //     min: Number(e.target.value),
-            //   }))
-            // }
             onChange={(e) => {
               setModalElement((prv) => {
                 if (prv) {
@@ -76,12 +62,6 @@ const SliderFeature = ({
             className="border rounded p-2 w-full outline-none"
             value={maxSlider}
             aria-label="max"
-            // onChange={(e) =>
-            //   setSliderInfo((prev) => ({
-            //     ...prev,
-            //     max: Number(e.target.value),
-            //   }))
-            // }
             onChange={(e) => {
               setModalElement((prv) => {
                 if (prv) {
@@ -105,12 +85,6 @@ const SliderFeature = ({
             className="border rounded p-2 w-full outline-none"
             value={stepSlider}
             aria-label="max "
-            // onChange={(e) =>
-            //   setSliderInfo((prev) => ({
-            //     ...prev,
-            //     step: Number(e.target.value),
-            //   }))
-            // }
             onChange={(e) => {
               setModalElement((prv) => {
                 if (prv) {
@@ -129,5 +103,4 @@ const SliderFeature = ({
     </div>
   );
 };
-
 export default SliderFeature;

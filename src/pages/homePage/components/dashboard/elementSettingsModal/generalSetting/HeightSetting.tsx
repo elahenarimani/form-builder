@@ -77,37 +77,7 @@ const HeightSetting = ({
             default:
               break;
           }
-          // setModalElement((prv) => {
-          //   if (!prv) return null;
-          //   if (prv?.type === "input") {
-          //     return {
-          //       ...prv,
-          //       typeInput: selectedHeight ? selectedHeight.label : "",
-          //     };
-          //   } else {
-          //     return prv;
-          //   }
-          //   //  console.log({inputtypeeee: modalElement})
-          // });
         }}
-        // onChange={(selectedHeight) => {
-        //   setSelectedHeight(selectedHeight);
-        //   const height = selectedHeight ? selectedHeight.label : "";
-        //   const type = forminfo?.type || selectInfo?.type || sliderInfo?.type;
-        //   switch (type) {
-        //     case "input":
-        //       setForminfo?.((prev) => ({ ...prev, height }));
-        //       break;
-        //     case "select":
-        //       setSelectInfo?.((prev) => ({ ...prev, height }));
-        //       break;
-        //     case "range":
-        //       setSliderInfo?.((prev) => ({ ...prev, height }));
-        //       break;
-        //     default:
-        //       break;
-        //   }
-        // }}
         options={inputHeightOptions}
         isClearable
         placeholder=""
@@ -154,5 +124,4 @@ const HeightSetting = ({
     </div>
   );
 };
-
 export default HeightSetting;
