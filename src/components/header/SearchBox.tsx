@@ -1,4 +1,4 @@
-import  { useContext } from "react";
+import { useContext } from "react";
 import AsyncSelect from "react-select/async";
 import { FinalForm } from "../../types/formTypes";
 import { ElementContext } from "../../pages/homePage/HomePage";
@@ -7,7 +7,14 @@ type SelectOption = {
   label: string;
   value: string;
 };
-export default function SearchBox() {
+type ISearchProp = {
+  isSearchOpen: boolean;
+  setIsSearchOpen: React.Dispatch<React.SetStateAction<boolean>>;
+};
+export default function SearchBox({
+  isSearchOpen,
+  setIsSearchOpen,
+}: ISearchProp) {
   const FormContext = useContext(ElementContext);
   const navigate = useNavigate();
   if (!FormContext?.finalForm) return null;
@@ -32,25 +39,31 @@ export default function SearchBox() {
     }
   };
   return (
-    <div className="w-full min-h-screen fixed inset-0  bg-black bg-opacity-40 z-50 flex items-start justify-end ">
-      <div className=" p-6 rounded-lg  w-[90%] max-w-md relative ">
+    <div className="fixed top-0 left-0 w-full h-1/2 bg-black bg-opacity-40 z-50 flex items-start justify-start pt-0">
+      <div className="  w-[90%] md:w-[426px] relative   border border-gray-300 rounded-lg  outline-none mt-[5px] ml-[18px] ">
         <AsyncSelect
-        cacheOptions
-        defaultOptions
-        loadOptions={loadOptions}
-        placeholder="Enter your form name..."
-        onChange={handleChange}
-        styles={{
-          input: (base) => ({
-            ...base,
-            direction: "ltr",
-          }),
-          placeholder: (base) => ({
-            ...base,
-            color: "rgba(30,58,138)",
-          }),
-        }}
-      />
+          autoFocus
+          cacheOptions
+          defaultOptions
+          loadOptions={loadOptions}
+          placeholder="Enter your form name..."
+          onChange={handleChange}
+          styles={{
+            input: (base) => ({
+              ...base,
+              direction: "ltr",
+            }),
+            placeholder: (base) => ({
+              ...base,
+              color: "gray",
+            }),
+            control: (base) => ({
+              ...base,
+              border: 0,
+              boxShadow: "none",
+            }),
+          }}
+        />
       </div>
     </div>
   );
