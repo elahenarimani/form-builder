@@ -163,12 +163,6 @@ function HomePage() {
   useEffect(() => {
     console.log({ finalform: finalForm });
   }, [finalForm]);
-  // const handleSaveAsJson = () => {
-  //   //json save
-  //   const jsonData = JSON.stringify(elements, null, 2);
-  //   localStorage.setItem("my-form", jsonData);
-  //   console.log("saved JSON", jsonData);
-  // };
   const handleDelete = (id: string) => {
     setElements((prev) => prev.filter((el) => el.id !== id));
   };
