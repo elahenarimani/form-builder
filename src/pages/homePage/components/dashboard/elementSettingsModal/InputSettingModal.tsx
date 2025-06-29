@@ -1,12 +1,8 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect} from "react";
 import {
   FormElement,
   FormElementType,
-  InputElement,
-  RangeElement,
-  SelectElement,
 } from "../../../../../types/formTypes";
-import InputSetting from "./inputSetting/InputTypeSetting";
 import WidthSetting from "./generalSetting/WidthSetting";
 import HeightSetting from "./generalSetting/HeightSetting";
 import { ElementContext } from "../../../HomePage";
@@ -14,12 +10,11 @@ import MinMaxLength from "./inputSetting/MinMaxLength";
 import Button from "../../../../../components/Button";
 import InputTypeSetting from "./inputSetting/InputTypeSetting";
 import ValidationSetting from "./inputSetting/ValidationSetting";
-import SelectSettingModal from "./selectSetting/SelectSetting";
 import SelectSetting from "./selectSetting/SelectSetting";
-import { v4 as uuidv4 } from "uuid";
 import ValidationSelectSetting from "./selectSetting/ValidationSelectSetting";
 import ValidationSliderSetting from "./rangeSliderSetting/ValidationSliderSetting";
 import SliderFeature from "./rangeSliderSetting/SliderFeature";
+import { useCombinedStore } from "../../../../../zustand/useCombinedStore";
 type elementSettingsPrpps = {
   element: FormElement | null;
   activeType: FormElementType;
@@ -32,39 +27,49 @@ type elementSettingsPrpps = {
 };
 
 const ElementSettingModal = ({
-  element,
-  activeType,
+  // element,
+  // activeType,
   setClickedElement,
-  opensettingModal,
+  // opensettingModal,
   setOpensettingModal,
-  saveSetting,
+  // saveSetting,
   modalElement,
   setModalElement,
 }: elementSettingsPrpps) => {
-  const FormContext = useContext(ElementContext);
+  const { elementt,updateElement} = useCombinedStore ()
+  // const FormContext = useContext(ElementContext);
   useEffect(() => {
     console.log("modalElement changed:", modalElement);
   }, [modalElement]);
   useEffect(() => {
-    console.log("form context:", FormContext?.elements);
-  }, [FormContext?.elements]);
+    console.log("form context:", elementt);
+  }, [elementt]);
+
+
+
   const handleSave = () => {
     if (modalElement) {
-      FormContext?.setElements((prevElements: FormElement[]) => {
-        const indexFinder = FormContext?.elements.findIndex(
-          (item) => item.id === modalElement.id
-        );
-        if (indexFinder === -1) {
-          return prevElements;
-        }
-        const updatedElement = [...prevElements];
-        updatedElement[indexFinder] = modalElement;
-        return updatedElement;
-      });
+      updateElement(modalElement)
+      console.log("form context:", elementt);
+      // FormContext?.setElements((prevElements: FormElement[]) => {
+      //   const indexFinder = FormContext?.elements.findIndex(
+      //     (item) => item.id === modalElement.id
+      //   );
+      //   if (indexFinder === -1) {
+      //     return prevElements;
+      //   }
+      //   const updatedElement = [...prevElements];
+      //   updatedElement[indexFinder] = modalElement;
+      //   return updatedElement;
+      // });
       setOpensettingModal(false);
     }
   };
-  console.log(FormContext?.elements);
+
+
+
+
+  // console.log(FormContext?.elements);
   return (
     <div className="modal-wrapper overflow-visible fixed w-full h-screen bg-black/30 flex justify-center items-start z-50 top-0 left-0 right-0 p-[18px] ">
       <div className="modal overflow-y-auto w-full h-full bg-white p-4 rounded-[10px] flex flex-col justify-start items-center gap-0">

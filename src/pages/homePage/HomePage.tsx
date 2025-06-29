@@ -20,15 +20,16 @@ import { useCombinedStore } from "../../zustand/useCombinedStore";
 
 type ElementsContextType = {
   //true
-  elements: FormElement[];
-  setElements: React.Dispatch<React.SetStateAction<FormElement[]>>;
+  // elements: FormElement[];
+  // setElements: React.Dispatch<React.SetStateAction<FormElement[]>>;
   finalForm: FinalForm[];
   setFinalForm: React.Dispatch<React.SetStateAction<FinalForm[]>>;
 };
 export const ElementContext = createContext<ElementsContextType | null>(null); //true
 function HomePage() {
-  const [elements, setElements] = useState<FormElement[]>([]);
+  // const [elements, setElements] = useState<FormElement[]>([]);
   const [formName, setFormName] = useState("");
+   const { elementt , deleteElement,addElement} = useCombinedStore ()
   // const { finalForm, setFinalForm, log, finalFormName, element} = useCombinedStore();
   //  const { elements, setElements, log } = useCombinedStore();
   // const test = useFormStore(state => state.num);
@@ -101,7 +102,7 @@ function HomePage() {
         width: 300,
         height: 40,
       };
-      setElements((prev) => [...prev, newElement]);
+       addElement(newElement)
     }
   };
   // useEffect(() => {
@@ -128,8 +129,8 @@ function HomePage() {
     console.log("finalform :", finalForm);
   }, [finalForm]);
   useEffect(() => {
-    console.log("form context:", elements);
-  }, [elements]);
+    console.log("homePage:", elementt);
+  }, [elementt]);
 
   const handleSaveAsTable = () => {
     // if (!formName) {
@@ -164,7 +165,8 @@ function HomePage() {
     console.log({ finalform: finalForm });
   }, [finalForm]);
   const handleDelete = (id: string) => {
-    setElements((prev) => prev.filter((el) => el.id !== id));
+    // setElements((prev) => prev.filter((el) => el.id !== id));
+    deleteElement(id);
   };
   const saveSettingData = (id: string) => {
     setOpensettingModal(true);
@@ -174,8 +176,8 @@ function HomePage() {
   return (
     <ElementContext.Provider
       value={{
-        elements,
-        setElements,
+        // elements,
+        // setElements,
         finalForm,
         setFinalForm,
       }}

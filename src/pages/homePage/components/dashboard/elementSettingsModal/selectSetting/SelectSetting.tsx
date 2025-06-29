@@ -1,11 +1,6 @@
 import Select from "react-select";
-import React, { useContext, useEffect, useState } from "react";
-import {
-  FormElement,
-  SelectElement,
-  SelectEtting,
-} from "../../../../../../types/formTypes";
-import { ElementContext } from "../../../../HomePage";
+import React, { useEffect, useState } from "react";
+import { FormElement, SelectEtting } from "../../../../../../types/formTypes";
 type SelectProps = {
   modalElement: FormElement | null;
   setModalElement: React.Dispatch<React.SetStateAction<FormElement | null>>;
@@ -15,7 +10,6 @@ const SelectSetting = ({ modalElement, setModalElement }: SelectProps) => {
     { value: "single Select", label: "single select" },
     { value: "multi Select", label: "multi select" },
   ];
-  const FormContext = useContext(ElementContext);
   const [settingSelect, setSettingSelect] = useState<SelectEtting | null>(null);
   useEffect(() => {
     console.log("modalElement changed:", modalElement);

@@ -16,25 +16,16 @@ const inputWidthOptions: OptionWidthType[] = [
   { value: "90%", label: "90%" },
 ];
 type InputProps = {
-  setSelectInfo?: React.Dispatch<React.SetStateAction<SelectElement>>;
-  setSliderInfo?: React.Dispatch<React.SetStateAction<RangeElement>>;
-  selectInfo?: SelectElement;
-  sliderInfo?: RangeElement;
   modalElement: FormElement | null;
   setModalElement: React.Dispatch<React.SetStateAction<FormElement | null>>;
 };
 const WidthSetting = ({
-  setSelectInfo,
-  setSliderInfo,
-  selectInfo,
-  sliderInfo,
   modalElement,
   setModalElement,
 }: InputProps) => {
   const [selectedWidth, setSelectedWidth] = useState<OptionWidthType | null>(
     null
   );
-  const FormContext = useContext(ElementContext);
   return (
     <div className="w-full h-[80px] flex flex-col justify-start items-start">
       <label className="block mb-1 mt-1 text-sm font-medium text-gray-700 text-left">

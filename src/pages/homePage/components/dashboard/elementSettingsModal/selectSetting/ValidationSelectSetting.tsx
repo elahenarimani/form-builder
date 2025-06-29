@@ -1,10 +1,5 @@
-import React, { useContext, useState } from "react";
-import {
-  FormElement,
-  InputElement,
-  SelectElement,
-} from "../../../../../../types/formTypes";
-import { ElementContext } from "../../../../../homePage/HomePage";
+import React, { useState } from "react";
+import { FormElement } from "../../../../../../types/formTypes";
 type ValidationProps = {
   modalElement: FormElement | null;
   setModalElement: React.Dispatch<React.SetStateAction<FormElement | null>>;
@@ -16,7 +11,6 @@ const ValidationSelectSetting = ({
   const [requiredSelect, setRequiredSelect] = useState(false);
   const [requiredWidth, setRequiredWidth] = useState(false);
   const [requiredHeight, setRequiredHeight] = useState(false);
-  const FormContext = useContext(ElementContext);
   return (
     <div className="validation-wrapper w-full h-[150px] flex flex-col justify-between">
       <div className="validation-title w-full flex justify-between items-start">

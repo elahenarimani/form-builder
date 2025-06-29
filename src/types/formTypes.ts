@@ -85,11 +85,7 @@ export type FinalForm ={
   name:string;
   elements:FormElement[]
 }
-export type ElementState ={
-  element: FormElement[];
-  // setElements: (elements: FormElement[]) => void;
-  // clearElements: () => void;
-}
+
 export type FormState ={
   // elements: FormElement[];
   finalForm: FinalForm[];

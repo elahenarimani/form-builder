@@ -1,18 +1,10 @@
 import React, { useState } from "react";
 import { FormElement, InputElement } from "../../../../../../types/formTypes";
 type ValidationProps = {
-  // setForminfo: React.Dispatch<React.SetStateAction<InputElement>>;
-  // requiredType: boolean;
-  // requiredWidth: boolean;
-  // requiredHeight: boolean;
   modalElement: FormElement | null;
   setModalElement: React.Dispatch<React.SetStateAction<FormElement | null>>;
 };
 const ValidationSetting = ({
-  // setForminfo,
-  // requiredType,
-  // requiredWidth,
-  // requiredHeight,
   modalElement,
   setModalElement,
 }: ValidationProps) => {
@@ -36,7 +28,7 @@ const ValidationSetting = ({
             defaultChecked={false}
             checked={requiredType}
             onChange={(e) => {
-              setRequiredType(e.target.checked)
+              setRequiredType(e.target.checked);
               setModalElement((prv) => {
                 if (!prv) return null;
                 if (prv) {
@@ -48,10 +40,6 @@ const ValidationSetting = ({
                   return prv;
                 }
               });
-              // setForminfo((prv) => ({
-              //   ...prv,
-              //   requiredType: e.target.checked,
-              // }));
             }}
           />
         </div>
@@ -62,14 +50,8 @@ const ValidationSetting = ({
             aria-label="required or not"
             defaultChecked={true}
             checked={requiredWidth}
-            // onChange={(e) => {
-            //   setForminfo((prv) => ({
-            //     ...prv,
-            //     requiredWidth: e.target.checked,
-            //   }));
-            // }}
-             onChange={(e) => {
-              setRequiredWidth(e.target.checked)
+            onChange={(e) => {
+              setRequiredWidth(e.target.checked);
               setModalElement((prv) => {
                 if (!prv) return null;
                 if (prv) {
@@ -91,14 +73,8 @@ const ValidationSetting = ({
             aria-label="required or not"
             defaultChecked={true}
             checked={requiredHeight}
-            // onChange={(e) => {
-            //   setForminfo((prv) => ({
-            //     ...prv,
-            //     requiredHeight: e.target.checked,
-            //   }));
-            // }}
             onChange={(e) => {
-              setRequiredHeight(e.target.checked)
+              setRequiredHeight(e.target.checked);
               setModalElement((prv) => {
                 if (!prv) return null;
                 if (prv) {

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FormElement, RangeElement } from "../../../../../../types/formTypes";
+import { FormElement } from "../../../../../../types/formTypes";
 type SliderProps = {
   modalElement: FormElement | null;
   setModalElement: React.Dispatch<React.SetStateAction<FormElement | null>>;

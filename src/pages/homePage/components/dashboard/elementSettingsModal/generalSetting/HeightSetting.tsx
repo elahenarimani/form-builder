@@ -16,31 +16,16 @@ const inputHeightOptions: OptionHeightType[] = [
   { value: "90%", label: "90%" },
 ];
 type heightInputProps = {
-  setForminfo?: React.Dispatch<React.SetStateAction<InputElement>>;
-  setSelectInfo?: React.Dispatch<React.SetStateAction<SelectElement>>;
-  setSliderInfo?: React.Dispatch<React.SetStateAction<RangeElement>>;
-  height?: number | string;
-  forminfo?: InputElement;
-  selectInfo?: SelectElement;
-  sliderInfo?: RangeElement;
   modalElement: FormElement | null;
   setModalElement: React.Dispatch<React.SetStateAction<FormElement | null>>;
 };
 const HeightSetting = ({
-  setForminfo,
-  setSliderInfo,
-  setSelectInfo,
-  height,
-  forminfo,
-  selectInfo,
-  sliderInfo,
   modalElement,
   setModalElement,
 }: heightInputProps) => {
   const [selectedHeight, setSelectedHeight] = useState<OptionHeightType | null>(
     null
   );
-  const FormContext = useContext(ElementContext);
   useEffect(() => {
     console.log("modalElement changed:", modalElement);
   }, [modalElement]);

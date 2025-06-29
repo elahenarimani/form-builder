@@ -14,6 +14,7 @@ import {
 import Button from "../../../../components/Button";
 import { ElementContext } from "../../HomePage";
 import "./mainForm.css";
+import { useCombinedStore } from "../../../../zustand/useCombinedStore";
 type MainFormProps = {
   onDelete: (id: string) => void;
   formName: string;
@@ -36,15 +37,16 @@ const MainForm = ({
 }: MainFormProps) => {
   const [modalElement, setModalElement] = useState<FormElement | null>(null);
   const { setNodeRef } = useDroppable({ id: "drop-area" });
-  const FormContext = useContext(ElementContext);
+  // const FormContext = useContext(ElementContext);
   const [activeType, setActiveType] = useState<FormElementType>("input");
   const [inputValue, setInputValue] = useState<{[key: string]: string}>({});
+  const { elementt} = useCombinedStore ()
   useEffect(() => {
-    console.log("form context:", FormContext?.elements);
-  }, [FormContext?.elements]);
+    console.log("all element:", elementt);
+  }, [elementt]);
   console.log(formName);
   const saveSetting = (idSetting: string) => {
-    const elementFinder = FormContext?.elements.find(
+    const elementFinder = elementt.find(
       (el) => el.id === idSetting
     );
     if (elementFinder) {
@@ -77,8 +79,8 @@ const MainForm = ({
           onChange={(e) => setFormName(e.target.value)}
         />
       </div>
-      {Array.isArray(FormContext?.elements) &&
-        FormContext?.elements.map((el) => (
+      {Array.isArray(elementt) &&
+        elementt.map((el) => (
           <div
             key={el.id}
             className="w-[300px] h-full mb-4 flex flex-row justify-between items-center gap-3"

@@ -1,11 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, {useEffect, useState } from "react";
 import Select from "react-select";
 import {
   FormElement,
-  InputElement,
   OptionInputType,
 } from "../../../../../../types/formTypes";
-import { ElementContext } from "../../../../HomePage";
 const inputTypeOptions: OptionInputType[] = [
   { value: "Text", label: "Text" },
   { value: "Number", label: "Number" },
@@ -20,7 +18,6 @@ type InputProps = {
 const InputTypeSetting = ({ modalElement, setModalElement }: InputProps) => {
   const [selectedInputType, setSelectedInputType] =
     useState<OptionInputType | null>(null);
-  const FormContext = useContext(ElementContext);
   useEffect(() => {
     console.log("modalElement changed:", modalElement);
   }, [modalElement]);
