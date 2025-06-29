@@ -13,7 +13,7 @@ const ElementPalette = () => {
           ref={inputDraggable.setNodeRef}
           {...inputDraggable.attributes}
           {...inputDraggable.listeners}
-          className="w-full md:w-[140px] min-h-[70px] bg-[#1ABC9C] rounded-[10px] flex flex-col justify-center items-center cursor-move hover:opacity-90 transition"
+          className="w-full md:w-[140px] min-h-[70px] bg-primary rounded-[10px] flex flex-col justify-center items-center cursor-move hover:opacity-90 transition"
         >
           <MdInput size={30} color="#fff" />
           <span className="text-white text-sm mt-1">Input</span>
@@ -22,7 +22,7 @@ const ElementPalette = () => {
           ref={selectDraggable.setNodeRef}
           {...selectDraggable.attributes}
           {...selectDraggable.listeners}
-          className="w-full md:w-[140px] min-h-[70px] bg-[#1ABC9C] rounded-[10px] flex flex-col justify-center items-center cursor-move hover:opacity-90 transition"
+          className="w-full md:w-[140px] min-h-[70px] bg-primary rounded-[10px] flex flex-col justify-center items-center cursor-move hover:opacity-90 transition"
         >
           <GoMultiSelect size={30} color="#fff" />
           <span className="text-white text-sm mt-1">Select</span>
@@ -31,7 +31,7 @@ const ElementPalette = () => {
           ref={rangeDraggable.setNodeRef}
           {...rangeDraggable.attributes}
           {...rangeDraggable.listeners}
-          className="w-full md:w-[140px] min-h-[70px] bg-[#1ABC9C] rounded-[10px] flex flex-col justify-center items-center cursor-move hover:opacity-90 transition"
+          className="w-full md:w-[140px] min-h-[70px] bg-primary rounded-[10px] flex flex-col justify-center items-center cursor-move hover:opacity-90 transition"
         >
           <PiSlidersHorizontal size={30} color="#fff" />
           <span className="text-white text-sm mt-1">Range slider</span>

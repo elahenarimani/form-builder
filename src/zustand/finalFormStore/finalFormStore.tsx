@@ -2,11 +2,12 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { FinalForm, FormElement } from "../../types/formTypes";
 interface ElementState {
-   finalForm: FinalForm[];
+  finalForm: FinalForm[];
   setFinalForm: (forms: FinalForm[]) => void;
   log: () => void;
   finalFormName: string;
   element: FormElement[];
+  addForm: (newForm: FinalForm) => void;
 }
 //  const [finalForm, setFinalForm] = useState<FinalForm[]>
 export const useFinalFormStoreStore = create<ElementState>()(
@@ -15,14 +16,17 @@ export const useFinalFormStoreStore = create<ElementState>()(
       finalForm: [],
       finalFormName: "",
       element: [],
-      // addFormToTable:() => set((state => ({finalForm : }))) ,
       setFinalForm: (forms) => set({ finalForm: forms }),
       log: () => {
         console.log(`current number is ${get().finalForm}`);
       },
+      addForm: (newForm) => {
+        const currentForm = get().finalForm;
+        set({ finalForm: [...currentForm, newForm] });
+      },
     }),
     {
-      name: "element-storage",
+      name: "final-form-storage",
     }
   )
 );

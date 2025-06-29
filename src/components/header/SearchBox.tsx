@@ -1,8 +1,7 @@
-import { useContext } from "react";
 import AsyncSelect from "react-select/async";
 import { FinalForm } from "../../types/formTypes";
-import { ElementContext } from "../../pages/homePage/HomePage";
 import { useNavigate } from "react-router-dom";
+import { useCombinedStore } from "../../zustand/useCombinedStore";
 type SelectOption = {
   label: string;
   value: string;
@@ -15,13 +14,13 @@ export default function SearchBox({
   isSearchOpen,
   setIsSearchOpen,
 }: ISearchProp) {
-  const FormContext = useContext(ElementContext);
+  const { finalForm } = useCombinedStore();
   const navigate = useNavigate();
-  if (!FormContext?.finalForm) return null;
+  if (!finalForm) return null;
   const loadOptions = (inputValue: string): Promise<SelectOption[]> => {
     return new Promise((resolve) => {
       setTimeout(() => {
-        const filtered = FormContext?.finalForm
+        const filtered = finalForm
           .filter((form: FinalForm) =>
             form.name.toLowerCase().includes(inputValue.toLowerCase())
           )

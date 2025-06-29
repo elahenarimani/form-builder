@@ -146,7 +146,7 @@ const ElementSettingModal = ({
             Cancel
           </Button>
           <Button
-            className="w-[70px] bg-[#1ABC9C] px-4 py-2 rounded-[50px] text-white  flex justify-center justify-centre cursor-pointer"
+            className="w-[70px] bg-primary px-4 py-2 rounded-[50px] text-white  flex justify-center justify-centre cursor-pointer"
             onClickHandler={() => handleSave()}
           >
             Save
