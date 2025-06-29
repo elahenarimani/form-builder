@@ -15,6 +15,8 @@ import ElementPalette from "./components/dashboard/ElementPalette";
 import Header from "../../components/header/Header";
 import Button from "../../components/Button";
 import MainForm from "./components/dashboard/MainForm";
+import { useCombinedStore } from "../../zustand/useCombinedStore";
+// import { useFormStore } from "../../zustand/formStore";
 
 type ElementsContextType = {
   //true
@@ -27,7 +29,16 @@ export const ElementContext = createContext<ElementsContextType | null>(null); /
 function HomePage() {
   const [elements, setElements] = useState<FormElement[]>([]);
   const [formName, setFormName] = useState("");
-  const [finalForm, setFinalForm] = useState<FinalForm[]>([]);
+  // const { finalForm, setFinalForm, log, finalFormName, element} = useCombinedStore();
+  //  const { elements, setElements, log } = useCombinedStore();
+  // const test = useFormStore(state => state.num);
+  // const test1increase = useFormStore(state => state.increaseCounterNumber)
+
+    const [finalForm, setFinalForm] = useState<FinalForm[]>(() => {
+    const saved = localStorage.getItem("saved-forms");
+    return saved ? JSON.parse(saved) : [];
+
+  });
   const [clickedElement, setClickedElement] = useState<FormElement | null>(
     null
   );
@@ -96,24 +107,62 @@ function HomePage() {
   // useEffect(() => {
   //   console.log("final form:", finalForm);
   // }, [finalForm]);
+  // const handleSaveAsTable = () => {
+  //   if (!formName) {
+  //     alert("please entre form name");
+  //     return;
+  //   }
+  //   const newForm: FinalForm = {
+  //     id: uuidv4(),
+  //     name: formName,
+  //     elements: elements,
+  //   };
+  //   const saved = localStorage.getItem("saved-forms");
+  //   const parsed: FinalForm[] = saved ? JSON.parse(saved) : [];
+  //   const updated = [...parsed, newForm];
+  //   localStorage.setItem("saved-forms", JSON.stringify(updated));
+  //   setFormName("");
+  //   navigate("/formList");
+  // };
+  useEffect(() => {
+    console.log("finalform :", finalForm);
+  }, [finalForm]);
+  useEffect(() => {
+    console.log("form context:", elements);
+  }, [elements]);
+
   const handleSaveAsTable = () => {
-    if (!formName) {
-      alert("please entre form name");
-      return;
-    }
-    const newForm: FinalForm = {
-      id: uuidv4(),
-      name: formName,
-      elements: elements,
-    };
-    // setFinalForm((prv)=> [...prv , newForm ])
-    const saved = localStorage.getItem("saved-forms");
-    const parsed: FinalForm[] = saved ? JSON.parse(saved) : [];
-    const updated = [...parsed, newForm];
-    localStorage.setItem("saved-forms", JSON.stringify(updated));
-    setFormName("");
-    navigate("/formList");
+    // if (!formName) {
+    //   alert("please entre form name");
+    //   return;
+    // }
+    // const newForm: FinalForm = {
+    //   id: uuidv4(),
+    //   name: formName,
+    //   elements: elements,
+    // };
+    // const saved = localStorage.getItem("saved-forms");
+    // console.log(saved)
+    // const parsed: FinalForm[] = saved ? JSON.parse(saved) : [];
+    // console.log(parsed)
+    // const updated = [...parsed, newForm];
+    // console.log(updated)
+    // localStorage.setItem("saved-forms", JSON.stringify(updated));
+    // setFormName("");
+    // navigate("/formList");
   };
+
+  //   useEffect(() => {
+  //   const saved = localStorage.getItem("saved-forms");
+  //   if (saved) {
+  //     const parsed: FinalForm[] = JSON.parse(saved);
+  //     setFinalForm(parsed);
+  //   }
+  // }, []);
+
+  useEffect(() => {
+    console.log({ finalform: finalForm });
+  }, [finalForm]);
   // const handleSaveAsJson = () => {
   //   //json save
   //   const jsonData = JSON.stringify(elements, null, 2);
@@ -139,7 +188,8 @@ function HomePage() {
     >
       <div className=" pb-[18px]">
         <DndContext onDragEnd={handleDrop}>
-          <Header />
+          {/* <Header /> */}
+         
           <main className="w-full md:w-11/12 lg:w-4/5 md:ml-auto md:mr-auto h-full flex flex-col md:flex-row-reverse justify-start md:justify-between items-center px-[18px] py-[18px] gap-[10px] md:gap-[50px]">
             <ElementPalette />
             <MainForm

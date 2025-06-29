@@ -1,25 +1,51 @@
-import React, { useContext, useEffect, useState } from "react";
-import { FinalForm } from "../../types/formTypes";
+import React, { useContext, useEffect } from "react";
 import { IoEyeOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import { ElementContext } from "../homePage/HomePage";
 import Header from "../../components/header/Header";
+import { useCombinedStore } from "../../zustand/useCombinedStore";
+
 const FormsTable = () => {
-  // const [finalForm , setFinalForm] = useState<FinalForm[]>([])
-  useEffect(() => {
-    const saved = localStorage.getItem("saved-forms");
-    if (saved) {
-      FormContext?.setFinalForm(JSON.parse(saved));
-    }
-  }, []);
-  const navigate = useNavigate();
+  const { finalForm, setFinalForm, log, finalFormName, element} = useCombinedStore();
   const FormContext = useContext(ElementContext);
+  // useEffect(() => {
+  //   const saved = localStorage.getItem("saved-forms");
+  //   console.log(saved);
+  //   if (saved) {
+  //     console.log(FormContext?.finalForm);
+  //     const result = !!JSON.parse(saved);
+  //     console.log(result);
+  //     console.log(FormContext?.finalForm);
+  //     const final = FormContext?.setFinalForm(
+  //       !!JSON.parse(saved) ? JSON.parse(saved) : []
+  //     );
+  //     console.log(FormContext?.finalForm);
+  //     console.log(final);
+  //   }
+  // }, []);
+  const navigate = useNavigate();
+
+  //     const [finalFormm , setFinalForm] = useState<FinalForm[] >([{
+  //     id:"12",
+  //     name:"salam",
+  //     elements :FormContext?.elements ||[],
+  //   },
+  //   {
+  //     id:"13",
+  //     name:"bye",
+  //     elements :FormContext?.elements || [],
+  //   }
+
+  // ])
+  // useEffect(() => {
+  //   console.log({ finalform: FormContext?.finalForm });
+  // }, [FormContext?.finalForm]);
   return (
     <div className="w-full h-full">
       <Header />
       <div className="w-full md:w-11/12 lg:w-4/5 md:ml-auto md:mr-auto h-full px-[18px] py-[18px] ">
         <h1 className="text-xl font-bold my-[18px] text-center">Forms List</h1>
-        {FormContext?.finalForm.length === 0 ? (
+        {finalForm.length === 0 ? (
           <p>No form</p>
         ) : (
           <div className="overflow-hidden rounded-[5px] border border-[#444444]">
@@ -37,7 +63,7 @@ const FormsTable = () => {
                 </tr>
               </thead>
               <tbody>
-                {FormContext?.finalForm.map((form, index) => (
+                {finalForm.map((form, index) => (
                   <tr key={form.id} className="text-center">
                     <td className="p-2 border whitespace-normal">
                       {index + 1}

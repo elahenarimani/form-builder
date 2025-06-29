@@ -39,8 +39,14 @@ export default function SearchBox({
     }
   };
   return (
-    <div className="fixed top-0 left-0 w-full h-1/2 bg-black bg-opacity-40 z-50 flex items-start justify-start pt-0">
-      <div className="  w-[90%] md:w-[426px] relative   border border-gray-300 rounded-lg  outline-none mt-[5px] ml-[18px] ">
+    <div
+      className="fixed top-0 left-0 w-full h-1/2 bg-black bg-opacity-40 z-50 flex items-start justify-start pt-0"
+      onClick={() => setIsSearchOpen(false)}
+    >
+      <div
+        className="  w-[90%] md:w-[426px] relative   border border-gray-300 rounded-lg  outline-none mt-[5px] ml-[18px]"
+        onClick={(e) => e.stopPropagation()}
+      >
         <AsyncSelect
           autoFocus
           cacheOptions

@@ -85,3 +85,20 @@ export type FinalForm ={
   name:string;
   elements:FormElement[]
 }
+export type ElementState ={
+  element: FormElement[];
+  // setElements: (elements: FormElement[]) => void;
+  // clearElements: () => void;
+}
+export type FormState ={
+  // elements: FormElement[];
+  finalForm: FinalForm[];
+  finalFormName:string;
+  element:FormElement[]
+  // setElements: (els: FormElement[]) => void;
+  // addFinalForm: (form: FinalForm) => void;
+  setFinalForm: (forms: FinalForm[]) => void;
+  // num: number;
+  // increaseCounterNumber : ()=>void
+  log:()=>void
+}
