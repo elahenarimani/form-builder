@@ -130,16 +130,17 @@ function HomePage() {
     console.log(id);
   };
   const handleSaveAsJson = () => {
-    console.log("save as json")
-  const json = JSON.stringify(finalForm, null, 2);
-  const blob = new Blob([json], { type: "application/json" });
-  const url = URL.createObjectURL(blob);
+  //   console.log("save as json")
+  // const json = JSON.stringify(finalForm, null, 2);
+  // const blob = new Blob([json], { type: "application/json" });
+  // const url = URL.createObjectURL(blob);
 
-  const link = document.createElement("a");
-  link.href = url;
-  link.download = "finalForm.json";
-  link.click();
-  URL.revokeObjectURL(url);
+  // const link = document.createElement("a");
+  // link.href = url;
+  // link.download = "finalForm.json";
+  // link.click();
+  // URL.revokeObjectURL(url);
+    navigate("/view-json");
 };
   return (
     <div className=" pb-[18px]">
