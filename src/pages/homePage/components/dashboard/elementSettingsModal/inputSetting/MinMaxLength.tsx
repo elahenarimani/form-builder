@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FormElement, InputElement } from "../../../../../../types/formTypes";
+import { FormElement} from "../../../../../../types/formTypes";
 type LengthProps = {
   modalElement: FormElement | null;
   setModalElement: React.Dispatch<React.SetStateAction<FormElement | null>>;

@@ -3,8 +3,7 @@ import { persist } from "zustand/middleware";
 import { FormElement } from "../../types/formTypes";
 
 interface ElementState {
-  elementt: FormElement[];
-
+  element: FormElement[];
   updateElement: (updatedElement: FormElement) => void;
   deleteElement: (deletedElement: string) => void;
   addElement: (newElement: FormElement) => void;
@@ -13,13 +12,13 @@ interface ElementState {
 export const useElementStore = create<ElementState>()(
   persist(
     (set, get) => ({
-      elementt: [],
+      element: [],
 
       updateElement: (updatedElement) => {
         console.log(updatedElement);
-        const currentElements = get().elementt;
+        const currentElements = get().element;
         console.log("currentElements:", currentElements);
-        const indexFinder = get().elementt.findIndex(
+        const indexFinder = get().element.findIndex(
           (el) => el.id === updatedElement.id
         );
         if (indexFinder === -1) {
@@ -27,20 +26,20 @@ export const useElementStore = create<ElementState>()(
         }
         const newElement = [...currentElements];
         newElement[indexFinder] = updatedElement;
-        set({ elementt: newElement });
+        set({ element: newElement });
         console.log("all element:", newElement);
       },
       deleteElement: (deletedElement) => {
-        const filteredElement = get().elementt.filter(
+        const filteredElement = get().element.filter(
           (el) => el.id !== deletedElement
         );
-        set({ elementt: filteredElement });
+        set({ element: filteredElement });
       },
       addElement: (newElement) => {
-        const currentElement = get().elementt;
-        set({ elementt: [...currentElement, newElement] });
+        const currentElement = get().element;
+        set({ element: [...currentElement, newElement] });
       },
-      clearElements: () => set({ elementt: [] }),
+      clearElements: () => set({ element: [] }),
     }),
     {
       name: "element-storage",

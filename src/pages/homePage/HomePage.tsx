@@ -16,7 +16,7 @@ type ElementsContextType = {
 export const ElementContext = createContext<ElementsContextType | null>(null); //true
 function HomePage() {
   const {
-    elementt,
+    element,
     deleteElement,
     addElement,
     addForm,
@@ -93,8 +93,8 @@ function HomePage() {
     console.log("finalform :", finalForm);
   }, [finalForm]);
   useEffect(() => {
-    console.log("homePage:", elementt);
-  }, [elementt]);
+    console.log("homePage:", element);
+  }, [element]);
   const handleSaveAsTable = () => {
     if (!formName) {
       alert("This form name is already used. Please choose a different name");
@@ -104,7 +104,7 @@ function HomePage() {
     const newForm: FinalForm = {
       id: uuidv4(),
       name: formName,
-      elements: elementt,
+      elements: element,
     };
     const exists = finalForm.some((form) => form.name === newForm.name);
     if (!exists) {
@@ -129,6 +129,18 @@ function HomePage() {
     console.log(opensettingModal);
     console.log(id);
   };
+  const handleSaveAsJson = () => {
+    console.log("save as json")
+  const json = JSON.stringify(finalForm, null, 2);
+  const blob = new Blob([json], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "finalForm.json";
+  link.click();
+  URL.revokeObjectURL(url);
+};
   return (
     <div className=" pb-[18px]">
       <DndContext onDragEnd={handleDrop}>
@@ -149,7 +161,7 @@ function HomePage() {
         <div className="w-full h-full flex justify-center justify-centre gap-[20px] ">
           <Button
             className="w-[130px] bg-white px-4 py-2 border-[1px] border-[#d1d5db] rounded-[50px] text-gray-700  flex justify-center justify-centre cursor-pointer"
-            // onClickHandler={() => handleSaveAsJson()}
+           onClickHandler={handleSaveAsJson}
           >
             Save as JSON
           </Button>

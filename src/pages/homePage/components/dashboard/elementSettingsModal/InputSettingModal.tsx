@@ -36,21 +36,21 @@ const ElementSettingModal = ({
   modalElement,
   setModalElement,
 }: elementSettingsPrpps) => {
-  const { elementt,updateElement} = useCombinedStore ()
+  const { element,updateElement} = useCombinedStore ()
   // const FormContext = useContext(ElementContext);
   useEffect(() => {
     console.log("modalElement changed:", modalElement);
   }, [modalElement]);
   useEffect(() => {
-    console.log("form context:", elementt);
-  }, [elementt]);
+    console.log("form context:", element);
+  }, [element]);
 
 
 
   const handleSave = () => {
     if (modalElement) {
       updateElement(modalElement)
-      console.log("form context:", elementt);
+      console.log("form context:", element);
       // FormContext?.setElements((prevElements: FormElement[]) => {
       //   const indexFinder = FormContext?.elements.findIndex(
       //     (item) => item.id === modalElement.id

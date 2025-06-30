@@ -40,13 +40,13 @@ const MainForm = ({
   // const FormContext = useContext(ElementContext);
   const [activeType, setActiveType] = useState<FormElementType>("input");
   const [inputValue, setInputValue] = useState<{[key: string]: string}>({});
-  const { elementt} = useCombinedStore ()
+  const { element} = useCombinedStore ()
   useEffect(() => {
-    console.log("all element:", elementt);
-  }, [elementt]);
+    console.log("all element:", element);
+  }, [element]);
   console.log(formName);
   const saveSetting = (idSetting: string) => {
-    const elementFinder = elementt.find(
+    const elementFinder = element.find(
       (el) => el.id === idSetting
     );
     if (elementFinder) {
@@ -79,8 +79,8 @@ const MainForm = ({
           onChange={(e) => setFormName(e.target.value)}
         />
       </div>
-      {Array.isArray(elementt) &&
-        elementt.map((el) => (
+      {Array.isArray(element) &&
+        element.map((el) => (
           <div
             key={el.id}
             className="w-[300px] h-full mb-4 flex flex-row justify-between items-center gap-3"

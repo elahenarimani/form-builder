@@ -1,13 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, {useEffect, useState } from "react";
 import Select from "react-select";
 import {
   FormElement,
-  InputElement,
   OptionHeightType,
-  RangeElement,
-  SelectElement,
 } from "../../../../../../types/formTypes";
-import { ElementContext } from "../../../../HomePage";
 const inputHeightOptions: OptionHeightType[] = [
   { value: "50%", label: "50%" },
   { value: "60%", label: "60%" },

@@ -1,13 +1,9 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import Select from "react-select";
 import {
   FormElement,
-  InputElement,
   OptionWidthType,
-  RangeElement,
-  SelectElement,
 } from "../../../../../../types/formTypes";
-import { ElementContext } from "../../../../HomePage";
 const inputWidthOptions: OptionWidthType[] = [
   { value: "50%", label: "50%" },
   { value: "60%", label: "60%" },

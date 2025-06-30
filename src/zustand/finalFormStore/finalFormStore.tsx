@@ -6,16 +6,16 @@ interface ElementState {
   setFinalForm: (forms: FinalForm[]) => void;
   log: () => void;
   finalFormName: string;
-  element: FormElement[];
+  elements: FormElement[];
   addForm: (newForm: FinalForm) => void;
 }
-//  const [finalForm, setFinalForm] = useState<FinalForm[]>
+
 export const useFinalFormStoreStore = create<ElementState>()(
   persist(
     (set, get) => ({
       finalForm: [],
       finalFormName: "",
-      element: [],
+      elements: [],
       setFinalForm: (forms) => set({ finalForm: forms }),
       log: () => {
         console.log(`current number is ${get().finalForm}`);
