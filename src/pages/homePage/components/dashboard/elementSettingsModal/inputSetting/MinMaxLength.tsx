@@ -13,8 +13,8 @@ const MinMaxLength = ({
   setModalElement,
   errors,
 }: LengthProps) => {
-  const [minLength1, setMinLength1] = useState<number>(0);
-  const [maxLength1, setMaxLength1] = useState<number>(0);
+  // const [minLength1, setMinLength1] = useState<number>(0);
+  // const [maxLength1, setMaxLength1] = useState<number>(0);
   useEffect(() => {
     console.log("modalElement changed:", modalElement);
   }, [modalElement]);
@@ -63,12 +63,19 @@ const MinMaxLength = ({
             className={`border rounded p-2 w-full outline-none ${
               errors?.minLength ? "border-red-500" : "border-gray-300"
             }`}
-            value={minLength1}
+            value={(modalElement as any)?.minLength ?? null}
             aria-label="min length"
-            onChange={(e) => {
-              const value = Number(e.target.value);
-              setMinLength1(value);
-              countLetters(value, "min");
+           onChange={(e) => {
+              setModalElement((prv) => {
+                if (prv) {
+                  return {
+                    ...prv,
+                    minLength: Number(e.target.value),
+                  };
+                } else {
+                  return null;
+                }
+              });
             }}
           />
         </div>
@@ -81,12 +88,19 @@ const MinMaxLength = ({
             className={`border rounded p-2 w-full outline-none ${
               errors?.maxLength ? "border-red-500" : "border-gray-300"
             }`}
-            value={maxLength1}
+            value={(modalElement as any)?.maxLength ?? null}
             aria-label="max length"
             onChange={(e) => {
-              const value = Number(e.target.value);
-              setMaxLength1(value);
-              countLetters(value, "max");
+              setModalElement((prv) => {
+                if (prv) {
+                  return {
+                    ...prv,
+                    maxLength: Number(e.target.value),
+                  };
+                } else {
+                  return null;
+                }
+              });
             }}
           />
         </div>

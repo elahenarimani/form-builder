@@ -60,7 +60,7 @@ function HomePage() {
             type: "select",
             // required: false,
             options: ["option 1", "option 2", "option 3"],
-            
+
             width: "100%",
             height: "100%",
             requiredSelect: false,
@@ -73,8 +73,7 @@ function HomePage() {
             id: uuidv4(),
             type: "range",
             // required: false,
-            requiredWidth: false,
-            requiredHeight: false,
+
             min: 0,
             max: 100,
             requiredRange: false,
@@ -84,9 +83,8 @@ function HomePage() {
             step: 0,
             width: "100%",
             height: "100%",
-
-
-
+            requiredWidth: false,
+            requiredHeight: false,
           };
           break;
       }

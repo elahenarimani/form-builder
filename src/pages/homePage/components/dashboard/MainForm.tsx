@@ -46,13 +46,48 @@ const MainForm = ({
   console.log(formName);
   const saveSetting = (idSetting: string) => {
     const elementFinder = element.find((el) => el.id === idSetting);
-    if (elementFinder) {
-      setModalElement(elementFinder);
-    }
+      if (!elementFinder) {
+    setModalElement(null);
+    return;
+  }
+    // let updatedElement = elementFinder;
+
+    // if (elementFinder) {
+    //   const updatedElement = {
+    //     ...elementFinder,
+    //     ...(elementFinder.type === "range" && {
+    //       min: "",
+    //       max: "",
+    //       step: "",
+    //     }),
+    //   };
+
+    //   setModalElement(updatedElement);
+    // }
+    let updatedElement = { ...elementFinder };
+    console.log("elementFinder:", elementFinder);
+console.log("elementFinder.type:", elementFinder.type);
+if (elementFinder.type === "range") {
+    updatedElement = {
+      ...updatedElement,
+      min: "",
+      max: "",
+      step: "",
+    } as RangeElement;
+  } else if (elementFinder.type === "input") {
+    updatedElement = {
+      ...updatedElement,
+      minLength: "",
+      maxLength: "",
+    } as InputElement;
+  }
+   else if (elementFinder.type === "select") {}
+ setModalElement(updatedElement);
+ 
     setOpensettingModal(true);
     console.log(opensettingModal);
     console.log(idSetting);
-    console.log(elementFinder);
+    // console.log(elementFinder);
   };
   const inputHandler = (inputId: string, inputTyped: string) => {
     setInputValue((prv) => ({
@@ -67,7 +102,9 @@ const MainForm = ({
     >
       <h2 className="text-lg font-bold mb-4">My Form</h2>
       <div className="w-[300px] h-[80px] flex flex-col justify-start items-start gap-[2px] mb-4">
-        <label className="w-full h-full text-start text-[15px]">Form Name:</label>
+        <label className="w-full h-full text-start text-[15px]">
+          Form Name:
+        </label>
         <Input
           className="w-[300px] h-[40px] rounded-[5px] px-[5px] outline-none border text-[13px] border border-gray-300"
           type="text"
@@ -99,8 +136,8 @@ const MainForm = ({
                           : "border-gray-300"
                       }`}
                   placeholder={(el as InputElement).placeholder}
-                  minLength={(el as InputElement).minLength}
-                  maxLength={(el as InputElement).maxLength}
+                  minLength={Number((el as InputElement).minLength)}
+                  maxLength={Number((el as InputElement).maxLength)}
                   required={(el as InputElement).requiredType}
                   aria-label="describe input"
                   style={{
@@ -121,8 +158,10 @@ const MainForm = ({
                     inputHandler((el as InputElement).id, e.target.value)
                   }
                 />
-                {String(inputValue).length > 0 &&
-                String(inputValue).length < (el as InputElement).minLength ? (
+
+                {inputValue[el.id]?.length > 0 &&
+                inputValue[el.id]?.length <
+                  Number((el as InputElement).minLength) ? (
                   <p className="h-[20px] text-red-500 text-sm mt-1 text-left">
                     minimum characters is {(el as InputElement).minLength}{" "}
                     characters.
@@ -130,6 +169,7 @@ const MainForm = ({
                 ) : (
                   <p className="hidden"></p>
                 )}
+
                 {String(inputValue).length ===
                 (el as InputElement).maxLength ? (
                   <p className="h-[20px] text-red-500 text-sm mt-1 text-left">

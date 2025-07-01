@@ -14,8 +14,8 @@ export type InputElement = BaseElement & {
   label?: string;
   typeInput: string; //will remove
   placeholder?: string;
-  minLength: number;
-  maxLength: number;
+  minLength: number|string|null;
+  maxLength: number|string|null;
   requiredType: boolean;
   width?: number | string;
   height?: number | string;
@@ -37,7 +37,7 @@ export type InputElement = BaseElement & {
   // requiredType: boolean;
 };
 export type SelectElement = BaseElement & {
-  type?: "select";
+  type: "select";
   label?: string;
   // required?: boolean;
   options: string[];
@@ -52,9 +52,9 @@ export type SelectElement = BaseElement & {
 export type RangeElement = BaseElement & {
   type: "range";
   label?: string;
-  min: number | string;
-  max: number | string;
-  step: number | string;
+  min?: number | string ;
+  max?: number | string ;
+  step?: number | string ;
   requiredRange: boolean;
   requiredMinRange: boolean;
   requiredMaxRange: boolean;

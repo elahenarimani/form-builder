@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FormElement } from "../../../../../../types/formTypes";
 type SliderFeatureProps = {
   modalElement: FormElement | null;
@@ -8,15 +8,21 @@ const SliderFeature = ({
   modalElement,
   setModalElement,
 }: SliderFeatureProps) => {
-  const [minSlider, setMinSlider] = useState<
-    string | number | readonly string[] | undefined
-  >(undefined);
-  const [maxSlider, setMaxSlider] = useState<
-    string | number | readonly string[] | undefined
-  >(undefined);
-  const [stepSlider, setStepSlider] = useState<
-    string | number | readonly string[] | undefined
-  >(undefined);
+  // const [minSlider, setMinSlider] = useState<
+  //   string | number | readonly string[] | undefined
+  // >(undefined);
+  // const [maxSlider, setMaxSlider] = useState<
+  //   string | number | readonly string[] | undefined
+  // >(undefined);
+  // const [stepSlider, setStepSlider] = useState<
+  //   string | number | readonly string[] | undefined
+  // >(undefined);
+// useEffect(()=> {
+//   if (modalElement) {
+//   (modalElement as any).min = undefined;
+//   (modalElement as any).max = 0;
+// }
+// },[])
   return (
     <div className="Min-Max-Length-wrapper w-full h-[300px] flex flex-col justify-start">
       <div className="Min-Max-Length-title w-full justify-between items-start">
@@ -32,8 +38,8 @@ const SliderFeature = ({
           <input
             type="number"
             className="border rounded p-2 w-full outline-none"
-            value={minSlider}
             aria-label="min"
+            value={(modalElement as any)?.min ?? null}
             onChange={(e) => {
               setModalElement((prv) => {
                 if (prv) {
@@ -42,7 +48,7 @@ const SliderFeature = ({
                     min: Number(e.target.value),
                   };
                 } else {
-                  return prv;
+                  return null;
                 }
               });
             }}
@@ -55,8 +61,8 @@ const SliderFeature = ({
           <input
             type="number"
             className="border rounded p-2 w-full outline-none"
-            value={maxSlider}
-            aria-label="max"
+             aria-label="max"
+            value={(modalElement as any)?.max ?? null}
             onChange={(e) => {
               setModalElement((prv) => {
                 if (prv) {
@@ -65,7 +71,7 @@ const SliderFeature = ({
                     max: Number(e.target.value),
                   };
                 } else {
-                  return prv;
+                  return null;
                 }
               });
             }}
@@ -78,8 +84,8 @@ const SliderFeature = ({
           <input
             type="number"
             className="border rounded p-2 w-full outline-none"
-            value={stepSlider}
             aria-label="max "
+            value={(modalElement as any)?.step ?? null}
             onChange={(e) => {
               setModalElement((prv) => {
                 if (prv) {
@@ -88,7 +94,7 @@ const SliderFeature = ({
                     step: Number(e.target.value),
                   };
                 } else {
-                  return prv;
+                  return null;
                 }
               });
             }}
