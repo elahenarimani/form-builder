@@ -20,12 +20,13 @@ const ValidationSliderSetting = ({
       </div>
       <div className="validation w-full h-full border-[1px] border-[#d1d5db] rounded-[5px]  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 items-center gap-y-[15px] mb-2 p-[18px]">
         {" "}
-        <div className="flex justify-start items-center gap-[10px]">
+        {/* <div className="flex justify-start items-center gap-[10px]">
           <label className="text-sm">Required Range</label>
           <input
             type="checkbox"
             aria-label="required or not"
-            defaultChecked={true}
+            defaultChecked={false}
+            className="w-4 h-4 accent-[#1ABC9C] rounded-[10px]"
             checked={(modalElement as any)?.requiredRange ?? false}
             onChange={(e) => {
               setModalElement((prv) => {
@@ -34,13 +35,14 @@ const ValidationSliderSetting = ({
               });
             }}
           />
-        </div>
+        </div> */}
         <div className="flex justify-start items-center gap-[10px]">
           <label className="text-sm">Required Min Range</label>
           <input
             type="checkbox"
             aria-label="required or not"
-            defaultChecked={true}
+            defaultChecked={false}
+            className="w-4 h-4 accent-[#1ABC9C] rounded-[10px]"
             checked={(modalElement as any)?.requiredMinRange ?? false}
             onChange={(e) => {
               setModalElement((prv) => {
@@ -55,7 +57,8 @@ const ValidationSliderSetting = ({
           <input
             type="checkbox"
             aria-label="required or not"
-            defaultChecked={true}
+            defaultChecked={false}
+            className="w-4 h-4 accent-[#1ABC9C] rounded-[10px]"
             checked={(modalElement as any)?.requiredMaxRange ?? false}
             onChange={(e) => {
               setModalElement((prv) => {
@@ -70,7 +73,8 @@ const ValidationSliderSetting = ({
           <input
             type="checkbox"
             aria-label="required or not"
-            defaultChecked={true}
+            defaultChecked={false}
+            className="w-4 h-4 accent-[#1ABC9C] rounded-[10px]"
             checked={(modalElement as any)?.requiredStep ?? false}
             onChange={(e) => {
               setModalElement((prv) => {

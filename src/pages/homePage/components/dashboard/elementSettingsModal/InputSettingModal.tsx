@@ -35,44 +35,119 @@ const ElementSettingModal = ({
   setModalElement,
 }: elementSettingsPrpps) => {
   const { element, updateElement } = useCombinedStore();
- const [errors, setErrors] = useState<{
-  minLength?: boolean;
-  maxLength?: boolean;
-  typeInput?: boolean;
-}>({});
+  const [errors, setErrors] = useState<{ [key: string]: boolean }>({});
+  const [submitting, setSubmitting] = useState(false);
+
   useEffect(() => {
     console.log("modalElement changed:", modalElement);
   }, [modalElement]);
   useEffect(() => {
     console.log("form context:", element);
   }, [element]);
+
+  //   const validateValues =() => {
+  //   let errors ={}
+  //   if (modalElement?.type === "range") {
+
+  //         } as RangeElement;
+  //       } else if (modalElement?.type === "input") {
+
+  //         } as InputElement;
+  //       } else if (modalElement?.type === "select") {
+
+  //       } as SelectElement;
+  // }
+
   const handleSave = () => {
-    if (!modalElement) return null;
-    const newErrors: {
-      minLength?: boolean;
-      maxLength?: boolean;
-      typeInput?: boolean;
-    } = {};
-    if (modalElement.type === "input") {
-      if (modalElement.requiredMinLength &&!modalElement.minLength) {
-        newErrors.minLength = true;
+    if (!modalElement) return;
+    const newErrors: { [key: string]: boolean } = {};
+    if (modalElement?.type === "input") {
+      if (!modalElement) return null;
+      if (modalElement?.requiredField && !modalElement.typeInput) {
+        newErrors.requiredField = true;
       }
-      if (modalElement.requiredMaxLength && modalElement.maxLength) {
-        newErrors.maxLength = true;
+      if (modalElement?.requiredMinLength && !modalElement.minLength) {
+        newErrors.requiredMinLength = true;
       }
-      if (modalElement.requiredTypeInput && modalElement.typeInput) {
-        newErrors.typeInput = true;
+      if (modalElement.requiredMaxLength && !modalElement.maxLength) {
+        newErrors.requiredMaxLength = true;
+      }
+      if (modalElement?.requiredTypeInput && !modalElement.typeInput) {
+        newErrors.requiredTypeInput = true;
+      }
+    } else if (modalElement?.type === "range") {
+      // if (modalElement?.requiredRange  ) {
+      //   newErrors.requiredRange = true;
+      // }
+      if (modalElement?.requiredMinRange && !modalElement.min) {
+        newErrors.requiredMinRange = true;
+      }
+      if (modalElement?.requiredMaxRange && !modalElement.max) {
+        newErrors.requiredMaxRange = true;
+      }
+      if (modalElement?.requiredStep && !modalElement.step) {
+        newErrors.requiredStep = true;
+      }
+    } else if (modalElement?.type === "select") {
+      if (modalElement?.requiredSelect && !modalElement.typeSelect) {
+        newErrors.requiredSelect = true;
       }
     }
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
+      console.log("newError:", newErrors);
       return;
     } else {
       updateElement(modalElement);
-      console.log("form context:", element);
       setOpensettingModal(false);
     }
   };
+  // const handleSave = () => {
+  //   if (Object.keys(newErrors).length > 0) {
+  //     setErrors(validateValues())
+  //     return;
+  //   } else {
+  //     updateElement(modalElement);
+  //     setOpensettingModal(false);
+  //   }
+  // setErrors(validateValues())
+  // setSubmitting(true);
+  //   if (Object.keys(newErrors).length > 0) {
+  //     setErrors(newErrors);
+  //     return;
+  //   } else {
+  //     updateElement(modalElement);
+  //     console.log("form context:", element);
+  //     setOpensettingModal(false);
+  //   }
+  // };
+  // const handleSave = () => {
+  //   if (!modalElement) return null;
+  //   const newErrors: {
+  //     minLength?: boolean;
+  //     maxLength?: boolean;
+  //     typeInput?: boolean;
+  //   } = {};
+  //   if (modalElement.type === "input") {
+  //     if (modalElement.requiredMinLength && !modalElement.minLength) {
+  //       newErrors.minLength = true;
+  //     }
+  //     if (modalElement.requiredMaxLength && modalElement.maxLength) {
+  //       newErrors.maxLength = true;
+  //     }
+  //     if (modalElement.requiredTypeInput && modalElement.typeInput) {
+  //       newErrors.typeInput = true;
+  //     }
+  //   }
+  //   if (Object.keys(newErrors).length > 0) {
+  //     setErrors(newErrors);
+  //     return;
+  //   } else {
+  //     updateElement(modalElement);
+  //     console.log("form context:", element);
+  //     setOpensettingModal(false);
+  //   }
+  // };
   return (
     <div className="modal-wrapper overflow-visible fixed w-full h-screen bg-black/30 flex justify-center items-start z-50 top-0 left-0 right-0 p-[18px] overflow-y-auto">
       <div className="modal overflow-y-auto w-full h-full bg-white p-4 rounded-[10px] flex flex-col justify-start items-center gap-0">
@@ -112,6 +187,7 @@ const ElementSettingModal = ({
             <SelectSetting
               modalElement={modalElement}
               setModalElement={setModalElement}
+              errors={errors}
             />
             <WidthSetting
               modalElement={modalElement}
@@ -152,6 +228,7 @@ const ElementSettingModal = ({
             <SliderFeature
               modalElement={modalElement}
               setModalElement={setModalElement}
+              errors={errors}
             />
           </div>
         )}

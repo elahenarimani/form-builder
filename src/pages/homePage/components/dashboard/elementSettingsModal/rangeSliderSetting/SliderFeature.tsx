@@ -3,10 +3,12 @@ import { FormElement } from "../../../../../../types/formTypes";
 type SliderFeatureProps = {
   modalElement: FormElement | null;
   setModalElement: React.Dispatch<React.SetStateAction<FormElement | null>>;
+    errors: { [key: string]: boolean };
 };
 const SliderFeature = ({
   modalElement,
   setModalElement,
+  errors
 }: SliderFeatureProps) => {
   // const [minSlider, setMinSlider] = useState<
   //   string | number | readonly string[] | undefined
@@ -36,8 +38,8 @@ const SliderFeature = ({
             min:
           </label>
           <input
-            type="number"
-            className="border rounded p-2 w-full outline-none"
+            type="text"
+            className={`border rounded p-2 w-full outline-none focus:ring-1 focus:ring-[#1ABC9C] ${errors?.requiredMinRange ? "border-red-500" : "border-gray-300"}`}
             aria-label="min"
             value={(modalElement as any)?.min ?? null}
             onChange={(e) => {
@@ -55,12 +57,12 @@ const SliderFeature = ({
           />
         </div>
         <div className="w-full mb-2">
-          <label className="block mb-1 text-sm font-medium text-gray-700 text-left">
+          <label className="block mb-1 text-sm font-medium text-gray-700 text-left ">
             Max:
           </label>
           <input
-            type="number"
-            className="border rounded p-2 w-full outline-none"
+            type="text"
+            className={`border rounded p-2 w-full outline-none focus:ring-1 focus:ring-[#1ABC9C] ${errors?.requiredMaxRange ? "border-red-500" : "border-gray-300"}`}
              aria-label="max"
             value={(modalElement as any)?.max ?? null}
             onChange={(e) => {
@@ -82,8 +84,8 @@ const SliderFeature = ({
             step:
           </label>
           <input
-            type="number"
-            className="border rounded p-2 w-full outline-none"
+            type="text"
+             className={`border rounded p-2 w-full outline-none focus:ring-1 focus:ring-[#1ABC9C] ${errors?.requiredStep  ? "border-red-500" : "border-gray-300"}`}
             aria-label="max "
             value={(modalElement as any)?.step ?? null}
             onChange={(e) => {

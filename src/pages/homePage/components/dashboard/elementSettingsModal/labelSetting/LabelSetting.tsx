@@ -25,7 +25,7 @@ const LabelSetting = ({ modalElement, setModalElement }: LabelSettingProps) => {
           })
         }
         placeholder="Enter your label..."
-        className="w-full border border-gray-300 rounded-[5px] px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#1ABC9C]"
+        className="w-full border border-gray-300 rounded-[5px] px-4 py-2 focus:outline-none focus:ring-1 focus:ring-[#1ABC9C]"
       />
     </div>
   );

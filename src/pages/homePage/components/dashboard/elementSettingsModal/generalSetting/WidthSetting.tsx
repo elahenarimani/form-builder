@@ -15,10 +15,7 @@ type InputProps = {
   modalElement: FormElement | null;
   setModalElement: React.Dispatch<React.SetStateAction<FormElement | null>>;
 };
-const WidthSetting = ({
-  modalElement,
-  setModalElement,
-}: InputProps) => {
+const WidthSetting = ({ modalElement, setModalElement }: InputProps) => {
   const [selectedWidth, setSelectedWidth] = useState<OptionWidthType | null>(
     null
   );
@@ -70,10 +67,10 @@ const WidthSetting = ({
             ...provided,
             width: "100%",
             border: "1px solid #d1d5db",
-            boxShadow: "none",
-            borderColor: state.isFocused ? "#d1d5db" : "#d1d5db",
+            boxShadow: state.isFocused ? "0 0 0 1px #1ABC9C" : "none",
+            borderColor: state.isFocused ? "#1ABC9C" : "#d1d5db",
             "&:hover": {
-              borderColor: "#a1a1aa",
+              borderColor: "none",
             },
           }),
           menu: (provided) => ({

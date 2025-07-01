@@ -43,51 +43,46 @@ const MainForm = ({
   useEffect(() => {
     console.log("all element:", element);
   }, [element]);
-  console.log(formName);
-  const saveSetting = (idSetting: string) => {
+  const saveModalSetting = (idSetting: string) => {
     const elementFinder = element.find((el) => el.id === idSetting);
-      if (!elementFinder) {
-    setModalElement(null);
-    return;
-  }
-    // let updatedElement = elementFinder;
-
-    // if (elementFinder) {
-    //   const updatedElement = {
-    //     ...elementFinder,
-    //     ...(elementFinder.type === "range" && {
-    //       min: "",
-    //       max: "",
-    //       step: "",
-    //     }),
-    //   };
-
-    //   setModalElement(updatedElement);
-    // }
+    if (!elementFinder) {
+      setModalElement(null);
+      return;
+    }
     let updatedElement = { ...elementFinder };
-    console.log("elementFinder:", elementFinder);
-console.log("elementFinder.type:", elementFinder.type);
-if (elementFinder.type === "range") {
-    updatedElement = {
-      ...updatedElement,
-      min: "",
-      max: "",
-      step: "",
-    } as RangeElement;
-  } else if (elementFinder.type === "input") {
-    updatedElement = {
-      ...updatedElement,
-      minLength: "",
-      maxLength: "",
-    } as InputElement;
-  }
-   else if (elementFinder.type === "select") {}
- setModalElement(updatedElement);
- 
+    if (elementFinder.type === "range") {
+      updatedElement = {
+        ...updatedElement,
+        min: "",
+        max: "",
+        step: "",
+        label: "",
+        requiredRange: false,
+        requiredMinRange: false,
+        requiredMaxRange: false,
+        requiredStep: false,
+      } as RangeElement;
+    } else if (elementFinder.type === "input") {
+      updatedElement = {
+        ...updatedElement,
+        minLength: "",
+        maxLength: "",
+        label: "",
+        requiredField: false,
+        requiredMinLength: false,
+        requiredMaxLength: false,
+        requiredTypeInput: false,
+      } as InputElement;
+    } else if (elementFinder.type === "select") {
+      updatedElement = {
+        ...updatedElement,
+        label: "",
+        requiredSelect: false,
+      } as SelectElement;
+    }
+    setModalElement(updatedElement);
+
     setOpensettingModal(true);
-    console.log(opensettingModal);
-    console.log(idSetting);
-    // console.log(elementFinder);
   };
   const inputHandler = (inputId: string, inputTyped: string) => {
     setInputValue((prv) => ({
@@ -264,7 +259,7 @@ if (elementFinder.type === "range") {
                 <IoTrash size={20} color="red" />
               </Button>
               <Button
-                onClickHandler={() => saveSetting(el.id)}
+                onClickHandler={() => saveModalSetting(el.id)}
                 className=" top-1 right-1  group-hover:opacity-100 transition-opacity"
               >
                 <IoMdSettings size={20} color="gray" />
@@ -279,7 +274,7 @@ if (elementFinder.type === "range") {
           setClickedElement={setClickedElement}
           opensettingModal={opensettingModal}
           setOpensettingModal={setOpensettingModal}
-          saveSetting={saveSetting}
+          saveSetting={saveModalSetting}
           modalElement={modalElement}
           setModalElement={setModalElement}
         />

@@ -1,4 +1,4 @@
-import React, {useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Select from "react-select";
 import {
   FormElement,
@@ -14,13 +14,13 @@ const inputTypeOptions: OptionInputType[] = [
 type InputProps = {
   modalElement: FormElement | null;
   setModalElement: React.Dispatch<React.SetStateAction<FormElement | null>>;
-  errors?: {
-    minLength?: boolean;
-    maxLength?: boolean;
-    typeInput?: boolean;
-  };
+  errors: { [key: string]: boolean };
 };
-const InputTypeSetting = ({ modalElement, setModalElement ,errors}: InputProps) => {
+const InputTypeSetting = ({
+  modalElement,
+  setModalElement,
+  errors,
+}: InputProps) => {
   const [selectedInputType, setSelectedInputType] =
     useState<OptionInputType | null>(null);
   useEffect(() => {
@@ -60,12 +60,18 @@ const InputTypeSetting = ({ modalElement, setModalElement ,errors}: InputProps) 
           control: (provided, state) => ({
             ...provided,
             width: "100%",
-            border: `1px solid ${errors?.typeInput ? "#ef4444" : "#d1d5db"}`,
-            boxShadow: "none",
-            borderColor: state.isFocused ? "#d1d5db" : "#d1d5db",
+            borderWidth: "1px",
+            borderStyle: "solid",
+            // border: `1px solid ${errors?.typeInput ? "#ef4444" : "#d1d5db"}`,
+            boxShadow: state.isFocused ? "0 0 0 1px #1ABC9C" : "none",
             "&:hover": {
-              borderColor: "#a1a1aa",
+              borderColor: errors?.requiredTypeInput ? "#ef4444" : "#9ca3af", // خاکستری تیره در حالت hover
             },
+            borderColor: errors?.requiredTypeInput
+              ? "#ef4444" // قرمز وقتی خطا هست
+              : state.isFocused
+              ? "#1ABC9C" // رنگ برند وقتی فوکوس هست
+              : "#d1d5db", // پیش‌فرض خاکستری
           }),
           menu: (provided) => ({
             ...provided,

@@ -3,10 +3,7 @@ import { FormElement } from "../../../../../../types/formTypes";
 type LengthProps = {
   modalElement: FormElement | null;
   setModalElement: React.Dispatch<React.SetStateAction<FormElement | null>>;
-  errors?: {
-    minLength?: boolean;
-    maxLength?: boolean;
-  };
+  errors: { [key: string]: boolean }
 };
 const MinMaxLength = ({
   modalElement,
@@ -18,34 +15,34 @@ const MinMaxLength = ({
   useEffect(() => {
     console.log("modalElement changed:", modalElement);
   }, [modalElement]);
-  const countLetters = (text: number, feild: "min" | "max") => {
-    const letterCount = text;
-    if (feild === "min") {
-      setModalElement((prv) => {
-        if (!prv) return null;
-        if (prv) {
-          return {
-            ...prv,
-            minLength: letterCount,
-          };
-        } else {
-          return prv;
-        }
-      });
-    } else {
-      setModalElement((prv) => {
-        if (!prv) return null;
-        if (prv) {
-          return {
-            ...prv,
-            maxLength: letterCount,
-          };
-        } else {
-          return prv;
-        }
-      });
-    }
-  };
+  // const countLetters = (text: number, feild: "min" | "max") => {
+  //   const letterCount = text;
+  //   if (feild === "min") {
+  //     setModalElement((prv) => {
+  //       if (!prv) return null;
+  //       if (prv) {
+  //         return {
+  //           ...prv,
+  //           minLength: letterCount,
+  //         };
+  //       } else {
+  //         return prv;
+  //       }
+  //     });
+  //   } else {
+  //     setModalElement((prv) => {
+  //       if (!prv) return null;
+  //       if (prv) {
+  //         return {
+  //           ...prv,
+  //           maxLength: letterCount,
+  //         };
+  //       } else {
+  //         return prv;
+  //       }
+  //     });
+  //   }
+  // };
   return (
     <div className="Min-Max-Length-wrapper w-full h-[275px] flex flex-col justify-start">
       <div className="Min-Max-Length-title w-full justify-between items-start">
@@ -59,9 +56,9 @@ const MinMaxLength = ({
             min Length:
           </label>
           <input
-            type="number"
-            className={`border rounded p-2 w-full outline-none ${
-              errors?.minLength ? "border-red-500" : "border-gray-300"
+            type="text"
+            className={`border rounded p-2 w-full outline-none focus:ring-1 focus:ring-[#1ABC9C] ${
+              errors?.requiredMinLength ? "border-red-500" : "border-gray-300"
             }`}
             value={(modalElement as any)?.minLength ?? null}
             aria-label="min length"
@@ -84,9 +81,9 @@ const MinMaxLength = ({
             Max Length:
           </label>
           <input
-            type="number"
-            className={`border rounded p-2 w-full outline-none ${
-              errors?.maxLength ? "border-red-500" : "border-gray-300"
+            type="text"
+            className={`border rounded p-2 w-full outline-none focus:ring-1 focus:ring-[#1ABC9C] ${
+              errors?.requiredMaxLength ? "border-red-500" : "border-gray-300"
             }`}
             value={(modalElement as any)?.maxLength ?? null}
             aria-label="max length"

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { FormElement } from "../../../../../../types/formTypes";
 type ValidationProps = {
   modalElement: FormElement | null;
@@ -8,9 +8,6 @@ const ValidationSelectSetting = ({
   modalElement,
   setModalElement,
 }: ValidationProps) => {
-  // const [requiredSelect, setRequiredSelect] = useState(false);
-  // const [requiredWidth, setRequiredWidth] = useState(false);
-  // const [requiredHeight, setRequiredHeight] = useState(false);
   return (
     <div className="validation-wrapper w-full h-full xl:h-[150px] flex flex-col justify-between">
       <div className="validation-title w-full flex justify-between items-start">
@@ -25,7 +22,8 @@ const ValidationSelectSetting = ({
           <input
             type="checkbox"
             aria-label="required or not"
-            defaultChecked={true}
+            className="w-4 h-4 accent-[#1ABC9C] rounded-[10px]"
+            defaultChecked={false}
             checked={(modalElement as any)?.requiredSelect ?? false}
             onChange={(e) => {
               setModalElement((prv) => {
@@ -38,52 +36,6 @@ const ValidationSelectSetting = ({
             }}
           />
         </div>
-        {/* <div className="flex justify-between items-center gap-[10px] ">
-          <label className="text-sm">Required Width</label>
-          <input
-            type="checkbox"
-            aria-label="required or not"
-            defaultChecked={true}
-            checked={requiredWidth}
-            onChange={(e) => {
-              setRequiredWidth(e.target.checked);
-              setModalElement((prv) => {
-                if (!prv) return null;
-                if (prv) {
-                  return {
-                    ...prv,
-                    requiredWidth: e.target.checked,
-                  };
-                } else {
-                  return prv;
-                }
-              });
-            }}
-          />
-        </div> */}
-        {/* <div className="flex justify-between items-center gap-[10px]">
-          <label className="text-sm">Required Height</label>
-          <input
-            type="checkbox"
-            aria-label="required or not"
-            defaultChecked={true}
-            checked={requiredHeight}
-            onChange={(e) => {
-              setRequiredHeight(e.target.checked);
-              setModalElement((prv) => {
-                if (!prv) return null;
-                if (prv) {
-                  return {
-                    ...prv,
-                    requiredHeight: e.target.checked,
-                  };
-                } else {
-                  return prv;
-                }
-              });
-            }}
-          />
-        </div> */}
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import React, {useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Select from "react-select";
 import {
   FormElement,
@@ -15,10 +15,7 @@ type heightInputProps = {
   modalElement: FormElement | null;
   setModalElement: React.Dispatch<React.SetStateAction<FormElement | null>>;
 };
-const HeightSetting = ({
-  modalElement,
-  setModalElement,
-}: heightInputProps) => {
+const HeightSetting = ({ modalElement, setModalElement }: heightInputProps) => {
   const [selectedHeight, setSelectedHeight] = useState<OptionHeightType | null>(
     null
   );
@@ -73,10 +70,10 @@ const HeightSetting = ({
             ...provided,
             width: "100%",
             border: "1px solid #d1d5db",
-            boxShadow: "none",
-            borderColor: state.isFocused ? "#d1d5db" : "#d1d5db",
+            boxShadow: state.isFocused ? "0 0 0 1px #1ABC9C" : "none",
+            borderColor: state.isFocused ? "#1ABC9C" : "#d1d5db",
             "&:hover": {
-              borderColor: "#a1a1aa",
+              borderColor: "none",
             },
           }),
           menu: (provided) => ({

@@ -23,7 +23,7 @@ function HomePage() {
     finalForm,
     clearElements,
   } = useCombinedStore();
-  const [formName, setFormName] = useState("Enter name form name...");
+  const [formName, setFormName] = useState("Enter form name...");
   const [clickedElement, setClickedElement] = useState<FormElement | null>(
     null
   );
@@ -48,7 +48,7 @@ function HomePage() {
             typeInput: "",
             minLength: 0,
             maxLength: 100,
-            requiredFeild: false,
+            requiredField: false,
             requiredMinLength: false,
             requiredMaxLength: false,
             requiredTypeInput: false,
@@ -60,7 +60,7 @@ function HomePage() {
             type: "select",
             // required: false,
             options: ["option 1", "option 2", "option 3"],
-
+            typeSelect:"",
             width: "100%",
             height: "100%",
             requiredSelect: false,

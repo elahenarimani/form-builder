@@ -1,3 +1,5 @@
+import { error } from "console";
+
 export type FormElementType = "input" | "select" | "range";
 export interface BaseElement {
   id: string;
@@ -12,14 +14,14 @@ export interface BaseElement {
 export type InputElement = BaseElement & {
   type: "input";
   label?: string;
-  typeInput: string; //will remove
+  typeInput: string;
   placeholder?: string;
-  minLength: number|string|null;
-  maxLength: number|string|null;
-  requiredType: boolean;
+  minLength: number | string | null;
+  maxLength: number | string | null;
+  requiredType: boolean; //will remove
   width?: number | string;
   height?: number | string;
-  requiredFeild: boolean;
+  requiredField: boolean;
   requiredMinLength: boolean;
   requiredMaxLength: boolean;
   requiredTypeInput: Boolean;
@@ -39,6 +41,7 @@ export type InputElement = BaseElement & {
 export type SelectElement = BaseElement & {
   type: "select";
   label?: string;
+  typeSelect: string;
   // required?: boolean;
   options: string[];
   requiredSelect: boolean;
@@ -52,9 +55,9 @@ export type SelectElement = BaseElement & {
 export type RangeElement = BaseElement & {
   type: "range";
   label?: string;
-  min?: number | string ;
-  max?: number | string ;
-  step?: number | string ;
+  min?: number | string;
+  max?: number | string;
+  step?: number | string;
   requiredRange: boolean;
   requiredMinRange: boolean;
   requiredMaxRange: boolean;
@@ -120,3 +123,38 @@ export type FormState = {
   // increaseCounterNumber : ()=>void
   log: () => void;
 };
+// export type errorsType = {
+//   requiredField?: boolean;
+//   requiredMinLength: boolean;
+//   requiredMaxLength: boolean;
+//   requiredTypeInput: boolean;
+//   requiredRange: boolean;
+//   requiredMinRange: boolean;
+//   requiredMaxRange: boolean;
+//   requiredStep: boolean;
+//   requiredSelect: boolean;
+
+// if (modalElement?.type === "input") {
+//   if (!modalElement?.requiredField) {
+
+//   }
+//   if (!modalElement?.requiredMinLength) {
+//   }
+//   if (!modalElement.requiredMaxLength) {
+//   }
+//   if (!modalElement?.requiredTypeInput) {
+//   }
+// } else if (modalElement?.type === "range") {
+//   if (!modalElement?.requiredRange) {
+//   }
+//   if (!modalElement?.requiredMinRange) {
+//   }
+//   if (!modalElement?.requiredMaxRange) {
+//   }
+//   if (!modalElement?.requiredStep) {
+//   }
+// } else if (modalElement?.type === "select") {
+//   if (!modalElement?.requiredSelect) {
+//   }
+// }
+// };
