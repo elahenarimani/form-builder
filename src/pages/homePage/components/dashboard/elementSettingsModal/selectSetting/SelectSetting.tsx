@@ -6,7 +6,11 @@ type SelectProps = {
   setModalElement: React.Dispatch<React.SetStateAction<FormElement | null>>;
   errors: { [key: string]: boolean };
 };
-const SelectSetting = ({ modalElement, setModalElement ,errors}: SelectProps) => {
+const SelectSetting = ({
+  modalElement,
+  setModalElement,
+  errors,
+}: SelectProps) => {
   const selectOptions: SelectEtting[] = [
     { value: "single Select", label: "single select" },
     { value: "multi Select", label: "multi select" },
@@ -51,16 +55,15 @@ const SelectSetting = ({ modalElement, setModalElement ,errors}: SelectProps) =>
             width: "100%",
             borderWidth: "1px",
             borderStyle: "solid",
-            // border: `1px solid ${errors?.typeInput ? "#ef4444" : "#d1d5db"}`,
             boxShadow: state.isFocused ? "0 0 0 1px #1ABC9C" : "none",
             "&:hover": {
-              borderColor: errors?.requiredSelect ? "#ef4444" : "#9ca3af", // خاکستری تیره در حالت hover
+              borderColor: errors?.requiredSelect ? "#ef4444" : "#9ca3af",
             },
             borderColor: errors?.requiredSelect
-              ? "#ef4444" // قرمز وقتی خطا هست
+              ? "#ef4444"
               : state.isFocused
-              ? "#1ABC9C" // رنگ برند وقتی فوکوس هست
-              : "#d1d5db", // پیش‌فرض خاکستری
+              ? "#1ABC9C"
+              : "#d1d5db",
           }),
           menu: (provided) => ({
             ...provided,

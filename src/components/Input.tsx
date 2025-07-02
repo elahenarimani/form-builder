@@ -4,8 +4,8 @@ type IInputProp = {
   onChangeHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
   className?: string;
-  ariaLabel:string;
-  type?:string
+  ariaLabel: string;
+  type?: string;
 };
 const Input = ({
   valueState,
@@ -13,7 +13,7 @@ const Input = ({
   placeholder,
   className,
   ariaLabel,
-  type
+  type,
 }: IInputProp) => {
   return (
     <div>
@@ -25,7 +25,6 @@ const Input = ({
         aria-label={ariaLabel}
         type={type}
       />
-      
     </div>
   );
 };

@@ -3,19 +3,18 @@ import { IoTrash } from "react-icons/io5";
 import React, { useEffect, useState } from "react";
 import ReactSlider from "react-slider";
 import { IoMdSettings } from "react-icons/io";
-import ElementSettingModal from "./elementSettingsModal/ElementSettingModal";
-import {
-  FormElement,
-  InputElement,
-  FormElementType,
-  SelectElement,
-  RangeElement,
-} from "../../../../types/formTypes";
-import Button from "../../../../components/Button";
-import "./mainForm.css";
-import { useCombinedStore } from "../../../../zustand/useCombinedStore";
-import Input from "../../../../components/Input";
-type MainFormProps = {
+
+
+
+import "./drop.css";
+import { FormElement, FormElementType, InputElement, RangeElement, SelectElement } from "../../../types/formTypes";
+import { useCombinedStore } from "../../../zustand/useCombinedStore";
+import Input from "../../../components/Input";
+import Button from "../../../components/Button";
+import ElementSettingModal from "../../homePage/components/dashboard/elementSettingsModal/ElementSettingModal";
+
+
+type DropProps = {
   onDelete: (id: string) => void;
   formName: string;
   setFormName: React.Dispatch<React.SetStateAction<string>>;
@@ -25,7 +24,7 @@ type MainFormProps = {
   opensettingModal: boolean;
   setOpensettingModal: React.Dispatch<React.SetStateAction<boolean>>;
 };
-const MainForm = ({
+const Drop = ({
   onDelete,
   formName,
   setFormName,
@@ -34,7 +33,7 @@ const MainForm = ({
   setClickedElement,
   opensettingModal,
   setOpensettingModal,
-}: MainFormProps) => {
+}: DropProps) => {
   const { element } = useCombinedStore();
   const [modalElement, setModalElement] = useState<FormElement | null>(null);
   const { setNodeRef } = useDroppable({ id: "drop-area" });
@@ -324,4 +323,4 @@ const MainForm = ({
     </div>
   );
 };
-export default MainForm;
+export default Drop;

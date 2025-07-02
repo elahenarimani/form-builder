@@ -97,5 +97,4 @@ const ValidationSetting = ({
     </div>
   );
 };
-
 export default ValidationSetting;

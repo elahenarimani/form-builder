@@ -8,7 +8,6 @@ import Header from "../../components/header/Header";
 import Button from "../../components/Button";
 import MainForm from "./components/dashboard/MainForm";
 import { useCombinedStore } from "../../zustand/useCombinedStore";
-
 type ElementsContextType = {
   finalForm: FinalForm[];
   setFinalForm: React.Dispatch<React.SetStateAction<FinalForm[]>>;
@@ -23,7 +22,7 @@ function HomePage() {
     finalForm,
     clearElements,
   } = useCombinedStore();
-  const [formName, setFormName] = useState("Enter form name...");
+  const [formName, setFormName] = useState("");
   const [clickedElement, setClickedElement] = useState<FormElement | null>(
     null
   );
@@ -58,9 +57,8 @@ function HomePage() {
           newElement = {
             id: uuidv4(),
             type: "select",
-            // required: false,
             options: ["option 1", "option 2", "option 3"],
-            typeSelect:"",
+            typeSelect: "",
             width: "100%",
             height: "100%",
             requiredSelect: false,
@@ -72,8 +70,6 @@ function HomePage() {
           newElement = {
             id: uuidv4(),
             type: "range",
-            // required: false,
-
             min: 0,
             max: 100,
             requiredRange: false,
@@ -198,6 +194,6 @@ function HomePage() {
   );
 }
 export default HomePage;
-function uuid() {
-  throw new Error("Function not implemented.");
-}
+// function uuid() {
+//   throw new Error("Function not implemented.");
+// }

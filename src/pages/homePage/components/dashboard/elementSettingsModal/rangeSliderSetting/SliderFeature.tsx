@@ -1,30 +1,14 @@
-import React, { useEffect, useState } from "react";
 import { FormElement } from "../../../../../../types/formTypes";
 type SliderFeatureProps = {
   modalElement: FormElement | null;
   setModalElement: React.Dispatch<React.SetStateAction<FormElement | null>>;
-    errors: { [key: string]: boolean };
+  errors: { [key: string]: boolean };
 };
 const SliderFeature = ({
   modalElement,
   setModalElement,
-  errors
+  errors,
 }: SliderFeatureProps) => {
-  // const [minSlider, setMinSlider] = useState<
-  //   string | number | readonly string[] | undefined
-  // >(undefined);
-  // const [maxSlider, setMaxSlider] = useState<
-  //   string | number | readonly string[] | undefined
-  // >(undefined);
-  // const [stepSlider, setStepSlider] = useState<
-  //   string | number | readonly string[] | undefined
-  // >(undefined);
-// useEffect(()=> {
-//   if (modalElement) {
-//   (modalElement as any).min = undefined;
-//   (modalElement as any).max = 0;
-// }
-// },[])
   return (
     <div className="Min-Max-Length-wrapper w-full h-[300px] flex flex-col justify-start">
       <div className="Min-Max-Length-title w-full justify-between items-start">
@@ -39,7 +23,9 @@ const SliderFeature = ({
           </label>
           <input
             type="text"
-            className={`border rounded p-2 w-full outline-none focus:ring-1 focus:ring-[#1ABC9C] ${errors?.requiredMinRange ? "border-red-500" : "border-gray-300"}`}
+            className={`border rounded p-2 w-full outline-none focus:ring-1 focus:ring-[#1ABC9C] ${
+              errors?.requiredMinRange ? "border-red-500" : "border-gray-300"
+            }`}
             aria-label="min"
             value={(modalElement as any)?.min ?? null}
             onChange={(e) => {
@@ -62,8 +48,10 @@ const SliderFeature = ({
           </label>
           <input
             type="text"
-            className={`border rounded p-2 w-full outline-none focus:ring-1 focus:ring-[#1ABC9C] ${errors?.requiredMaxRange ? "border-red-500" : "border-gray-300"}`}
-             aria-label="max"
+            className={`border rounded p-2 w-full outline-none focus:ring-1 focus:ring-[#1ABC9C] ${
+              errors?.requiredMaxRange ? "border-red-500" : "border-gray-300"
+            }`}
+            aria-label="max"
             value={(modalElement as any)?.max ?? null}
             onChange={(e) => {
               setModalElement((prv) => {
@@ -85,7 +73,9 @@ const SliderFeature = ({
           </label>
           <input
             type="text"
-             className={`border rounded p-2 w-full outline-none focus:ring-1 focus:ring-[#1ABC9C] ${errors?.requiredStep  ? "border-red-500" : "border-gray-300"}`}
+            className={`border rounded p-2 w-full outline-none focus:ring-1 focus:ring-[#1ABC9C] ${
+              errors?.requiredStep ? "border-red-500" : "border-gray-300"
+            }`}
             aria-label="max "
             value={(modalElement as any)?.step ?? null}
             onChange={(e) => {

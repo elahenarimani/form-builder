@@ -1,11 +1,9 @@
 import React from "react";
 import { FormElement } from "../../../../../../types/formTypes";
-
 type LabelSettingProps = {
   modalElement: FormElement | null;
   setModalElement: React.Dispatch<React.SetStateAction<FormElement | null>>;
 };
-
 const LabelSetting = ({ modalElement, setModalElement }: LabelSettingProps) => {
   return (
     <div className="label-setting w-full h-[80px] flex flex-col justify-start items-start ">
@@ -30,5 +28,4 @@ const LabelSetting = ({ modalElement, setModalElement }: LabelSettingProps) => {
     </div>
   );
 };
-
 export default LabelSetting;

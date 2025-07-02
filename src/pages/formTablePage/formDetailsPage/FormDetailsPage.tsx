@@ -169,7 +169,6 @@ const FormDetailsPage = () => {
                     />
                   </div>
                 );
-
               case "select":
                 return (
                   <div key={element.id} style={style}>
@@ -185,7 +184,6 @@ const FormDetailsPage = () => {
                     </select>
                   </div>
                 );
-
               case "range":
                 return (
                   <div key={element.id} style={style}>
@@ -206,7 +204,6 @@ const FormDetailsPage = () => {
                     </div>
                   </div>
                 );
-
               default:
                 return null;
             }

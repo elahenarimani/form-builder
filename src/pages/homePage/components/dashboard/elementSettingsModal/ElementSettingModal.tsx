@@ -1,8 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FormElement, FormElementType } from "../../../../../types/formTypes";
 import WidthSetting from "./generalSetting/WidthSetting";
 import HeightSetting from "./generalSetting/HeightSetting";
-import { ElementContext } from "../../../HomePage";
 import MinMaxLength from "./inputSetting/MinMaxLength";
 import Button from "../../../../../components/Button";
 import InputTypeSetting from "./inputSetting/InputTypeSetting";
@@ -23,41 +22,20 @@ type elementSettingsPrpps = {
   modalElement: FormElement | null;
   setModalElement: React.Dispatch<React.SetStateAction<FormElement | null>>;
 };
-
 const ElementSettingModal = ({
-  // element,
-  // activeType,
   setClickedElement,
-  // opensettingModal,
   setOpensettingModal,
-  // saveSetting,
   modalElement,
   setModalElement,
 }: elementSettingsPrpps) => {
   const { element, updateElement } = useCombinedStore();
   const [errors, setErrors] = useState<{ [key: string]: boolean }>({});
-  const [submitting, setSubmitting] = useState(false);
-
   useEffect(() => {
     console.log("modalElement changed:", modalElement);
   }, [modalElement]);
   useEffect(() => {
     console.log("form context:", element);
   }, [element]);
-
-  //   const validateValues =() => {
-  //   let errors ={}
-  //   if (modalElement?.type === "range") {
-
-  //         } as RangeElement;
-  //       } else if (modalElement?.type === "input") {
-
-  //         } as InputElement;
-  //       } else if (modalElement?.type === "select") {
-
-  //       } as SelectElement;
-  // }
-
   const handleSave = () => {
     if (!modalElement) return;
     const newErrors: { [key: string]: boolean } = {};
@@ -76,9 +54,6 @@ const ElementSettingModal = ({
         newErrors.requiredTypeInput = true;
       }
     } else if (modalElement?.type === "range") {
-      // if (modalElement?.requiredRange  ) {
-      //   newErrors.requiredRange = true;
-      // }
       if (modalElement?.requiredMinRange && !modalElement.min) {
         newErrors.requiredMinRange = true;
       }
@@ -102,52 +77,6 @@ const ElementSettingModal = ({
       setOpensettingModal(false);
     }
   };
-  // const handleSave = () => {
-  //   if (Object.keys(newErrors).length > 0) {
-  //     setErrors(validateValues())
-  //     return;
-  //   } else {
-  //     updateElement(modalElement);
-  //     setOpensettingModal(false);
-  //   }
-  // setErrors(validateValues())
-  // setSubmitting(true);
-  //   if (Object.keys(newErrors).length > 0) {
-  //     setErrors(newErrors);
-  //     return;
-  //   } else {
-  //     updateElement(modalElement);
-  //     console.log("form context:", element);
-  //     setOpensettingModal(false);
-  //   }
-  // };
-  // const handleSave = () => {
-  //   if (!modalElement) return null;
-  //   const newErrors: {
-  //     minLength?: boolean;
-  //     maxLength?: boolean;
-  //     typeInput?: boolean;
-  //   } = {};
-  //   if (modalElement.type === "input") {
-  //     if (modalElement.requiredMinLength && !modalElement.minLength) {
-  //       newErrors.minLength = true;
-  //     }
-  //     if (modalElement.requiredMaxLength && modalElement.maxLength) {
-  //       newErrors.maxLength = true;
-  //     }
-  //     if (modalElement.requiredTypeInput && modalElement.typeInput) {
-  //       newErrors.typeInput = true;
-  //     }
-  //   }
-  //   if (Object.keys(newErrors).length > 0) {
-  //     setErrors(newErrors);
-  //     return;
-  //   } else {
-  //     updateElement(modalElement);
-  //     console.log("form context:", element);
-  //     setOpensettingModal(false);
-  //   }
-  // };
   return (
     <div className="modal-wrapper overflow-visible fixed w-full h-screen bg-black/30 flex justify-center items-start z-50 top-0 left-0 right-0 p-[18px] overflow-y-auto">
       <div className="modal overflow-y-auto w-full h-full bg-white p-4 rounded-[10px] flex flex-col justify-start items-center gap-0">
@@ -250,5 +179,4 @@ const ElementSettingModal = ({
     </div>
   );
 };
-
 export default ElementSettingModal;

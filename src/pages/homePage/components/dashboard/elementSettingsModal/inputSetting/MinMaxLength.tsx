@@ -1,48 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { FormElement } from "../../../../../../types/formTypes";
 type LengthProps = {
   modalElement: FormElement | null;
   setModalElement: React.Dispatch<React.SetStateAction<FormElement | null>>;
-  errors: { [key: string]: boolean }
+  errors: { [key: string]: boolean };
 };
 const MinMaxLength = ({
   modalElement,
   setModalElement,
   errors,
 }: LengthProps) => {
-  // const [minLength1, setMinLength1] = useState<number>(0);
-  // const [maxLength1, setMaxLength1] = useState<number>(0);
   useEffect(() => {
     console.log("modalElement changed:", modalElement);
   }, [modalElement]);
-  // const countLetters = (text: number, feild: "min" | "max") => {
-  //   const letterCount = text;
-  //   if (feild === "min") {
-  //     setModalElement((prv) => {
-  //       if (!prv) return null;
-  //       if (prv) {
-  //         return {
-  //           ...prv,
-  //           minLength: letterCount,
-  //         };
-  //       } else {
-  //         return prv;
-  //       }
-  //     });
-  //   } else {
-  //     setModalElement((prv) => {
-  //       if (!prv) return null;
-  //       if (prv) {
-  //         return {
-  //           ...prv,
-  //           maxLength: letterCount,
-  //         };
-  //       } else {
-  //         return prv;
-  //       }
-  //     });
-  //   }
-  // };
   return (
     <div className="Min-Max-Length-wrapper w-full h-[275px] flex flex-col justify-start">
       <div className="Min-Max-Length-title w-full justify-between items-start">
@@ -62,7 +32,7 @@ const MinMaxLength = ({
             }`}
             value={(modalElement as any)?.minLength ?? null}
             aria-label="min length"
-           onChange={(e) => {
+            onChange={(e) => {
               setModalElement((prv) => {
                 if (prv) {
                   return {

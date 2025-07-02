@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { CgSearch, CgProfile } from "react-icons/cg";
-import { FaRegQuestionCircle } from "react-icons/fa";
-import { FaTableCellsLarge } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 import Button from "../Button";
 import SearchBox from "./SearchBox";
 import Input from "../Input";
@@ -11,9 +10,13 @@ const Header = () => {
   return (
     <div className="w-full  h-[50px]  bg-[#444444] px-[18px] text-white">
       <div className="mobile-size lg:hidden w-full  h-full flex flex-row justify-between items-center ">
-        <div className=" w-[30px] h-[30px] hover:cursor-pointer " onClick={() => setIsSearchOpen(true)}>
+        <div
+          className=" w-[30px] h-[30px] hover:cursor-pointer "
+          onClick={() => setIsSearchOpen(true)}
+        >
           <CgSearch className="w-full h-full" />
         </div>
+       <Link to={"/"}>
         <div className="w-[30px] h-[30px] hover:cursor-pointer ">
           <img
             src="/image/logo.jpg"
@@ -22,12 +25,13 @@ const Header = () => {
             aria-label="logo image"
           />
         </div>
+       </Link>
         <Button className="w-[30px] h-[30px] hover:cursor-pointer">
           <CgProfile className="w-full h-full" />
         </Button>
       </div>
       <div className="desktop-size hidden w-full  h-full lg:flex flex-row justify-between items-center  ">
-        <div className="  flex-1"  onClick={() => setIsSearchOpen(true)}>
+        <div className="  flex-1" onClick={() => setIsSearchOpen(true)}>
           <Input
             valueState={inpval}
             onChangeHandler={(e) => setInputValue(e.target.value)}
@@ -36,19 +40,19 @@ const Header = () => {
             ariaLabel="input"
           />
         </div>
-        <div className="flex justify-between items-center flex-1">
-          <div className="w-[30px] h-[30px] hover:cursor-pointer ">
-            <img
-              src="/image/logo.jpg"
-              alt="Brand logo"
-              className="w-full h-full"
-              aria-label="logo image"
-            />
-          </div>
-          <Button className="w-[30px] h-[30px] hover:cursor-pointer">
-            <CgProfile className="w-full h-full" />
-          </Button>
-        </div>
+        <Link to={"/"} className="flex justify-between items-center flex-1">
+            <div className="w-[30px] h-[30px] hover:cursor-pointer ">
+              <img
+                src="/image/logo.jpg"
+                alt="Brand logo"
+                className="w-full h-full"
+                aria-label="logo image"
+              />
+            </div>
+            <Button className="w-[30px] h-[30px] hover:cursor-pointer">
+              <CgProfile className="w-full h-full" />
+            </Button>
+        </Link>
       </div>
       {isSearchOpen && (
         <SearchBox
