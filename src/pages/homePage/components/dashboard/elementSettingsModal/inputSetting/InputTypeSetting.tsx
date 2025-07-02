@@ -15,14 +15,20 @@ type InputProps = {
   modalElement: FormElement | null;
   setModalElement: React.Dispatch<React.SetStateAction<FormElement | null>>;
   errors: { [key: string]: boolean };
+  selectedInputType: OptionInputType | null;
+  setSelectedInputType: React.Dispatch<
+    React.SetStateAction<OptionInputType | null>
+  >;
 };
 const InputTypeSetting = ({
   modalElement,
   setModalElement,
   errors,
+  selectedInputType,
+  setSelectedInputType,
 }: InputProps) => {
-  const [selectedInputType, setSelectedInputType] =
-    useState<OptionInputType | null>(null);
+  // const [selectedInputType, setSelectedInputType] =
+  //   useState<OptionInputType | null>(null);
   useEffect(() => {
     console.log("modalElement changed:", modalElement);
   }, [modalElement]);
@@ -40,7 +46,9 @@ const InputTypeSetting = ({
             if (prv?.type === "input") {
               return {
                 ...prv,
-                typeInput: selectedInputType ? selectedInputType.label : "",
+                typeInput: selectedInputType
+                  ? selectedInputType.label.toLowerCase()
+                  : "",
               };
             } else {
               return prv;

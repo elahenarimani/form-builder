@@ -8,11 +8,11 @@ import Header from "../../components/header/Header";
 import Button from "../../components/Button";
 import MainForm from "./components/dashboard/MainForm";
 import { useCombinedStore } from "../../zustand/useCombinedStore";
-type ElementsContextType = {
-  finalForm: FinalForm[];
-  setFinalForm: React.Dispatch<React.SetStateAction<FinalForm[]>>;
-};
-export const ElementContext = createContext<ElementsContextType | null>(null); //true
+// type ElementsContextType = {
+//   finalForm: FinalForm[];
+//   setFinalForm: React.Dispatch<React.SetStateAction<FinalForm[]>>;
+// };
+// export const ElementContext = createContext<ElementsContextType | null>(null); //true
 function HomePage() {
   const {
     element,
@@ -23,6 +23,7 @@ function HomePage() {
     clearElements,
   } = useCombinedStore();
   const [formName, setFormName] = useState("");
+   const [inputValue, setInputValue] = useState<{ [key: string]: string }>({});
   const [clickedElement, setClickedElement] = useState<FormElement | null>(
     null
   );
@@ -51,6 +52,7 @@ function HomePage() {
             requiredMinLength: false,
             requiredMaxLength: false,
             requiredTypeInput: false,
+             inputContent:"",
           };
           break;
         case "select":
@@ -100,6 +102,9 @@ function HomePage() {
   useEffect(() => {
     console.log("homePage:", element);
   }, [element]);
+   useEffect(() => {
+    console.log("inputvalue:", inputValue ,setInputValue);
+  }, [inputValue]);
   const handleSaveAsTable = () => {
     if (!formName) {
       alert("Form name cannot be empty");
@@ -172,6 +177,8 @@ function HomePage() {
             setClickedElement={setClickedElement}
             opensettingModal={opensettingModal}
             setOpensettingModal={setOpensettingModal}
+            inputValue={inputValue}
+            setInputValue={setInputValue}
           />
         </main>
         <div className="w-full h-full flex justify-center justify-centre gap-[20px] ">

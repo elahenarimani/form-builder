@@ -1,11 +1,19 @@
 import React from "react";
 type IInputProp = {
-  valueState: string;
+  valueState: string ;
   onChangeHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
   className?: string;
-  ariaLabel: string;
+  ariaLabel?: string;
   type?: string;
+  minLength?: number ;
+  maxLength?: number ;
+  style?:{
+    width:string,
+    height:string
+  };
+  onClick?:()=>void
+
 };
 const Input = ({
   valueState,
@@ -14,6 +22,10 @@ const Input = ({
   className,
   ariaLabel,
   type,
+  minLength,
+  maxLength,
+  style,
+  onClick,
 }: IInputProp) => {
   return (
     <div>
@@ -24,6 +36,10 @@ const Input = ({
         className={className}
         aria-label={ariaLabel}
         type={type}
+        minLength={minLength}
+        maxLength={maxLength}
+        style={style}
+        onClick={onClick}
       />
     </div>
   );

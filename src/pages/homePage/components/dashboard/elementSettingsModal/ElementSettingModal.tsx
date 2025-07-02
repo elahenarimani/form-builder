@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FormElement, FormElementType } from "../../../../../types/formTypes";
+import { FormElement, FormElementType, OptionInputType } from "../../../../../types/formTypes";
 import WidthSetting from "./generalSetting/WidthSetting";
 import HeightSetting from "./generalSetting/HeightSetting";
 import MinMaxLength from "./inputSetting/MinMaxLength";
@@ -12,6 +12,7 @@ import ValidationSliderSetting from "./rangeSliderSetting/ValidationSliderSettin
 import SliderFeature from "./rangeSliderSetting/SliderFeature";
 import { useCombinedStore } from "../../../../../zustand/useCombinedStore";
 import LabelSetting from "./labelSetting/LabelSetting";
+import InputContent from "./inputSetting/InputContent";
 type elementSettingsPrpps = {
   element: FormElement | null;
   activeType: FormElementType;
@@ -22,6 +23,13 @@ type elementSettingsPrpps = {
   modalElement: FormElement | null;
   setModalElement: React.Dispatch<React.SetStateAction<FormElement | null>>;
 };
+  const inputTypeOptions: OptionInputType[] = [
+    { value: "Text", label: "Text" },
+    { value: "Number", label: "Number" },
+    { value: "Color", label: "Color" },
+    { value: "Radio", label: "Radio" },
+    { value: "Checkbox", label: "Checkbox" },
+  ];
 const ElementSettingModal = ({
   setClickedElement,
   setOpensettingModal,
@@ -30,6 +38,8 @@ const ElementSettingModal = ({
 }: elementSettingsPrpps) => {
   const { element, updateElement } = useCombinedStore();
   const [errors, setErrors] = useState<{ [key: string]: boolean }>({});
+
+   const [selectedInputType, setSelectedInputType] = useState<OptionInputType | null>(null);
   useEffect(() => {
     console.log("modalElement changed:", modalElement);
   }, [modalElement]);
@@ -87,6 +97,15 @@ const ElementSettingModal = ({
               modalElement={modalElement}
               setModalElement={setModalElement}
               errors={errors}
+              selectedInputType={selectedInputType} 
+              setSelectedInputType={setSelectedInputType}
+            />
+            <InputContent
+              modalElement={modalElement}
+              setModalElement={setModalElement}
+              errors={errors}
+              selectedInputType={selectedInputType} 
+              setSelectedInputType={setSelectedInputType}
             />
             <WidthSetting
               modalElement={modalElement}

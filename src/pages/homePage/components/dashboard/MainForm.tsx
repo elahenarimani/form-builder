@@ -24,6 +24,10 @@ type MainFormProps = {
   setClickedElement: React.Dispatch<React.SetStateAction<FormElement | null>>;
   opensettingModal: boolean;
   setOpensettingModal: React.Dispatch<React.SetStateAction<boolean>>;
+  inputValue: { [key: string]: string };
+  setInputValue: React.Dispatch<
+    React.SetStateAction<{ [key: string]: string }>
+  >;
 };
 const MainForm = ({
   onDelete,
@@ -34,12 +38,14 @@ const MainForm = ({
   setClickedElement,
   opensettingModal,
   setOpensettingModal,
+  inputValue,
+  setInputValue,
 }: MainFormProps) => {
   const { element } = useCombinedStore();
   const [modalElement, setModalElement] = useState<FormElement | null>(null);
   const { setNodeRef } = useDroppable({ id: "drop-area" });
   const [activeType, setActiveType] = useState<FormElementType>("input");
-  const [inputValue, setInputValue] = useState<{ [key: string]: string }>({});
+  // const [inputValue, setInputValue] = useState<{ [key: string]: string }>({});
   useEffect(() => {
     console.log("all element:", element);
   }, [element]);
@@ -48,6 +54,7 @@ const MainForm = ({
       case "input":
         return {
           ...el,
+          inputContent: "",
           minLength: "",
           maxLength: "",
           label: "",
@@ -80,61 +87,64 @@ const MainForm = ({
   };
   const saveModalSetting = (idSetting: string) => {
     const elementFinder = element.find((el) => el.id === idSetting);
-  if (!elementFinder) {
-    setModalElement(null);
-    return;
-  }
-  const newElement = initialModalElementValue(elementFinder);
-  setModalElement(newElement);
-  setOpensettingModal(true);
-  //   const elementFinder = element.find((el) => el.id === idSetting);
-  //   if (!elementFinder) {
-  //     setModalElement(null);
-  //     return;
-  //   }
-  //   let updatedElement = { ...elementFinder };
-  //   if (elementFinder.type === "range") {
-  //     updatedElement = {
-  //       ...updatedElement,
-  //       min: "",
-  //       max: "",
-  //       step: "",
-  //       label: "",
-  //       requiredRange: false,
-  //       requiredMinRange: false,
-  //       requiredMaxRange: false,
-  //       requiredStep: false,
-  //     } as RangeElement;
-  //   } else if (elementFinder.type === "input") {
-  //     updatedElement = {
-  //       ...updatedElement,
-  //       minLength: "",
-  //       maxLength: "",
-  //       label: "",
-  //       requiredField: false,
-  //       requiredMinLength: false,
-  //       requiredMaxLength: false,
-  //       requiredTypeInput: false,
-  //     } as InputElement;
-  //   } else if (elementFinder.type === "select") {
-  //     updatedElement = {
-  //       ...updatedElement,
-  //       label: "",
-  //       requiredSelect: false,
-  //     } as SelectElement;
-  //   }
-  //   setModalElement(updatedElement);
-  //   setOpensettingModal(true);
+    if (!elementFinder) {
+      setModalElement(null);
+      return;
+    }
+    const newElement = initialModalElementValue(elementFinder);
+    setModalElement(newElement);
+    setOpensettingModal(true);
+    //   const elementFinder = element.find((el) => el.id === idSetting);
+    //   if (!elementFinder) {
+    //     setModalElement(null);
+    //     return;
+    //   }
+    //   let updatedElement = { ...elementFinder };
+    //   if (elementFinder.type === "range") {
+    //     updatedElement = {
+    //       ...updatedElement,
+    //       min: "",
+    //       max: "",
+    //       step: "",
+    //       label: "",
+    //       requiredRange: false,
+    //       requiredMinRange: false,
+    //       requiredMaxRange: false,
+    //       requiredStep: false,
+    //     } as RangeElement;
+    //   } else if (elementFinder.type === "input") {
+    //     updatedElement = {
+    //       ...updatedElement,
+    //       minLength: "",
+    //       maxLength: "",
+    //       label: "",
+    //       requiredField: false,
+    //       requiredMinLength: false,
+    //       requiredMaxLength: false,
+    //       requiredTypeInput: false,
+    //     } as InputElement;
+    //   } else if (elementFinder.type === "select") {
+    //     updatedElement = {
+    //       ...updatedElement,
+    //       label: "",
+    //       requiredSelect: false,
+    //     } as SelectElement;
+    //   }
+    //   setModalElement(updatedElement);
+    //   setOpensettingModal(true);
   };
   const inputHandler = (inputId: string, inputTyped: string) => {
-    setInputValue((prv) => ({
-      ...prv,
-      [inputId]: inputTyped,
-    }));
+    setInputValue((prv) => {
+      if (!prv) return {};
+      return {
+        ...prv,
+        [inputId]: inputTyped,
+      };
+    });
   };
+
   return (
     <div
-     
       ref={setNodeRef}
       className="main-form  w-full min-h-screen border border-[#444444] rounded-[5px] py-[20px] px-[15px] bg-gray-50 "
     >
@@ -174,25 +184,27 @@ const MainForm = ({
                           ? "border-red-500"
                           : "border-gray-300"
                       }`}
-                  placeholder={(el as InputElement).placeholder}
+                  // placeholder={(el as InputElement).placeholder}
                   minLength={Number((el as InputElement).minLength)}
                   maxLength={Number((el as InputElement).maxLength)}
-                  required={(el as InputElement).requiredType}
+                  // required={(el as InputElement).requiredType}
                   aria-label="describe input"
-                  style={{
-                    width:
-                      (el as InputElement).requiredWidth && el.width
-                        ? `${el.width}px`
-                        : "100%",
-                    height:
-                      (el as InputElement).requiredHeight && el.height
-                        ? `${el.height}px`
-                        : "auto",
-                  }}
+                   readOnly
+                  // style={{
+                  //   width:
+                  //     (el as InputElement).width
+                  //       ? `${el.width}px`
+                  //       : "100%",
+                  //   height:
+                  //     (el as InputElement).height
+                  //       ? `${el.height}px`
+                  //       : "auto",
+                  // }}
                   onClick={() => {
                     setActiveType("input");
                   }}
-                  value={inputValue[(el as InputElement).id] || ""}
+                  // valueState={inputValue[(el as InputElement).id] || ""}
+                  value={(el as InputElement).inputContent || ""}
                   onChange={(e) =>
                     inputHandler((el as InputElement).id, e.target.value)
                   }
@@ -207,8 +219,8 @@ const MainForm = ({
                 ) : (
                   <p className="hidden"></p>
                 )}
-                {String(inputValue).length ===
-                (el as InputElement).maxLength ? (
+                {inputValue[el.id]?.length ===
+                Number((el as InputElement).maxLength) ? (
                   <p className="h-[20px] text-red-500 text-sm mt-1 text-left">
                     maximum characters is {(el as InputElement).maxLength}{" "}
                     characters.
