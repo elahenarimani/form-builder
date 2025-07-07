@@ -34,6 +34,7 @@ const SelectSetting = ({
               return {
                 ...prv,
                 options: settingSelect ? [settingSelect.label] : [],
+                selectMode: settingSelect?.value === "multi Select" ? "multi" : "single", 
               };
             } else {
               return prv;
@@ -74,9 +75,14 @@ const SelectSetting = ({
             ...base,
             zIndex: 99999,
           }),
-          option: (provided) => ({
+          option: (provided, state) => ({
             ...provided,
             textAlign: "left",
+            backgroundColor: state.isFocused || state.isSelected
+              ? "rgba(26, 188, 156, 0.5)"
+              : "white",
+            color: "black",
+            cursor: "pointer",
           }),
           singleValue: (provided) => ({
             ...provided,

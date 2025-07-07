@@ -89,9 +89,15 @@ const InputTypeSetting = ({
             ...base,
             zIndex: 99999,
           }),
-          option: (provided) => ({
+          option: (provided, state) => ({
             ...provided,
             textAlign: "left",
+            backgroundColor:
+              state.isFocused || state.isSelected
+                ? "rgba(26, 188, 156, 0.5)"
+                : "white",
+            color: "black",
+            cursor: "pointer",
           }),
           singleValue: (provided) => ({
             ...provided,

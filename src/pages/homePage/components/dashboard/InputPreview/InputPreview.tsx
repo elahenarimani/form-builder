@@ -13,7 +13,7 @@ const InputPreview = ({
   setActiveType,
 }: InputPreviewProps) => {
   return (
-    <div className="w-full h-full ">
+    <div className="w-full h-full  ">
       <input
         type={(el as InputElement).typeInput}
         className={`p-2 w-full h-[40px] rounded text-[#9CA7C4] outline-none border 

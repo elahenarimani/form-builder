@@ -16,7 +16,7 @@ export type InputElement = BaseElement & {
   placeholder?: string;
   minLength: number | string | null;
   maxLength: number | string | null;
-  inputContent:string|number;
+  inputContent: string | number;
   requiredType: boolean; //will remove
   width?: number | string;
   height?: number | string;
@@ -32,6 +32,7 @@ export type SelectElement = BaseElement & {
   // required?: boolean;
   options: string[];
   requiredSelect: boolean;
+  selectMode?: "single" | "multi";
 };
 export type RangeElement = BaseElement & {
   type: "range";

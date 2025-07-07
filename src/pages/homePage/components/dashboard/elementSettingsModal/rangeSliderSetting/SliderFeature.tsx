@@ -27,7 +27,7 @@ const SliderFeature = ({
               errors?.requiredMinRange ? "border-red-500" : "border-gray-300"
             }`}
             aria-label="min"
-            value={(modalElement as any)?.min ?? null}
+            value={(modalElement as any)?.min ?? ""}
             onChange={(e) => {
               setModalElement((prv) => {
                 if (prv) {
@@ -52,7 +52,7 @@ const SliderFeature = ({
               errors?.requiredMaxRange ? "border-red-500" : "border-gray-300"
             }`}
             aria-label="max"
-            value={(modalElement as any)?.max ?? null}
+            value={(modalElement as any)?.max ?? ""}
             onChange={(e) => {
               setModalElement((prv) => {
                 if (prv) {
@@ -77,7 +77,7 @@ const SliderFeature = ({
               errors?.requiredStep ? "border-red-500" : "border-gray-300"
             }`}
             aria-label="max "
-            value={(modalElement as any)?.step ?? null}
+            value={(modalElement as any)?.step ?? ""}
             onChange={(e) => {
               setModalElement((prv) => {
                 if (prv) {

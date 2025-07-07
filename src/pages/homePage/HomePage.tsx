@@ -60,6 +60,7 @@ function HomePage() {
             id: uuidv4(),
             type: "select",
             options: ["option 1", "option 2", "option 3"],
+            selectMode:"multi",
             typeSelect: "",
             width: "100%",
             height: "100%",
