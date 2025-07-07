@@ -149,10 +149,10 @@ const MainForm = ({
   return (
     <div
       ref={setNodeRef}
-      className="main-form  w-full min-h-screen border border-[#444444] rounded-[5px] py-[20px] px-[15px] bg-gray-50  "
+      className="main-form  w-full min-h-screen border border-[#444444] rounded-[5px] py-[20px] px-[15px] bg-gray-50   "
     >
       <h2 className="text-lg font-bold mb-4">My Form</h2>
-      <div className="w-[300px] h-[80px] flex flex-col justify-start items-start gap-[2px] mb-4">
+      <div className="w-[300px] lg:max-w-[80%] xl:max-w-[50%]  h-[80px] flex flex-col justify-start items-start gap-[2px] mb-4">
         <label className="w-full h-full text-start text-[15px]">
           Form Name:
         </label>
@@ -165,17 +165,17 @@ const MainForm = ({
           onChangeHandler={(e) => setFormName(e.target.value)}
         />
       </div>
-      <div className="element-wrapper w-full  h-full flex flex-col justify-start items-start ">
+      <div className="all-element w-full lg:max-w-[80%]  h-full flex flex-col justify-start items-start ">
         {Array.isArray(element) &&
           element.map((el) => (
             <div
               key={el.id}
-              className=" w-[300px]   h-full mb-4 flex flex-row justify-between items-center gap-3"
+              className="each-element w-[300px]   h-full  lg:w-full mb-4 flex flex-row justify-between items-center gap-3"
               style={{
-                top: el.y || 0,
-                left: el.x || 0,
-                width: el.width || "auto",
-                height: el.height || "auto",
+                // top: el.y || 0,
+                // left: el.x || 0,
+                // width: el.width || "auto",
+                // height: el.height || "auto",
               }}
             >
               {el.type === "input" && (
@@ -198,7 +198,7 @@ const MainForm = ({
                   setActiveType={setActiveType}
                 />
               )}
-              <div className="!w-[60px] h-full flex justify-end items-center p-[8px]  ">
+              <div className="button-wrapper !w-[60px] h-full flex justify-end items-center p-[8px]  ">
                 <Button
                   onClickHandler={() => onDelete(el.id)}
                   className=" top-1 right-1  group-hover:opacity-100 transition-opacity"

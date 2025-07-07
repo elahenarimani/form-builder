@@ -9,7 +9,7 @@ type RangePreviewProps = {
 const RangePreview = ({ el, setActiveType }: RangePreviewProps) => {
   return (
     <div
-    className="a w-[300px] h-full "
+    className="range-slider w-full h-full "
     //   style={{
     //     width: el.requiredWidth && el.width ? `${el.width}px` : "300px",
     //     height: el.requiredHeight && el.height ? `${el.height}px` : "auto",

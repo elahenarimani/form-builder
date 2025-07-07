@@ -13,7 +13,7 @@ const SelectPreview = ({ el, setActiveType }: Props) => {
   }));
   const isMulti = el.selectMode === "multi";
   return (
-    <div onClick={() => setActiveType("select")} className="w-full">
+    <div onClick={() => setActiveType("select")} className="select w-full">
       <Select
         isMulti={isMulti}
         options={options}
