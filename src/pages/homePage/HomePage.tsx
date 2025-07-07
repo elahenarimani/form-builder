@@ -48,7 +48,7 @@ function HomePage() {
             typeInput: "",
             minLength: 0,
             maxLength: 100,
-            requiredField: false,
+            requiredInputContent: false,
             requiredMinLength: false,
             requiredMaxLength: false,
             requiredTypeInput: false,

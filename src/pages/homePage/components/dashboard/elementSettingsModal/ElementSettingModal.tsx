@@ -51,8 +51,8 @@ const ElementSettingModal = ({
     const newErrors: { [key: string]: boolean } = {};
     if (modalElement?.type === "input") {
       if (!modalElement) return null;
-      if (modalElement?.requiredField && !modalElement.typeInput) {
-        newErrors.requiredField = true;
+      if (modalElement?.requiredInputContent && !modalElement.inputContent) {
+        newErrors.requiredInputContent = true;
       }
       if (modalElement?.requiredMinLength && !modalElement.minLength) {
         newErrors.requiredMinLength = true;
@@ -180,7 +180,7 @@ const ElementSettingModal = ({
             />
           </div>
         )}
-        <div className="w-full h-full flex justify-center justify-centre gap-[20px] ">
+        <div className="w-full h-full flex justify-center justify-centre gap-[20px] mt-[30px]">
           <Button
             className="w-[70px] bg-white px-4 py-2 border-[1px] border-[#d1d5db] rounded-[50px] text-gray-700  flex justify-center justify-centre cursor-pointer"
             onClickHandler={() => setOpensettingModal(false)}

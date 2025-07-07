@@ -20,7 +20,7 @@ export type InputElement = BaseElement & {
   requiredType: boolean; //will remove
   width?: number | string;
   height?: number | string;
-  requiredField: boolean;
+  requiredInputContent: boolean;
   requiredMinLength: boolean;
   requiredMaxLength: boolean;
   requiredTypeInput: Boolean;

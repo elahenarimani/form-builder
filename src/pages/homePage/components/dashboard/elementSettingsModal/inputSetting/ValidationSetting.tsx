@@ -18,19 +18,19 @@ const ValidationSetting = ({
       <div className="validation w-full h-full border-[1px] border-[#d1d5db] rounded-[5px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 items-center gap-y-[15px] mb-2 p-[18px]">
         {" "}
         <div className="flex justify-start items-center gap-[5px] ">
-          <label className="text-sm">Required Field</label>
+          <label className="text-sm">Required Input Content</label>
           <input
             type="checkbox"
             aria-label="required or not"
             defaultChecked={false}
             className="w-4 h-4 accent-[#1ABC9C] rounded-[10px]"
-            checked={(modalElement as any)?.requiredFeild ?? false}
+            checked={(modalElement as any)?.requiredInputContent ?? false}
             onChange={(e) => {
               setModalElement((prv) => {
                 if (!prv) return null;
                 return {
                   ...prv,
-                  requiredFeild: e.target.checked,
+                  requiredInputContent: e.target.checked,
                 };
               });
             }}
