@@ -13,7 +13,6 @@ export const useElementStore = create<ElementState>()(
   persist(
     (set, get) => ({
       element: [],
-
       updateElement: (updatedElement) => {
         console.log(updatedElement);
         const currentElements = get().element;

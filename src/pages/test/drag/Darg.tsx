@@ -41,3 +41,112 @@ const Drag = () => {
   );
 };
 export default Drag;
+
+
+
+
+
+// import React from "react";
+// import { useForm, SubmitHandler, Controller } from "react-hook-form";
+// import Input from "../../components/Input";
+// import Button from "../../components/Button";
+// type LoginFormInputs = {
+//   email: string;
+//   password: string;
+// };
+// const  LogIn = () => {
+// //   const { handleSubmit, control } = useForm();
+//    const {
+//     control,
+//     handleSubmit,
+//     formState: { errors },
+//   } = useForm<LoginFormInputs>();
+//   return (
+//     <form  
+//       className="max-w-sm mx-auto p-4 border rounded shadow space-y-4">
+//       <div>
+//         <label>Email</label>
+//         <Controller
+//         name="email"
+//         control={control}
+//         defaultValue="test"
+//         rules={{ required: "" }}
+//         render={({field}) => (
+//           <Input
+//             valueState={field.value}
+//             onChangeHandler={field.onChange}
+//             placeholder="مثال"
+//             type="email"
+//               className="w-full border rounded px-3 py-2"
+//               ariaLabel="email"
+//           />
+//         )}
+//       />
+//       {errors.email && (
+//           <p className="text-red-500 text-sm">{errors.email.message}</p>
+//         )}
+//       </div>
+
+//       <div>
+//         <label>Password</label>
+//         <Controller
+//          name="password"
+//         control={control}
+//         defaultValue="test2"
+//         rules={{
+//             required: "رمز عبور الزامی است",
+//             minLength: { value: 6, message: "حداقل ۶ کاراکتر وارد کنید" },
+//           }}
+//         render={({ field }) => (
+//           <Input
+//             valueState={field.value}
+//             onChangeHandler={field.onChange}
+//             placeholder="ضروری"
+//              type="password"
+//               className="w-full border rounded px-3 py-2"
+//               ariaLabel="password"
+//           />
+//         )}
+//       />
+//        {errors.password && (
+//           <p className="text-red-500 text-sm">{errors.password.message}</p>
+//         )}
+//       </div>
+
+//       {/* {errors.exampleRequired && <span>This field is required</span>} */}
+
+//       <Button
+//         type="submit"
+//         className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
+//       >
+//         enter
+//       </Button>
+//     </form>
+//   );
+// };
+
+// export default  LogIn;
+
+
+
+
+
+// import React from 'react';
+// import { useForm } from 'react-hook-form';
+// //  import Input from "../../components/Input";
+//  function LogIn() {
+//   const { register, handleSubmit, formState: { errors } } = useForm();
+//   const onSubmit = (data :any) => console.log(data);
+//   console.log(errors);
+  
+//   return (
+//     <form onSubmit={handleSubmit(onSubmit)}>
+//       <input type="text" placeholder="First name" {...register("First name", {required: true, maxLength: 80})} />
+//       <input type="text" placeholder="Email" {...register("Email", {required: true, pattern: /^\S+@\S+$/i})} />
+//       <input type="tel" placeholder="Mobile number" {...register("Mobile number", {required: true, minLength: 6, maxLength: 12})} />
+
+//       <input type="submit" />
+//     </form>
+//   );
+// }
+// export default LogIn;

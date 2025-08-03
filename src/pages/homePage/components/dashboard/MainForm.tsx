@@ -1,7 +1,6 @@
 import { useDroppable } from "@dnd-kit/core";
 import { IoTrash } from "react-icons/io5";
 import React, { useEffect, useState } from "react";
-import ReactSlider from "react-slider";
 import { IoMdSettings } from "react-icons/io";
 import ElementSettingModal from "./elementSettingsModal/ElementSettingModal";
 import {
@@ -145,7 +144,6 @@ const MainForm = ({
       };
     });
   };
-
   return (
     <div
       ref={setNodeRef}

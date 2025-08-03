@@ -8,9 +8,7 @@ interface ElementState {
   finalFormName: string;
   elements: FormElement[];
   addForm: (newForm: FinalForm) => void;
-  // inputContent:number|string
 }
-
 export const useFinalFormStoreStore = create<ElementState>()(
   persist(
     (set, get) => ({

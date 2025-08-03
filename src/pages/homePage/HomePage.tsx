@@ -1,4 +1,4 @@
-import { useState, createContext, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { DndContext, DragEndEvent } from "@dnd-kit/core";
 import { v4 as uuidv4 } from "uuid";
 import { FormElement, FormElementType, FinalForm } from "../../types/formTypes";
@@ -8,11 +8,6 @@ import Header from "../../components/header/Header";
 import Button from "../../components/Button";
 import MainForm from "./components/dashboard/MainForm";
 import { useCombinedStore } from "../../zustand/useCombinedStore";
-// type ElementsContextType = {
-//   finalForm: FinalForm[];
-//   setFinalForm: React.Dispatch<React.SetStateAction<FinalForm[]>>;
-// };
-// export const ElementContext = createContext<ElementsContextType | null>(null); //true
 function HomePage() {
   const {
     element,
@@ -21,6 +16,7 @@ function HomePage() {
     addForm,
     finalForm,
     clearElements,
+    isAuthenticated,
   } = useCombinedStore();
   const [formName, setFormName] = useState("");
    const [inputValue, setInputValue] = useState<{ [key: string]: string }>({});
@@ -29,6 +25,11 @@ function HomePage() {
   );
   const navigate = useNavigate();
   const [opensettingModal, setOpensettingModal] = useState<boolean>(false);
+  useEffect(() => {
+  if (!isAuthenticated) {
+    navigate("/login");
+  }
+}, [isAuthenticated]);
   const handleDrop = (event: DragEndEvent) => {
     const { active, over } = event;
     if (over && over.id === "drop-area") {
@@ -202,6 +203,3 @@ function HomePage() {
   );
 }
 export default HomePage;
-// function uuid() {
-//   throw new Error("Function not implemented.");
-// }

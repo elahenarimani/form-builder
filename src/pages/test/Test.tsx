@@ -1,7 +1,6 @@
-import { useState, createContext, useEffect } from "react";
-import { DndContext, DragEndEvent } from "@dnd-kit/core";
+import { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { FormElement, FormElementType, FinalForm } from "../../types/formTypes";
+import { FormElement, FinalForm } from "../../types/formTypes";
 import { Outlet, useNavigate } from "react-router-dom";
 import Header from "../../components/header/Header";
 import Button from "../../components/Button";
@@ -13,7 +12,6 @@ function Test() {
   const {
     element,
     deleteElement,
-    addElement,
     addForm,
     finalForm,
     clearElements,
@@ -24,173 +22,6 @@ function Test() {
   );
   const navigate = useNavigate();
   const [opensettingModal, setOpensettingModal] = useState<boolean>(false);
-  // const handleDrop = (event: DragEndEvent) => {
-  //   const { active, over } = event;
-  //   if (over && over.id === "drop-area") {
-  //     const type = active.id as FormElementType;
-  //     let newElement: FormElement;
-  //     switch (type) {
-  //       case "input":
-  //         newElement = {
-  //           id: uuidv4(),
-  //           type: "input",
-  //           requiredType: false,
-  //           requiredWidth: false,
-  //           requiredHeight: false,
-  //           width: "100%",
-  //           height: "100%",
-  //           placeholder: "Enter text",
-  //           typeInput: "",
-  //           minLength: 0,
-  //           maxLength: 100,
-  //           requiredField: false,
-  //           requiredMinLength: false,
-  //           requiredMaxLength: false,
-  //           requiredTypeInput: false,
-  //         };
-  //         break;
-  //       case "select":
-  //         newElement = {
-  //           id: uuidv4(),
-  //           type: "select",
-  //           options: ["option 1", "option 2", "option 3"],
-  //           typeSelect: "",
-  //           width: "100%",
-  //           height: "100%",
-  //           requiredSelect: false,
-  //           requiredWidth: false,
-  //           requiredHeight: false,
-  //         };
-  //         break;
-  //       case "range":
-  //         newElement = {
-  //           id: uuidv4(),
-  //           type: "range",
-  //           min: 0,
-  //           max: 100,
-  //           requiredRange: false,
-  //           requiredMinRange: false,
-  //           requiredMaxRange: false,
-  //           requiredStep: false,
-  //           step: 0,
-  //           width: "100%",
-  //           height: "100%",
-  //           requiredWidth: false,
-  //           requiredHeight: false,
-  //         };
-  //         break;
-  //     }
-  //     newElement = {
-  //       ...newElement,
-  //       x: Math.random() * 400,
-  //       y: Math.random() * 400,
-  //       width: 300,
-  //       height: 40,
-  //     };
-  //     // if (event?.delta && over?.rect) {
-  //     //   const offsetX = over.rect.left;
-  //     //   const offsetY = over.rect.top;
-
-  //     //   const x = event.delta.x + offsetX;
-  //     //   const y = event.delta.y + offsetY;
-
-  //     //   newElement = {
-  //     //     ...newElement,
-  //     //     x,
-  //     //     y,
-  //     //     width: 300,
-  //     //     height: 40,
-  //     //   };
-  //     // }
-  //     addElement(newElement);
-  //   }
-  // };
-
-
-//   const handleDrop = (event: DragEndEvent) => {
-//   const { active, over } = event;
-
-//   if (over && over.id === "drop-area") {
-//     const type = active.id as FormElementType;
-//     let newElement: FormElement;
-
-//     switch (type) {
-//       case "input":
-//         newElement = {
-//           id: uuidv4(),
-//           type: "input",
-//           requiredType: false,
-//           requiredWidth: false,
-//           requiredHeight: false,
-//           width: "100%",
-//           height: "100%",
-//           placeholder: "Enter text",
-//           typeInput: "",
-//           minLength: 0,
-//           maxLength: 100,
-//           requiredField: false,
-//           requiredMinLength: false,
-//           requiredMaxLength: false,
-//           requiredTypeInput: false,
-//         };
-//         break;
-
-//       case "select":
-//         newElement = {
-//           id: uuidv4(),
-//           type: "select",
-//           options: ["option 1", "option 2", "option 3"],
-//           typeSelect: "",
-//           width: "100%",
-//           height: "100%",
-//           requiredSelect: false,
-//           requiredWidth: false,
-//           requiredHeight: false,
-//         };
-//         break;
-
-//       case "range":
-//         newElement = {
-//           id: uuidv4(),
-//           type: "range",
-//           min: 0,
-//           max: 100,
-//           requiredRange: false,
-//           requiredMinRange: false,
-//           requiredMaxRange: false,
-//           requiredStep: false,
-//           step: 0,
-//           width: "100%",
-//           height: "100%",
-//           requiredWidth: false,
-//           requiredHeight: false,
-//         };
-//         break;
-
-//       default:
-//         return;
-//     }
-
-//     // گرفتن موقعیت دقیق موس نسبت به drop-area
-//     if (event.activatorEvent && over.rect) {
-//       const mouseEvent = event.activatorEvent as MouseEvent;
-//       const dropAreaRect = over.rect;
-
-//       const x = mouseEvent.clientX - dropAreaRect.left;
-//       const y = mouseEvent.clientY - dropAreaRect.top;
-
-//       newElement = {
-//         ...newElement,
-//         x,
-//         y,
-//         width: 300,
-//         height: 40,
-//       };
-//     }
-
-//     addElement(newElement);
-//   }
-// };
   useEffect(() => {
     console.log("finalform :", finalForm);
   }, [finalForm]);

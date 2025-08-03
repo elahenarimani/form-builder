@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect} from "react";
 import Select from "react-select";
 import {
   FormElement,
@@ -27,8 +27,6 @@ const InputTypeSetting = ({
   selectedInputType,
   setSelectedInputType,
 }: InputProps) => {
-  // const [selectedInputType, setSelectedInputType] =
-  //   useState<OptionInputType | null>(null);
   useEffect(() => {
     console.log("modalElement changed:", modalElement);
   }, [modalElement]);

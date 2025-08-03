@@ -23,13 +23,6 @@ type elementSettingsPrpps = {
   modalElement: FormElement | null;
   setModalElement: React.Dispatch<React.SetStateAction<FormElement | null>>;
 };
-  const inputTypeOptions: OptionInputType[] = [
-    { value: "Text", label: "Text" },
-    { value: "Number", label: "Number" },
-    { value: "Color", label: "Color" },
-    { value: "Radio", label: "Radio" },
-    { value: "Checkbox", label: "Checkbox" },
-  ];
 const ElementSettingModal = ({
   setClickedElement,
   setOpensettingModal,
