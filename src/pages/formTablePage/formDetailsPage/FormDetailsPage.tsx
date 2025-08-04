@@ -1,15 +1,24 @@
-import { useParams } from "react-router-dom";
-import { useCombinedStore } from "../../../zustand/useCombinedStore";
+import { useNavigate, useParams } from "react-router-dom"
+
+import { useCombinedStore } from "../../../zustand/useCombinedStore"
+import { useEffect } from "react"
+
 const FormDetailsPage = () => {
-  const { finalForm } = useCombinedStore();
-  const { id } = useParams();
-  const form = finalForm.find((f) => f.id === id);
+  const { finalForm, isAuthenticated } = useCombinedStore()
+  const navigate = useNavigate()
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate("/login")
+    }
+  }, [isAuthenticated, navigate])
+  const { id } = useParams()
+  const form = finalForm.find((f) => f.id === id)
   if (!form) {
     return (
       <div className="w-full h-full text-center mt-10 text-red-500">
         <p>Form not found</p>
       </div>
-    );
+    )
   }
   return (
     <div className=" w-full min-h-screen  bg-gray-50  px-4 ">
@@ -18,18 +27,23 @@ const FormDetailsPage = () => {
           {form.name}
         </h1>
         <div
-          className="form-list-wrapper w-full h-full overflow-y-auto border border-dashed border-gray-300 rounded-xl bg-gray-100 flex flex-col justify-between items-start p-[40px] gap-[8px]" style={{ height: "600px" }}
+          className="form-list-wrapper w-full h-full overflow-y-auto border border-dashed border-gray-300 rounded-xl bg-gray-100 flex flex-col justify-between items-start p-[40px] gap-[8px]"
+          style={{ height: "600px" }}
         >
           {form.elements.map((element) => {
             const style = {
               width: element.width?.toString() || "100%",
               height: element.height?.toString() || "auto",
-            };
-            const label = element.label || "Untitled Label";
+            }
+            const label = element.label || "Untitled Label"
             switch (element.type) {
               case "input":
                 return (
-                  <div key={element.id} style={style} className="border-2 border-gray-500 rounded-[5px] p-[30px] flex-shrink-0">
+                  <div
+                    key={element.id}
+                    style={style}
+                    className="border-2 border-gray-500 rounded-[5px] p-[30px] flex-shrink-0"
+                  >
                     <label className="block text-sm text-gray-700 mb-1">
                       {label}
                     </label>
@@ -53,10 +67,14 @@ const FormDetailsPage = () => {
                       className="w-full h-full border border-gray-300 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-[#1ABC9C]"
                     />
                   </div>
-                );
+                )
               case "select":
                 return (
-                  <div key={element.id} style={style} className="border-2 border-gray-500 rounded-[5px] p-[30px] flex-shrink-0">
+                  <div
+                    key={element.id}
+                    style={style}
+                    className="border-2 border-gray-500 rounded-[5px] p-[30px] flex-shrink-0"
+                  >
                     <label className="block text-sm text-gray-700 mb-1">
                       {label}
                     </label>
@@ -68,10 +86,14 @@ const FormDetailsPage = () => {
                       ))}
                     </select>
                   </div>
-                );
+                )
               case "range":
                 return (
-                  <div key={element.id} style={style} className="border-2 border-gray-500 rounded-[5px] p-[30px] flex-shrink-0">
+                  <div
+                    key={element.id}
+                    style={style}
+                    className="border-2 border-gray-500 rounded-[5px] p-[30px] flex-shrink-0"
+                  >
                     <label className="block text-sm text-gray-700 mb-1">
                       {label}
                     </label>
@@ -88,14 +110,14 @@ const FormDetailsPage = () => {
                       <span>Step: {element.step}</span>
                     </div>
                   </div>
-                );
+                )
               default:
-                return null;
+                return null
             }
           })}
         </div>
       </div>
     </div>
-  );
-};
-export default FormDetailsPage;
+  )
+}
+export default FormDetailsPage

@@ -1,6 +1,7 @@
 import { useDraggable } from "@dnd-kit/core";
-import { MdInput } from "react-icons/md";
+
 import { GoMultiSelect } from "react-icons/go";
+import { MdInput } from "react-icons/md";
 import { PiSlidersHorizontal } from "react-icons/pi";
 const ElementPalette = () => {
   const inputDraggable = useDraggable({ id: "input" });

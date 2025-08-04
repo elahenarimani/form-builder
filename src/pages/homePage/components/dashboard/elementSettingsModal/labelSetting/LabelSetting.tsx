@@ -1,5 +1,7 @@
 import React from "react";
+
 import { FormElement } from "../../../../../../types/formTypes";
+
 type LabelSettingProps = {
   modalElement: FormElement | null;
   setModalElement: React.Dispatch<React.SetStateAction<FormElement | null>>;

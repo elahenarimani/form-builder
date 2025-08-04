@@ -1,8 +1,8 @@
-import { useDroppable } from "@dnd-kit/core";
-import { IoTrash } from "react-icons/io5";
 import React, { useEffect, useState } from "react";
+import { useDroppable } from "@dnd-kit/core";
+
+import { IoTrash } from "react-icons/io5";
 import { IoMdSettings } from "react-icons/io";
-import ElementSettingModal from "./elementSettingsModal/ElementSettingModal";
 import {
   FormElement,
   InputElement,
@@ -17,6 +17,7 @@ import Input from "../../../../components/Input";
 import InputPreview from "./InputPreview/InputPreview";
 import SelectPreview from "./SelectPreview/SelectPreview";
 import RangePreview from "./RangePreview/RangePreview";
+import ElementSettingModal from "./elementSettingsModal/ElementSettingModal";
 type MainFormProps = {
   onDelete: (id: string) => void;
   formName: string;
@@ -95,47 +96,8 @@ const MainForm = ({
     const newElement = initialModalElementValue(elementFinder);
     setModalElement(newElement);
     setOpensettingModal(true);
-    //   const elementFinder = element.find((el) => el.id === idSetting);
-    //   if (!elementFinder) {
-    //     setModalElement(null);
-    //     return;
-    //   }
-    //   let updatedElement = { ...elementFinder };
-    //   if (elementFinder.type === "range") {
-    //     updatedElement = {
-    //       ...updatedElement,
-    //       min: "",
-    //       max: "",
-    //       step: "",
-    //       label: "",
-    //       requiredRange: false,
-    //       requiredMinRange: false,
-    //       requiredMaxRange: false,
-    //       requiredStep: false,
-    //     } as RangeElement;
-    //   } else if (elementFinder.type === "input") {
-    //     updatedElement = {
-    //       ...updatedElement,
-    //       minLength: "",
-    //       maxLength: "",
-    //       label: "",
-    //       requiredField: false,
-    //       requiredMinLength: false,
-    //       requiredMaxLength: false,
-    //       requiredTypeInput: false,
-    //     } as InputElement;
-    //   } else if (elementFinder.type === "select") {
-    //     updatedElement = {
-    //       ...updatedElement,
-    //       label: "",
-    //       requiredSelect: false,
-    //     } as SelectElement;
-    //   }
-    //   setModalElement(updatedElement);
-    //   setOpensettingModal(true);
   };
   const handleInputChange = (inputId: string, inputTyped: string) => {
-    // if we select 2 or more input they will be independent
     setInputValue((prv) => {
       if (!prv) return {};
       return {
@@ -170,10 +132,6 @@ const MainForm = ({
               key={el.id}
               className="each-element w-[300px]   h-full  lg:w-full mb-4 flex flex-row justify-between items-center gap-3"
               style={{
-                // top: el.y || 0,
-                // left: el.x || 0,
-                // width: el.width || "auto",
-                // height: el.height || "auto",
               }}
             >
               {el.type === "input" && (

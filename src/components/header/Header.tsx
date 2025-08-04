@@ -1,14 +1,15 @@
 import { useState } from "react";
-import { CgSearch, CgProfile } from "react-icons/cg";
 import { Link } from "react-router-dom";
+
+import { CgSearch, CgProfile } from "react-icons/cg";
+import { useCombinedStore } from "../../zustand/useCombinedStore";
 import Button from "../Button";
 import SearchBox from "./SearchBox";
 import Input from "../Input";
-import { useCombinedStore } from "../../zustand/useCombinedStore";
 const Header = () => {
   const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
   const [inpval, setInputValue] = useState<string>("");
-  const { signUp, logIn, logout } = useCombinedStore();
+  const { logout } = useCombinedStore();
   return (
     <div className="w-full  h-[50px]  bg-[#444444] px-[18px] text-white">
       <div className="mobile-size lg:hidden w-full  h-full flex flex-row justify-between items-center ">

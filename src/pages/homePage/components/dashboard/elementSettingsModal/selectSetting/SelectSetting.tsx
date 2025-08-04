@@ -1,6 +1,8 @@
-import Select from "react-select";
 import React, { useEffect, useState } from "react";
+import Select from "react-select";
+
 import { FormElement, SelectEtting } from "../../../../../../types/formTypes";
+
 type SelectProps = {
   modalElement: FormElement | null;
   setModalElement: React.Dispatch<React.SetStateAction<FormElement | null>>;

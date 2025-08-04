@@ -22,19 +22,6 @@ const router = createBrowserRouter([
     path: "/",
     element: <HomePage />,
   },
-//   {
-//   path: "/formList",
-//   children: [
-//     {
-//       index: true,
-//       element: <FormList />,
-//     },
-//     {
-//       path: "form/:id",
-//       element: <FormDetailsPage />,
-//     },
-//   ],
-// }
   {
     path: "/formList",
     element: <FormList />,

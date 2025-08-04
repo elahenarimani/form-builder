@@ -1,5 +1,6 @@
-import { FormElementType, RangeElement } from "../../../../../types/formTypes";
 import ReactSlider from "react-slider";
+
+import { FormElementType, RangeElement } from "../../../../../types/formTypes";
 type RangePreviewProps = {
   el: RangeElement;
   setActiveType: (type: FormElementType) => void;

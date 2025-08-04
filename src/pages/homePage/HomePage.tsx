@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react";
 import { DndContext, DragEndEvent } from "@dnd-kit/core";
 import { v4 as uuidv4 } from "uuid";
-import { FormElement, FormElementType, FinalForm } from "../../types/formTypes";
 import { Outlet, useNavigate } from "react-router-dom";
+
+import { useCombinedStore } from "../../zustand/useCombinedStore";
+import { FormElement, FormElementType, FinalForm } from "../../types/formTypes";
 import ElementPalette from "./components/dashboard/ElementPalette";
 import Header from "../../components/header/Header";
 import Button from "../../components/Button";
 import MainForm from "./components/dashboard/MainForm";
-import { useCombinedStore } from "../../zustand/useCombinedStore";
+
 function HomePage() {
   const {
     element,
@@ -19,7 +21,7 @@ function HomePage() {
     isAuthenticated,
   } = useCombinedStore();
   const [formName, setFormName] = useState("");
-   const [inputValue, setInputValue] = useState<{ [key: string]: string }>({});
+  const [inputValue, setInputValue] = useState<{ [key: string]: string }>({});
   const [clickedElement, setClickedElement] = useState<FormElement | null>(
     null
   );
@@ -29,7 +31,7 @@ function HomePage() {
   if (!isAuthenticated) {
     navigate("/login");
   }
-}, [isAuthenticated]);
+}, [isAuthenticated,navigate]);
   const handleDrop = (event: DragEndEvent) => {
     const { active, over } = event;
     if (over && over.id === "drop-area") {
@@ -53,7 +55,7 @@ function HomePage() {
             requiredMinLength: false,
             requiredMaxLength: false,
             requiredTypeInput: false,
-             inputContent:"",
+            inputContent:"",
           };
           break;
         case "select":
