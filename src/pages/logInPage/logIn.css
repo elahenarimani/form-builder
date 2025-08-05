@@ -1,0 +1,15 @@
+.mobile-img-wrapper {
+  width: 100%;
+  height: 100%;
+  background-image: url("../../../public/image/one.PNG");
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.desktop-img-wrapper {
+  width: 100%;
+  height: 100%;
+  background-image: url("../../../public/image/tow.jpg");
+  background-position: right;
+  background-repeat: no-repeat;
+  background-size: contain;
+}

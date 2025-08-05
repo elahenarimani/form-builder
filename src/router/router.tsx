@@ -1,13 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
+
 import FormList from "../pages/formTablePage/FormsTablePage";
 import HomePage from "../pages/homePage/HomePage";
 import FormDetailsPage from "../pages/formTablePage/formDetailsPage/FormDetailsPage";
-import ViewJson from "../pages/viewJson/ViewJson";
+import ViewJson from "../pages/viewJsonPage/ViewJson";
 import Test from "../pages/test/Test";
-import LogIn from "../pages/logIn/LogIn";
-import SignUp from "../pages/signUp/SignUp";
-
-
+import LogIn from "../pages/logInPage/LogIn";
+import SignUp from "../pages/signUpPage/SignUp";
 
 const router = createBrowserRouter([
   {

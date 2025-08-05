@@ -1,11 +1,16 @@
-import ReactSlider from "react-slider";
+import ReactSlider from "react-slider"
 
-import { FormElementType, RangeElement } from "../../../../../types/formTypes";
+import { FormElementType, RangeElement } from "../../../../../types/formTypes"
+import { useState } from "react"
 type RangePreviewProps = {
-  el: RangeElement;
-  setActiveType: (type: FormElementType) => void;
-};
+  el: RangeElement
+  setActiveType: (type: FormElementType) => void
+}
 const RangePreview = ({ el, setActiveType }: RangePreviewProps) => {
+  const min = el.min ? +el.min : 0
+  const max = el.max ? +el.max : 100
+  const step = el.step ? +el.step : 5
+    const [value, setValue] = useState<[number, number]>([min, max])
   return (
     <div
       className="range-slider w-full h-full "
@@ -16,10 +21,11 @@ const RangePreview = ({ el, setActiveType }: RangePreviewProps) => {
           className="horizontal-slider w-full h-[40px]"
           thumbClassName="example-thumb"
           trackClassName="example-track"
-          min={Number(el.min) || 0}
-          max={Number(el.max) || 100}
-          step={Number(el.step) || 1}
-          value={[Number(el.min) || 0, Number(el.max) || 100]}
+          min={min}
+          max={max}
+          step={step}
+          value={value}
+          onChange={(val) => setValue(val as [number, number])}
           ariaLabel={["Thumb"]}
           ariaValuetext={(state) => `Thumb value ${state.valueNow}`}
           renderThumb={(props, state) => <div {...props}>{state.valueNow}</div>}
@@ -28,6 +34,6 @@ const RangePreview = ({ el, setActiveType }: RangePreviewProps) => {
         />
       </div>
     </div>
-  );
-};
-export default RangePreview;
+  )
+}
+export default RangePreview

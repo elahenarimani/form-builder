@@ -29,9 +29,9 @@ function HomePage() {
   const [opensettingModal, setOpensettingModal] = useState<boolean>(false);
   useEffect(() => {
   if (!isAuthenticated) {
-    navigate("/login");
+    navigate("/login")
   }
-}, [isAuthenticated,navigate]);
+}, [isAuthenticated,navigate])
   const handleDrop = (event: DragEndEvent) => {
     const { active, over } = event;
     if (over && over.id === "drop-area") {
@@ -76,8 +76,8 @@ function HomePage() {
           newElement = {
             id: uuidv4(),
             type: "range",
-            min: 0,
-            max: 100,
+            min: "",
+            max: "",
             requiredRange: false,
             requiredMinRange: false,
             requiredMaxRange: false,
