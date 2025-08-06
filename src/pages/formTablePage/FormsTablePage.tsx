@@ -6,7 +6,7 @@ import { useCombinedStore } from "../../zustand/useCombinedStore"
 import Header from "../../components/header/Header"
 import { useEffect } from "react"
 const FormsTable = () => {
-  const { finalForm, isAuthenticated } = useCombinedStore()
+  const { finalForm, isAuthenticated, userEmail } = useCombinedStore()
   const navigate = useNavigate()
   useEffect(() => {
     if (!isAuthenticated) {
@@ -42,25 +42,27 @@ const FormsTable = () => {
                 </tr>
               </thead>
               <tbody>
-                {finalForm.map((form, index) => (
-                  <tr key={form.id} className="text-center">
-                    <td className="p-2 border border-gray-50 whitespace-normal">
-                      {index + 1}
-                    </td>
-                    <td className="p-2 border border-gray-50 truncate whitespace-nowrap overflow-hidden">
-                      {form.name}
-                    </td>
-                    <td className="p-2 border border-gray-50 whitespace-normal">
-                      {form.elements.length}
-                    </td>
-                    <td
-                      className="p-2 border border-gray-50 whitespace-normal flex justify-center items-center w-full h-full cursor-pointer"
-                      onClick={() => navigate(`/formList/form/${form.id}`)}
-                    >
-                      <IoEyeOutline />
-                    </td>
-                  </tr>
-                ))}
+                {finalForm
+                  .filter((form) => form.owner === userEmail)
+                  .map((form, index) => (
+                    <tr key={form.id} className="text-center">
+                      <td className="p-2 border border-gray-50 whitespace-normal">
+                        {index + 1}
+                      </td>
+                      <td className="p-2 border border-gray-50 truncate whitespace-nowrap overflow-hidden">
+                        {form.name}
+                      </td>
+                      <td className="p-2 border border-gray-50 whitespace-normal">
+                        {form.elements.length}
+                      </td>
+                      <td
+                        className="p-2 border border-gray-50 whitespace-normal flex justify-center items-center w-full h-full cursor-pointer"
+                        onClick={() => navigate(`/formList/form/${form.id}`)}
+                      >
+                        <IoEyeOutline />
+                      </td>
+                    </tr>
+                  ))}
               </tbody>
             </table>
           </div>

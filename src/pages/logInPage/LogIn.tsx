@@ -23,7 +23,7 @@ const LogIn = () => {
     } else {
       setError("email", {
         type: "manual",
-        message: "email is wrong",
+        message: "you need to sign up first",
       })
       setError("password", {
         type: "manual",

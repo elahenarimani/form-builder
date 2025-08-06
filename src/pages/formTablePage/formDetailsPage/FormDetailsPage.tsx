@@ -50,6 +50,7 @@ const FormDetailsPage = () => {
                     <input
                       type={element.typeInput}
                       placeholder={element.placeholder}
+                      value={element.inputContent}
                       minLength={
                         typeof element.minLength === "number"
                           ? element.minLength

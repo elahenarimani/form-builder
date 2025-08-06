@@ -1,7 +1,7 @@
 import React from "react";
 
 type IInputProp = {
-  valueState?: string ;
+  valueState?: string | number ;
   onChangeHandler?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
   className?: string;

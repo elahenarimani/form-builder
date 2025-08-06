@@ -44,7 +44,7 @@ const MainForm = ({
   inputValue,
   setInputValue,
 }: MainFormProps) => {
-  const { element } = useCombinedStore();
+  const { element, userEmail} = useCombinedStore();
   const [modalElement, setModalElement] = useState<FormElement | null>(null);
   const { setNodeRef } = useDroppable({ id: "drop-area" });
   const [activeType, setActiveType] = useState<FormElementType>("input");
@@ -127,7 +127,8 @@ const MainForm = ({
       </div>
       <div className="all-element w-full lg:max-w-[80%]  h-full flex flex-col justify-start items-start ">
         {Array.isArray(element) &&
-          element.map((el) => (
+          element.filter(el => el.owner === userEmail)
+          .map((el) => (
             <div
               key={el.id}
               className="each-element w-[300px]   h-full  lg:w-full mb-4 flex flex-row justify-between items-center gap-3"
@@ -159,7 +160,7 @@ const MainForm = ({
                   onClickHandler={() => onDelete(el.id)}
                   className=" top-1 right-1  group-hover:opacity-100 transition-opacity"
                 >
-                  <IoTrash size={20} color="red" />
+                  <IoTrash size={20} className="text-errorColor" />
                 </Button>
                 <Button
                   onClickHandler={() => saveModalSetting(el.id)}

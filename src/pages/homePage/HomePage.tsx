@@ -19,6 +19,7 @@ function HomePage() {
     finalForm,
     clearElements,
     isAuthenticated,
+    userEmail,
   } = useCombinedStore();
   const [formName, setFormName] = useState("");
   const [inputValue, setInputValue] = useState<{ [key: string]: string }>({});
@@ -56,20 +57,22 @@ function HomePage() {
             requiredMaxLength: false,
             requiredTypeInput: false,
             inputContent:"",
+            owner: userEmail || "",
           };
           break;
         case "select":
           newElement = {
             id: uuidv4(),
             type: "select",
-            options: ["option 1", "option 2", "option 3"],
-            selectMode:"multi",
+            options: [""],
+            selectMode:null,
             typeSelect: "",
             width: "100%",
             height: "100%",
             requiredSelect: false,
             requiredWidth: false,
             requiredHeight: false,
+            owner: userEmail || "",
           };
           break;
         case "range":
@@ -87,6 +90,7 @@ function HomePage() {
             height: "100%",
             requiredWidth: false,
             requiredHeight: false,
+            owner: userEmail || "",
           };
           break;
       }
@@ -119,6 +123,7 @@ function HomePage() {
       id: uuidv4(),
       name: formName,
       elements: element,
+     owner:userEmail || "",
     };
     const exists = finalForm.some((form) => form.name === newForm.name);
     if (!exists) {
@@ -153,6 +158,7 @@ function HomePage() {
       id: uuidv4(),
       name: formName,
       elements: element,
+      owner:userEmail || "",
     };
     const exists = finalForm.some((form) => form.name === newForm.name);
     if (!exists) {

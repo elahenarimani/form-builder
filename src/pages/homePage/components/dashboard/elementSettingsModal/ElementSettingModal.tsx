@@ -1,88 +1,95 @@
-import React, { useEffect, useState } from "react";
-import { FormElement, FormElementType, OptionInputType } from "../../../../../types/formTypes";
-import WidthSetting from "./generalSetting/WidthSetting";
-import HeightSetting from "./generalSetting/HeightSetting";
-import MinMaxLength from "./inputSetting/MinMaxLength";
-import Button from "../../../../../components/Button";
-import InputTypeSetting from "./inputSetting/InputTypeSetting";
-import ValidationSetting from "./inputSetting/ValidationSetting";
-import SelectSetting from "./selectSetting/SelectSetting";
-import ValidationSelectSetting from "./selectSetting/ValidationSelectSetting";
-import ValidationSliderSetting from "./rangeSliderSetting/ValidationSliderSetting";
-import SliderFeature from "./rangeSliderSetting/SliderFeature";
-import { useCombinedStore } from "../../../../../zustand/useCombinedStore";
-import LabelSetting from "./labelSetting/LabelSetting";
-import InputContent from "./inputSetting/InputContent";
+import React, { useEffect, useState } from "react"
+import {
+  FormElement,
+  FormElementType,
+  OptionInputType,
+  SelectElement,
+} from "../../../../../types/formTypes"
+import WidthSetting from "./generalSetting/WidthSetting"
+import HeightSetting from "./generalSetting/HeightSetting"
+import MinMaxLength from "./inputSetting/MinMaxLength"
+import Button from "../../../../../components/Button"
+import InputTypeSetting from "./inputSetting/InputTypeSetting"
+import ValidationSetting from "./inputSetting/ValidationSetting"
+import SelectSetting from "./selectSetting/SelectSetting"
+import ValidationSelectSetting from "./selectSetting/ValidationSelectSetting"
+import ValidationSliderSetting from "./rangeSliderSetting/ValidationSliderSetting"
+import SliderFeature from "./rangeSliderSetting/SliderFeature"
+import { useCombinedStore } from "../../../../../zustand/useCombinedStore"
+import LabelSetting from "./labelSetting/LabelSetting"
+import InputContent from "./inputSetting/InputContent"
+import SelectOptionsInput from "./selectSetting/SelectOptionsInput"
 type elementSettingsPrpps = {
-  element: FormElement | null;
-  activeType: FormElementType;
-  setClickedElement: (element: FormElement | null) => void;
-  opensettingModal: boolean;
-  setOpensettingModal: React.Dispatch<React.SetStateAction<boolean>>;
-  saveSetting: (id: string) => void;
-  modalElement: FormElement | null;
-  setModalElement: React.Dispatch<React.SetStateAction<FormElement | null>>;
-};
+  element: FormElement | null
+  activeType: FormElementType
+  setClickedElement: (element: FormElement | null) => void
+  opensettingModal: boolean
+  setOpensettingModal: React.Dispatch<React.SetStateAction<boolean>>
+  saveSetting: (id: string) => void
+  modalElement: FormElement | null
+  setModalElement: React.Dispatch<React.SetStateAction<FormElement | null>>
+}
 const ElementSettingModal = ({
   setClickedElement,
   setOpensettingModal,
   modalElement,
   setModalElement,
 }: elementSettingsPrpps) => {
-  const { element, updateElement } = useCombinedStore();
-  const [errors, setErrors] = useState<{ [key: string]: boolean }>({});
+  const { element, updateElement } = useCombinedStore()
+  const [errors, setErrors] = useState<{ [key: string]: boolean }>({})
 
-   const [selectedInputType, setSelectedInputType] = useState<OptionInputType | null>(null);
+  const [selectedInputType, setSelectedInputType] =
+    useState<OptionInputType | null>(null)
   useEffect(() => {
-    console.log("modalElement changed:", modalElement);
-  }, [modalElement]);
+    console.log("modalElement changed:", modalElement)
+  }, [modalElement])
   useEffect(() => {
-    console.log("form context:", element);
-  }, [element]);
+    console.log("form context:", element)
+  }, [element])
   const handleSave = () => {
-    if (!modalElement) return;
-    const newErrors: { [key: string]: boolean } = {};
+    if (!modalElement) return
+    const newErrors: { [key: string]: boolean } = {}
     if (modalElement?.type === "input") {
-      if (!modalElement) return null;
+      if (!modalElement) return null
       if (modalElement?.requiredInputContent && !modalElement.inputContent) {
-        newErrors.requiredInputContent = true;
+        newErrors.requiredInputContent = true
       }
       if (modalElement?.requiredMinLength && !modalElement.minLength) {
-        newErrors.requiredMinLength = true;
+        newErrors.requiredMinLength = true
       }
       if (modalElement.requiredMaxLength && !modalElement.maxLength) {
-        newErrors.requiredMaxLength = true;
+        newErrors.requiredMaxLength = true
       }
       if (modalElement?.requiredTypeInput && !modalElement.typeInput) {
-        newErrors.requiredTypeInput = true;
+        newErrors.requiredTypeInput = true
       }
     } else if (modalElement?.type === "range") {
       if (modalElement?.requiredMinRange && !modalElement.min) {
-        newErrors.requiredMinRange = true;
+        newErrors.requiredMinRange = true
       }
       if (modalElement?.requiredMaxRange && !modalElement.max) {
-        newErrors.requiredMaxRange = true;
+        newErrors.requiredMaxRange = true
       }
       if (modalElement?.requiredStep && !modalElement.step) {
-        newErrors.requiredStep = true;
+        newErrors.requiredStep = true
       }
     } else if (modalElement?.type === "select") {
       if (modalElement?.requiredSelect && !modalElement.typeSelect) {
-        newErrors.requiredSelect = true;
+        newErrors.requiredSelect = true
       }
     }
     if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
-      console.log("newError:", newErrors);
-      return;
+      setErrors(newErrors)
+      console.log("newError:", newErrors)
+      return
     } else {
-      updateElement(modalElement);
-      setOpensettingModal(false);
+      updateElement(modalElement)
+      setOpensettingModal(false)
     }
-  };
+  }
   return (
     <div className="modal-wrapper overflow-visible fixed w-full h-screen bg-black/30 flex justify-center items-start z-50 top-0 left-0 right-0 p-[18px] overflow-y-auto">
-      <div className="modal overflow-y-auto w-full h-full bg-white p-4 rounded-[10px] flex flex-col justify-start items-center gap-0">
+      <div className="modal overflow-y-auto w-full  bg-white p-4 rounded-[10px] flex flex-col justify-start items-center gap-0">
         <h2 className="font-bold ">{modalElement?.type} setting</h2>
         {modalElement?.type === "input" && (
           <div className="input-setting w-full h-full flex flex-col justify-start items-center  mb-[4px] overflow-visible !gap-0">
@@ -90,14 +97,14 @@ const ElementSettingModal = ({
               modalElement={modalElement}
               setModalElement={setModalElement}
               errors={errors}
-              selectedInputType={selectedInputType} 
+              selectedInputType={selectedInputType}
               setSelectedInputType={setSelectedInputType}
             />
             <InputContent
               modalElement={modalElement}
               setModalElement={setModalElement}
               errors={errors}
-              selectedInputType={selectedInputType} 
+              selectedInputType={selectedInputType}
               setSelectedInputType={setSelectedInputType}
             />
             <WidthSetting
@@ -129,6 +136,10 @@ const ElementSettingModal = ({
               modalElement={modalElement}
               setModalElement={setModalElement}
               errors={errors}
+            />
+            <SelectOptionsInput
+              modalElement={modalElement}
+               setModalElement={setModalElement}
             />
             <WidthSetting
               modalElement={modalElement}
@@ -189,6 +200,6 @@ const ElementSettingModal = ({
         </div>
       </div>
     </div>
-  );
-};
-export default ElementSettingModal;
+  )
+}
+export default ElementSettingModal
