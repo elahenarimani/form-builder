@@ -64,7 +64,7 @@ function HomePage() {
           newElement = {
             id: uuidv4(),
             type: "select",
-            options: [""],
+             selectOptions: [""],
             selectMode:null,
             typeSelect: "",
             width: "100%",

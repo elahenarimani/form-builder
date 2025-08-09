@@ -1,5 +1,6 @@
 //element data
 export type FormElementType = "input" | "select" | "range"
+export type FormElement = InputElement | SelectElement | RangeElement
 export interface BaseElement {
   id: string
   type: FormElementType
@@ -32,7 +33,7 @@ export type SelectElement = BaseElement & {
   label?: string
   typeSelect: string
   // required?: boolean;
-  options: string[]
+  selectOptions: string[]
   requiredSelect: boolean
   selectMode?: null |"single" | "multi"
 }
@@ -48,8 +49,9 @@ export type RangeElement = BaseElement & {
   requiredStep: boolean
 }
 
+
 //form data
-export type FormElement = InputElement | SelectElement | RangeElement
+
 export interface Validation {
   required?: boolean
   min?: number
@@ -94,7 +96,7 @@ export type OpenModal = {
   openSelectSetting: boolean
   openRangeSetting: boolean
 }
-export type SelectEtting = {
+export type SelectSetting = {
   value: string
   label: string
 }

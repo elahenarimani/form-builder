@@ -1,23 +1,23 @@
 import React, { useEffect, useState } from "react";
 import Select from "react-select";
 
-import { FormElement, SelectEtting } from "../../../../../../types/formTypes";
+import { FormElement ,SelectSetting } from "../../../../../../types/formTypes";
 
 type SelectProps = {
   modalElement: FormElement | null;
   setModalElement: React.Dispatch<React.SetStateAction<FormElement | null>>;
   errors: { [key: string]: boolean };
 };
-const SelectSetting = ({
+const SelectSettings = ({
   modalElement,
   setModalElement,
   errors,
 }: SelectProps) => {
-  const selectOptions: SelectEtting[] = [
+  const selectOptions: SelectSetting[] = [
     { value: "single Select", label: "single select" },
     { value: "multi Select", label: "multi select" },
   ];
-  const [settingSelect, setSettingSelect] = useState<SelectEtting | null>(null);
+  const [settingSelect, setSettingSelect] = useState<SelectSetting | null>(null);
   useEffect(() => {
     console.log("modalElement changed:", modalElement);
   }, [modalElement]);
@@ -99,4 +99,4 @@ const SelectSetting = ({
     </div>
   );
 };
-export default SelectSetting;
+export default SelectSettings;

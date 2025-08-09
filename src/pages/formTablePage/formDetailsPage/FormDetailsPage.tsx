@@ -80,7 +80,7 @@ const FormDetailsPage = () => {
                       {label}
                     </label>
                     <select className="w-full h-full border border-gray-300 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-[#1ABC9C]">
-                      {element.options.map((opt, idx) => (
+                      {element.selectOptions.map((opt, idx) => (
                         <option key={idx} value={opt}>
                           {opt}
                         </option>

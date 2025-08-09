@@ -11,7 +11,7 @@ import MinMaxLength from "./inputSetting/MinMaxLength"
 import Button from "../../../../../components/Button"
 import InputTypeSetting from "./inputSetting/InputTypeSetting"
 import ValidationSetting from "./inputSetting/ValidationSetting"
-import SelectSetting from "./selectSetting/SelectSetting"
+import SelectSettings from "./selectSetting/SelectSettings"
 import ValidationSelectSetting from "./selectSetting/ValidationSelectSetting"
 import ValidationSliderSetting from "./rangeSliderSetting/ValidationSliderSetting"
 import SliderFeature from "./rangeSliderSetting/SliderFeature"
@@ -132,14 +132,14 @@ const ElementSettingModal = ({
         )}
         {modalElement?.type === "select" && (
           <div className="input-setting w-full h-full flex flex-col justify-start items-center  mb-[4px] overflow-visible !gap-0">
-            <SelectSetting
+            <SelectSettings
               modalElement={modalElement}
               setModalElement={setModalElement}
               errors={errors}
             />
             <SelectOptionsInput
               modalElement={modalElement}
-               setModalElement={setModalElement}
+              setModalElement={setModalElement}
             />
             <WidthSetting
               modalElement={modalElement}
