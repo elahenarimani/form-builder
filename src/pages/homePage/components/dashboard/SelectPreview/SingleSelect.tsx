@@ -4,18 +4,14 @@ import { SingleValue } from "react-select"
 import { useState } from "react"
 
 import {  SelectElement } from "../../../../../types/formTypes"
-import { useCombinedStore } from "../../../../../zustand/useCombinedStore"
-
 type Props = {
   el: SelectElement
-  // setActiveType: React.Dispatch<React.SetStateAction<FormElementType>>
 }
 type Option = {
   value: string
   label: string
 }
 const SingleSelect = ({ el }: Props) => {
-  const { element } = useCombinedStore()
   const [selectedOption, setSelectedOption] = useState<Option | null>(null)
   //array of string return an object
   const singleSelectOptions: Option[] = el.selectOptions.map((opt) => ({

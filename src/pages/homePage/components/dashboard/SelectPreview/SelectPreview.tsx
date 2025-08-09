@@ -74,7 +74,7 @@ const SelectPreview = ({ el, setActiveType }: Props) => {
   return (
     <div className="w-full ">
       {el.selectMode === "multi" ? (
-        <MultiSelect el={el} setActiveType={setActiveType} />
+        <MultiSelect el={el}  />
       ) : (
         <SingleSelect el={el}/>
       )}

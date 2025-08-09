@@ -25,7 +25,7 @@ const SelectOptionsInput = ({ modalElement, setModalElement }: Props) => {
     setModalElement({ ...modalElement,  selectOptions: updatedOptions })
   }
   function handleAddOption() {
-    setModalElement({ ...modalElement,  selectOptions: [...modalElement.selectOptions, "",""] })
+    setModalElement({ ...modalElement,  selectOptions: [...modalElement.selectOptions, ""] })
   }
   return (
     <div className="select-options-wrapper w-full h-full  flex flex-col justify-between">
