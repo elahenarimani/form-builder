@@ -17,7 +17,7 @@ export type InputElement = BaseElement & {
   placeholder?: string
   minLength: number | string | null
   maxLength: number | string | null
-  inputContent: string | number
+  inputContent: string
   requiredType: boolean //will remove
   width?: number | string
   height?: number | string

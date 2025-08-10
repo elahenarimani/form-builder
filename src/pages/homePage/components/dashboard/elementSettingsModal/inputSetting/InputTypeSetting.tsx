@@ -4,6 +4,7 @@ import Select from "react-select";
 
 import {
   FormElement,
+  InputElement,
   OptionInputType,
 } from "../../../../../../types/formTypes";
 const inputTypeOptions: OptionInputType[] = [
@@ -57,7 +58,7 @@ const InputTypeSetting = ({
         }}
         options={inputTypeOptions}
         isClearable
-        placeholder=""
+        placeholder={(modalElement as InputElement).typeInput}
         className="w-full"
         menuPortalTarget={typeof window !== "undefined" ? document.body : null}
         styles={{
