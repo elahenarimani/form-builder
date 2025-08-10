@@ -1,7 +1,8 @@
 import ReactSlider from "react-slider"
+import { useState } from "react"
 
 import { FormElementType, RangeElement } from "../../../../../types/formTypes"
-import { useState } from "react"
+
 type RangePreviewProps = {
   el: RangeElement
   setActiveType: (type: FormElementType) => void

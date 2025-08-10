@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import { useEffect } from "react"
 import Select from "react-select"
 import { SingleValue } from "react-select"
 import { useState } from "react"

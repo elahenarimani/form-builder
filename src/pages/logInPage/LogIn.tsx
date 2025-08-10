@@ -1,9 +1,9 @@
 import React from "react"
 import { useForm, SubmitHandler, Controller } from "react-hook-form"
+import { Link, useNavigate } from "react-router-dom"
 
 import { useCombinedStore } from "../../zustand/useCombinedStore"
 import "./logIn.css"
-import { Link, useNavigate } from "react-router-dom"
 import Input from "../../components/Input"
 import Button from "../../components/Button"
 

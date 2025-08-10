@@ -42,8 +42,6 @@ function HomePage() {
             id: uuidv4(),
             type: "input",
             requiredType: false,
-            requiredWidth: false,
-            requiredHeight: false,
             width: "100%",
             height: "100%",
             placeholder: "Enter text",
@@ -68,8 +66,6 @@ function HomePage() {
             width: "100%",
             height: "100%",
             requiredSelect: false,
-            requiredWidth: false,
-            requiredHeight: false,
             owner: userEmail || "",
           }
           break
@@ -86,8 +82,6 @@ function HomePage() {
             step: 0,
             width: "100%",
             height: "100%",
-            requiredWidth: false,
-            requiredHeight: false,
             owner: userEmail || "",
           }
           break

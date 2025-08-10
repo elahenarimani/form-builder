@@ -8,8 +8,6 @@ export interface BaseElement {
   y?: number
   width: number | string
   height: number | string
-  requiredWidth: boolean //will remove
-  requiredHeight: boolean //will remove
   owner: string | null
 }
 export type InputElement = BaseElement & {
@@ -32,10 +30,9 @@ export type SelectElement = BaseElement & {
   type: "select"
   label?: string
   typeSelect: string
-  // required?: boolean;
   selectOptions: string[]
   requiredSelect: boolean
-  selectMode?: null |"single" | "multi"
+  selectMode?: null | "single" | "multi"
 }
 export type RangeElement = BaseElement & {
   type: "range"
@@ -48,7 +45,6 @@ export type RangeElement = BaseElement & {
   requiredMaxRange: boolean
   requiredStep: boolean
 }
-
 
 //form data
 
@@ -78,7 +74,6 @@ export type FormState = {
   log: () => void
 }
 
-
 export type OptionInputType = {
   value: string
   label: string
@@ -100,4 +95,3 @@ export type SelectSetting = {
   value: string
   label: string
 }
-

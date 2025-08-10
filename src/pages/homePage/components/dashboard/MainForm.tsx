@@ -3,6 +3,7 @@ import { useDroppable } from "@dnd-kit/core";
 
 import { IoTrash } from "react-icons/io5";
 import { IoMdSettings } from "react-icons/io";
+
 import {
   FormElement,
   InputElement,
@@ -10,8 +11,9 @@ import {
   SelectElement,
   RangeElement,
 } from "../../../../types/formTypes";
-import Button from "../../../../components/Button";
+
 import "./mainForm.css";
+import Button from "../../../../components/Button";
 import { useCombinedStore } from "../../../../zustand/useCombinedStore";
 import Input from "../../../../components/Input";
 import InputPreview from "./InputPreview/InputPreview";

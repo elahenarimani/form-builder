@@ -1,4 +1,5 @@
 import { FormElementType, InputElement } from "../../../../../types/formTypes";
+
 type InputPreviewProps = {
   el: InputElement;
   inputValue: { [key: string]: string };

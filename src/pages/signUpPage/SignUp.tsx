@@ -1,36 +1,37 @@
-import React from "react";
-import { useForm, SubmitHandler, Controller } from "react-hook-form";
-import Input from "../../components/Input";
-import Button from "../../components/Button";
-import { useCombinedStore } from "../../zustand/useCombinedStore";
-import { useNavigate } from "react-router-dom";
+import React from "react"
+import { useNavigate } from "react-router-dom"
+import { useForm, SubmitHandler, Controller } from "react-hook-form"
+
+import Input from "../../components/Input"
+import Button from "../../components/Button"
+import { useCombinedStore } from "../../zustand/useCombinedStore"
 type signUpFormInputs = {
-  email: string;
-  password: string;
-  confirmPassword: string;
-};
+  email: string
+  password: string
+  confirmPassword: string
+}
 const SignUp = () => {
-  const { signUp } = useCombinedStore();
-  const navigate = useNavigate();
+  const { signUp } = useCombinedStore()
+  const navigate = useNavigate()
   const onSubmit: SubmitHandler<signUpFormInputs> = (data) => {
-    const success = signUp(data.email, data.password);
+    const success = signUp(data.email, data.password)
     if (success) {
-      alert("Sign-up successful! Now log in");
-      navigate("/login");
+      alert("Sign-up successful! Now log in")
+      navigate("/login")
     } else {
       setError("email", {
         type: "manual",
         message: "This email is already registered",
-      });
+      })
     }
-  };
+  }
   const {
     control,
     handleSubmit,
     setError,
     formState: { errors },
     getValues,
-  } = useForm<signUpFormInputs>();
+  } = useForm<signUpFormInputs>()
   return (
     <div className="w-full h-[100vh] flex justify-center items-center p-4">
       <form
@@ -136,7 +137,7 @@ const SignUp = () => {
         </Button>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default SignUp;
+export default SignUp
