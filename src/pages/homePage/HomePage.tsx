@@ -1,14 +1,14 @@
-import { useState, useEffect } from "react";
-import { DndContext, DragEndEvent } from "@dnd-kit/core";
-import { v4 as uuidv4 } from "uuid";
-import { Outlet, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react"
+import { DndContext, DragEndEvent } from "@dnd-kit/core"
+import { v4 as uuidv4 } from "uuid"
+import { Outlet, useNavigate } from "react-router-dom"
 
-import { useCombinedStore } from "../../zustand/useCombinedStore";
-import { FormElement, FormElementType, FinalForm } from "../../types/formTypes";
-import ElementPalette from "./components/dashboard/ElementPalette";
-import Header from "../../components/header/Header";
-import Button from "../../components/Button";
-import MainForm from "./components/dashboard/MainForm";
+import { useCombinedStore } from "../../zustand/useCombinedStore"
+import { FormElement, FormElementType, FinalForm } from "../../types/formTypes"
+import ElementPalette from "./components/dashboard/ElementPalette"
+import Header from "../../components/header/Header"
+import Button from "../../components/Button"
+import MainForm from "./components/dashboard/MainForm"
 
 function HomePage() {
   const {
@@ -20,24 +20,22 @@ function HomePage() {
     clearElements,
     isAuthenticated,
     userEmail,
-  } = useCombinedStore();
-  const [formName, setFormName] = useState("");
-  const [inputValue, setInputValue] = useState<{ [key: string]: string }>({});
-  const [clickedElement, setClickedElement] = useState<FormElement | null>(
-    null
-  );
-  const navigate = useNavigate();
-  const [opensettingModal, setOpensettingModal] = useState<boolean>(false);
+  } = useCombinedStore()
+  const [formName, setFormName] = useState("")
+  const [inputValue, setInputValue] = useState<{ [key: string]: string }>({})
+  const [clickedElement, setClickedElement] = useState<FormElement | null>(null)
+  const navigate = useNavigate()
+  const [opensettingModal, setOpensettingModal] = useState<boolean>(false)
   useEffect(() => {
-  if (!isAuthenticated) {
-    navigate("/login")
-  }
-}, [isAuthenticated,navigate])
+    if (!isAuthenticated) {
+      navigate("/login")
+    }
+  }, [isAuthenticated, navigate])
   const handleDrop = (event: DragEndEvent) => {
-    const { active, over } = event;
+    const { active, over } = event
     if (over && over.id === "drop-area") {
-      const type = active.id as FormElementType;
-      let newElement: FormElement;
+      const type = active.id as FormElementType
+      let newElement: FormElement
       switch (type) {
         case "input":
           newElement = {
@@ -56,16 +54,16 @@ function HomePage() {
             requiredMinLength: false,
             requiredMaxLength: false,
             requiredTypeInput: false,
-            inputContent:"",
+            inputContent: "",
             owner: userEmail || "",
-          };
-          break;
+          }
+          break
         case "select":
           newElement = {
             id: uuidv4(),
             type: "select",
-             selectOptions: [""],
-            selectMode:null,
+            selectOptions: [""],
+            selectMode: null,
             typeSelect: "",
             width: "100%",
             height: "100%",
@@ -73,8 +71,8 @@ function HomePage() {
             requiredWidth: false,
             requiredHeight: false,
             owner: userEmail || "",
-          };
-          break;
+          }
+          break
         case "range":
           newElement = {
             id: uuidv4(),
@@ -91,8 +89,8 @@ function HomePage() {
             requiredWidth: false,
             requiredHeight: false,
             owner: userEmail || "",
-          };
-          break;
+          }
+          break
       }
       newElement = {
         ...newElement,
@@ -100,78 +98,78 @@ function HomePage() {
         y: Math.random() * 400,
         width: 300,
         height: 40,
-      };
-      addElement(newElement);
+      }
+      addElement(newElement)
     }
-  };
+  }
   useEffect(() => {
-    console.log("finalform :", finalForm);
-  }, [finalForm]);
+    console.log("finalform :", finalForm)
+  }, [finalForm])
   useEffect(() => {
-    console.log("homePage:", element);
-  }, [element]);
-   useEffect(() => {
-    console.log("inputvalue:", inputValue ,setInputValue);
-  }, [inputValue]);
+    console.log("homePage:", element)
+  }, [element])
+  useEffect(() => {
+    console.log("inputvalue:", inputValue, setInputValue)
+  }, [inputValue])
   const handleSaveAsTable = () => {
     if (!formName) {
-      alert("Form name cannot be empty");
-      navigate("/");
-      return;
+      alert("Form name cannot be empty")
+      navigate("/")
+      return
     }
     const newForm: FinalForm = {
       id: uuidv4(),
       name: formName,
       elements: element,
-     owner:userEmail || "",
-    };
-    const exists = finalForm.some((form) => form.name === newForm.name);
-    if (!exists) {
-      addForm(newForm);
-    } else {
-      alert("This form name is already used. Please choose a different name");
-      navigate("/");
-      return;
+      owner: userEmail || "",
     }
-    clearElements();
-    setFormName("");
-    navigate("/formList");
-  };
+    const exists = finalForm.some((form) => form.name === newForm.name)
+    if (!exists) {
+      addForm(newForm)
+    } else {
+      alert("This form name is already used. Please choose a different name")
+      navigate("/")
+      return
+    }
+    clearElements()
+    setFormName("")
+    navigate("/formList")
+  }
   useEffect(() => {
-    console.log({ finalform: finalForm });
-  }, [finalForm]);
+    console.log({ finalform: finalForm })
+  }, [finalForm])
   const handleDelete = (id: string) => {
-    deleteElement(id);
-  };
+    deleteElement(id)
+  }
   const saveSettingData = (id: string) => {
-    setOpensettingModal(true);
-    console.log(opensettingModal);
-    console.log(id);
-  };
+    setOpensettingModal(true)
+    console.log(opensettingModal)
+    console.log(id)
+  }
   const handleSaveAsJson = () => {
     if (!formName) {
-      alert("Form name cannot be empty");
-      navigate("/");
-      return;
+      alert("Form name cannot be empty")
+      navigate("/")
+      return
     }
     const newForm: FinalForm = {
       id: uuidv4(),
       name: formName,
       elements: element,
-      owner:userEmail || "",
-    };
-    const exists = finalForm.some((form) => form.name === newForm.name);
-    if (!exists) {
-      addForm(newForm);
-    } else {
-      alert("This form name is already used. Please choose a different name");
-      navigate("/");
-      return;
+      owner: userEmail || "",
     }
-    clearElements();
-    setFormName("");
-    navigate("/view-json");
-  };
+    const exists = finalForm.some((form) => form.name === newForm.name)
+    if (!exists) {
+      addForm(newForm)
+    } else {
+      alert("This form name is already used. Please choose a different name")
+      navigate("/")
+      return
+    }
+    clearElements()
+    setFormName("")
+    navigate("/view-json")
+  }
   return (
     <div className=" pb-[18px]">
       <DndContext onDragEnd={handleDrop}>
@@ -208,6 +206,6 @@ function HomePage() {
       </DndContext>
       <Outlet />
     </div>
-  );
+  )
 }
-export default HomePage;
+export default HomePage

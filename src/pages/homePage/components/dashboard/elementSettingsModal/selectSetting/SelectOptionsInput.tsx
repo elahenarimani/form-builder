@@ -1,8 +1,11 @@
 import React, { useEffect } from "react"
+
+import { IoTrash } from "react-icons/io5"
+
 import { FormElement, SelectElement } from "../../../../../../types/formTypes"
 import Input from "../../../../../../components/Input"
 import Button from "../../../../../../components/Button"
-import { IoTrash } from "react-icons/io5"
+
 type Props = {
   modalElement: SelectElement
   setModalElement: React.Dispatch<React.SetStateAction<FormElement | null>>
@@ -20,7 +23,7 @@ const SelectOptionsInput = ({ modalElement, setModalElement }: Props) => {
     })
   }
   function handleRemoveOption(index: number) {
-    const updatedOptions = [...modalElement. selectOptions]
+    const updatedOptions = [...modalElement.selectOptions]
     updatedOptions.splice(index, 1)
     setModalElement({ ...modalElement,  selectOptions: updatedOptions })
   }

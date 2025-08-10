@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react"
+
 import {
   FormElement,
   FormElementType,
   OptionInputType,
   SelectElement,
 } from "../../../../../types/formTypes"
+
 import WidthSetting from "./generalSetting/WidthSetting"
 import HeightSetting from "./generalSetting/HeightSetting"
 import MinMaxLength from "./inputSetting/MinMaxLength"
@@ -19,6 +21,7 @@ import { useCombinedStore } from "../../../../../zustand/useCombinedStore"
 import LabelSetting from "./labelSetting/LabelSetting"
 import InputContent from "./inputSetting/InputContent"
 import SelectOptionsInput from "./selectSetting/SelectOptionsInput"
+
 type elementSettingsPrpps = {
   element: FormElement | null
   activeType: FormElementType
@@ -29,6 +32,7 @@ type elementSettingsPrpps = {
   modalElement: FormElement | null
   setModalElement: React.Dispatch<React.SetStateAction<FormElement | null>>
 }
+
 const ElementSettingModal = ({
   setClickedElement,
   setOpensettingModal,

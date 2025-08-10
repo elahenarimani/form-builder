@@ -15,6 +15,7 @@ const LabelSetting = ({ modalElement, setModalElement }: LabelSettingProps) => {
       <input
         type="text"
         value={modalElement?.label || ""}
+        aria-label="input"
         onChange={(e) =>
           setModalElement((prev) => {
             if (!prev) return null;
