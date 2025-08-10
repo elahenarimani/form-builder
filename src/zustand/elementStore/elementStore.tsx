@@ -25,7 +25,7 @@ export const useElementStore = create<ElementState>()(
         }
         const newElement = [...currentElements];
         newElement[indexFinder] = updatedElement;
-        set({ element: newElement });
+        set({ element : newElement });
         console.log("all element:", newElement);
       },
       deleteElement: (deletedElement) => {

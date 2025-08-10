@@ -5,6 +5,7 @@ import {
   InputElement,
   OptionInputType,
 } from "../../../../../../types/formTypes"
+import { useCombinedStore } from "../../../../../../zustand/useCombinedStore"
 type InputProps = {
   modalElement: FormElement | null
   setModalElement: React.Dispatch<React.SetStateAction<FormElement | null>>
@@ -21,6 +22,9 @@ const InputContent = ({
   selectedInputType,
   setSelectedInputType,
 }: InputProps) => {
+   const {
+      element,
+    } = useCombinedStore()
   useEffect(() => {
     console.log("modalElement changed:", modalElement)
   }, [modalElement])
@@ -35,8 +39,8 @@ const InputContent = ({
       <input
         type={selectedInputType?.value.toLowerCase() || "text"}
         aria-label="input"
-        // value={(modalElement as any)?.inputContent ?? ""}
-        value={((modalElement as InputElement).inputContent ) }
+        value={(modalElement as InputElement)?.inputContent ?? ""}
+        // value={(modalElement as InputElement).inputContent }
         onChange={(e) => {
           const value = e.target.value
           setModalElement((prev) => {
@@ -57,9 +61,9 @@ const InputContent = ({
             ? Number((modalElement as any)?.maxLength)
             : Infinity
         }
-        // placeholder={`Enter ${
-        //   selectedInputType?.label?.toLowerCase() || "text"
-        // }...`}
+        placeholder={`Enter ${
+          selectedInputType?.label?.toLowerCase() || "text"
+        }...`}
         // placeholder={
     
         

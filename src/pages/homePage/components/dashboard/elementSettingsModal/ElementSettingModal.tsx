@@ -41,7 +41,6 @@ const ElementSettingModal = ({
 }: elementSettingsPrpps) => {
   const { element, updateElement } = useCombinedStore()
   const [errors, setErrors] = useState<{ [key: string]: boolean }>({})
-
   const [selectedInputType, setSelectedInputType] =
     useState<OptionInputType | null>(null)
   useEffect(() => {

@@ -24,6 +24,7 @@ function HomePage() {
   const [formName, setFormName] = useState("")
   const [inputValue, setInputValue] = useState<{ [key: string]: string }>({})
   const [clickedElement, setClickedElement] = useState<FormElement | null>(null)
+  const [modalElement, setModalElement] = useState<FormElement | null>(null);
   const navigate = useNavigate()
   const [opensettingModal, setOpensettingModal] = useState<boolean>(false)
   useEffect(() => {
@@ -181,6 +182,8 @@ function HomePage() {
             setOpensettingModal={setOpensettingModal}
             inputValue={inputValue}
             setInputValue={setInputValue}
+            modalElement={modalElement}
+            setModalElement={setModalElement}
           />
         </main>
         <div className="w-full h-full flex justify-center justify-centre gap-[20px] ">

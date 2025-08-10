@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { useDroppable } from "@dnd-kit/core";
+import React, { useEffect, useState } from "react"
+import { useDroppable } from "@dnd-kit/core"
 
-import { IoTrash } from "react-icons/io5";
-import { IoMdSettings } from "react-icons/io";
+import { IoTrash } from "react-icons/io5"
+import { IoMdSettings } from "react-icons/io"
 
 import {
   FormElement,
@@ -10,30 +10,30 @@ import {
   FormElementType,
   SelectElement,
   RangeElement,
-} from "../../../../types/formTypes";
+} from "../../../../types/formTypes"
 
-import "./mainForm.css";
-import Button from "../../../../components/Button";
-import { useCombinedStore } from "../../../../zustand/useCombinedStore";
-import Input from "../../../../components/Input";
-import InputPreview from "./InputPreview/InputPreview";
-import SelectPreview from "./SelectPreview/SelectPreview";
-import RangePreview from "./RangePreview/RangePreview";
-import ElementSettingModal from "./elementSettingsModal/ElementSettingModal";
+import "./mainForm.css"
+import Button from "../../../../components/Button"
+import { useCombinedStore } from "../../../../zustand/useCombinedStore"
+import Input from "../../../../components/Input"
+import InputPreview from "./InputPreview/InputPreview"
+import SelectPreview from "./SelectPreview/SelectPreview"
+import RangePreview from "./RangePreview/RangePreview"
+import ElementSettingModal from "./elementSettingsModal/ElementSettingModal"
 type MainFormProps = {
-  onDelete: (id: string) => void;
-  formName: string;
-  setFormName: React.Dispatch<React.SetStateAction<string>>;
-  saveSettingData: (id: string) => void;
-  clickedElement: FormElement | null;
-  setClickedElement: React.Dispatch<React.SetStateAction<FormElement | null>>;
-  opensettingModal: boolean;
-  setOpensettingModal: React.Dispatch<React.SetStateAction<boolean>>;
-  inputValue: { [key: string]: string };
-  setInputValue: React.Dispatch<
-    React.SetStateAction<{ [key: string]: string }>
-  >;
-};
+  onDelete: (id: string) => void
+  formName: string
+  setFormName: React.Dispatch<React.SetStateAction<string>>
+  saveSettingData: (id: string) => void
+  clickedElement: FormElement | null
+  setClickedElement: React.Dispatch<React.SetStateAction<FormElement | null>>
+  opensettingModal: boolean
+  setOpensettingModal: React.Dispatch<React.SetStateAction<boolean>>
+  inputValue: { [key: string]: string }
+  setInputValue: React.Dispatch<React.SetStateAction<{ [key: string]: string }>>
+  modalElement: FormElement | null
+  setModalElement: React.Dispatch<React.SetStateAction<FormElement | null>>
+}
 const MainForm = ({
   onDelete,
   formName,
@@ -45,14 +45,15 @@ const MainForm = ({
   setOpensettingModal,
   inputValue,
   setInputValue,
+  modalElement,
+  setModalElement,
 }: MainFormProps) => {
-  const { element, userEmail} = useCombinedStore();
-  const [modalElement, setModalElement] = useState<FormElement | null>(null);
-  const { setNodeRef } = useDroppable({ id: "drop-area" });
-  const [activeType, setActiveType] = useState<FormElementType>("input");
+  const { element, userEmail } = useCombinedStore()
+  const { setNodeRef } = useDroppable({ id: "drop-area" })
+  const [activeType, setActiveType] = useState<FormElementType>("input")
   useEffect(() => {
-    console.log("all element:", element);
-  }, [element]);
+    console.log("all element:", element)
+  }, [element])
   const initialModalElementValue = (el: FormElement) => {
     switch (el.type) {
       case "input":
@@ -66,13 +67,13 @@ const MainForm = ({
           requiredMinLength: false,
           requiredMaxLength: false,
           requiredTypeInput: false,
-        } as InputElement;
+        } as InputElement
       case "select":
         return {
           ...el,
           label: "",
           requiredSelect: false,
-        } as SelectElement;
+        } as SelectElement
       case "range":
         return {
           ...el,
@@ -84,30 +85,30 @@ const MainForm = ({
           requiredMinRange: false,
           requiredMaxRange: false,
           requiredStep: false,
-        } as RangeElement;
+        } as RangeElement
       default:
-        return el;
+        return el
     }
-  };
+  }
   const saveModalSetting = (idSetting: string) => {
-    const elementFinder = element.find((el) => el.id === idSetting);
+    const elementFinder = element.find((el) => el.id === idSetting)
     if (!elementFinder) {
-      setModalElement(null);
-      return;
+      setModalElement(null)
+      return
     }
-    const newElement = initialModalElementValue(elementFinder);
-    setModalElement(newElement);
-    setOpensettingModal(true);
-  };
+    const newElement = initialModalElementValue(elementFinder)
+    setModalElement(newElement)
+    setOpensettingModal(true)
+  }
   const handleInputChange = (inputId: string, inputTyped: string) => {
     setInputValue((prv) => {
-      if (!prv) return {};
+      if (!prv) return {}
       return {
         ...prv,
         [inputId]: inputTyped,
-      };
-    });
-  };
+      }
+    })
+  }
   return (
     <div
       ref={setNodeRef}
@@ -129,50 +130,50 @@ const MainForm = ({
       </div>
       <div className="all-element w-full lg:max-w-[80%]  h-full flex flex-col justify-start items-start ">
         {Array.isArray(element) &&
-          element.filter(el => el.owner === userEmail)
-          .map((el) => (
-            <div
-              key={el.id}
-              className="each-element w-[300px]   h-full  lg:w-full mb-4 flex flex-row justify-between items-center gap-3"
-              style={{
-              }}
-            >
-              {el.type === "input" && (
-                <InputPreview
-                  el={el as InputElement}
-                  inputValue={inputValue}
-                  handleInputChange={handleInputChange}
-                  setActiveType={setActiveType}
-                />
-              )}
-              {el.type === "select" && (
-                <SelectPreview
-                  el={el as SelectElement}
-                  setActiveType={setActiveType}
-                />
-              )}
-              {el.type === "range" && (
-                <RangePreview
-                  el={el as RangeElement}
-                  setActiveType={setActiveType}
-                />
-              )}
-              <div className="button-wrapper !w-[60px] h-full flex justify-end items-center p-[8px]  ">
-                <Button
-                  onClickHandler={() => onDelete(el.id)}
-                  className=" top-1 right-1  group-hover:opacity-100 transition-opacity"
-                >
-                  <IoTrash size={20} className="text-errorColor" />
-                </Button>
-                <Button
-                  onClickHandler={() => saveModalSetting(el.id)}
-                  className=" top-1 right-1  group-hover:opacity-100 transition-opacity"
-                >
-                  <IoMdSettings size={20} color="gray" />
-                </Button>
+          element
+            .filter((el) => el.owner === userEmail)
+            .map((el) => (
+              <div
+                key={el.id}
+                className="each-element w-[300px]   h-full  lg:w-full mb-4 flex flex-row justify-between items-center gap-3"
+                style={{}}
+              >
+                {el.type === "input" && (
+                  <InputPreview
+                    el={el as InputElement}
+                    inputValue={inputValue}
+                    handleInputChange={handleInputChange}
+                    setActiveType={setActiveType}
+                  />
+                )}
+                {el.type === "select" && (
+                  <SelectPreview
+                    el={el as SelectElement}
+                    setActiveType={setActiveType}
+                  />
+                )}
+                {el.type === "range" && (
+                  <RangePreview
+                    el={el as RangeElement}
+                    setActiveType={setActiveType}
+                  />
+                )}
+                <div className="button-wrapper !w-[60px] h-full flex justify-end items-center p-[8px]  ">
+                  <Button
+                    onClickHandler={() => onDelete(el.id)}
+                    className=" top-1 right-1  group-hover:opacity-100 transition-opacity"
+                  >
+                    <IoTrash size={20} className="text-errorColor" />
+                  </Button>
+                  <Button
+                    onClickHandler={() => saveModalSetting(el.id)}
+                    className=" top-1 right-1  group-hover:opacity-100 transition-opacity"
+                  >
+                    <IoMdSettings size={20} color="gray" />
+                  </Button>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
       </div>
       {opensettingModal && modalElement && (
         <ElementSettingModal
@@ -187,6 +188,6 @@ const MainForm = ({
         />
       )}
     </div>
-  );
-};
-export default MainForm;
+  )
+}
+export default MainForm
